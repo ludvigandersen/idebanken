@@ -1,4 +1,4 @@
-package com.memorynotfound.spring.security.web;
+package com.memorynotfound.spring.security.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,15 +32,4 @@ public class HomeController {
     public String accessDenied() {
         return "/error/access-denied";
     }
-
-    @GetMapping("/redirect")
-    public String redirect(HttpServletRequest request){
-        if (request.isUserInRole("USER")){
-            return "redirect:/user";
-        } else if (request.isUserInRole("manager")){
-            return "redirect:/manager";
-        }
-        return "/login";
-    }
-
 }
