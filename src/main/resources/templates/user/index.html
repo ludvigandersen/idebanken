@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{fragments/layout}">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Secured page</title>
 </head>
 <body>
-<div layout:fragment="content" th:remove="tag">
+<div>
     <h1>This is a secured page!</h1>
     <p><a href="/" th:href="@{/}">Back to home page</a></p>
 </div>
