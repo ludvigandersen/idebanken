@@ -35,3 +35,7 @@ nav a:hover {
     width: 1024px;
     margin: 0 auto;
 }
+footer {
+    height: 50px;
+    background-color: aqua;
+}
