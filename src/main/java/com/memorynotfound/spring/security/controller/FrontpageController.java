@@ -1,9 +1,10 @@
 package com.memorynotfound.spring.security.controller;
 
+import com.memorynotfound.spring.security.model.Developer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class FrontpageController {
@@ -31,5 +32,17 @@ public class FrontpageController {
     @GetMapping("/access-denied")
     public String accessDenied() {
         return "/error/access-denied";
+    }
+
+    @GetMapping("/create-developer")
+    public String createDeveloper(){
+        return "create/create-developer";
+    }
+
+    @PostMapping("/create-developer")
+    public String createDeveloper(@ModelAttribute Developer developer){
+        System.out.println("test");
+        System.out.println(developer.toString());
+        return "index";
     }
 }

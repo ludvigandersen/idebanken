@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
 import javax.sql.DataSource;
 
 @EnableWebSecurity
@@ -29,7 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/js/**",
                             "/css/**",
                             "/img/**",
-                            "/webjars/**").permitAll()
+                            "/webjars/**",
+                            "/create/create-developer").permitAll()
                     .antMatchers("/user/**").hasRole("USER")
                     .antMatchers("/manager/**").hasRole("manager")
                     .anyRequest().authenticated()
