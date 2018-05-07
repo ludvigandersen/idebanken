@@ -7,22 +7,22 @@
     <body>
         <div class="container">
             <div th:replace="fragments/header :: header"></div>
-            <h1>Login page</h1>
+            <h1>Login</h1>
             <form th:action="@{/login}" method="post">
                 <div th:if="${param.error}">
                     <div class="alert alert-danger">
-                        Invalid username or password.
+                        Det indtastede brugernavn eller password er forkert.
                     </div>
                 </div>
                 <div th:if="${param.logout}">
                     <div class="alert alert-info">
-                        You have been logged out.
+                        Du er blevet logget ud.
                     </div>
                 </div>
                 <table>
                     <tr>
-                        <td><label for="username">Username: </label></td>
-                        <td><input type="text" id="username" name="username" autofocus="autofocus" placeholder="Username"></td>
+                        <td><label for="username">Brugernavn: </label></td>
+                        <td><input type="text" id="username" name="username" autofocus="autofocus" placeholder="Brugernavn"></td>
                     </tr>
                     <tr>
                         <td><label for="password">Password: </label></td>
