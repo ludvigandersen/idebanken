@@ -40,9 +40,9 @@ public class FrontpageController {
     }
 
     @PostMapping("/create-developer")
-    public String createDeveloper(@ModelAttribute Developer developer){
+    public String createDeveloper(@ModelAttribute("firstName") String firstName){
         System.out.println("test");
-        System.out.println(developer.toString());
+        System.out.println(firstName);
         return "index";
     }
 }
