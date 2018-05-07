@@ -7,13 +7,19 @@
     <body>
         <div class="container">
             <div th:replace="fragments/header :: header"></div>
-                <h1>Idébanken</h1>
-                <p>Opret dine idéer her</p>
-                <p><a href="/create-idea">Opret din idé</a></p>
+            <div class ="center">
+                <h1>Opret dine idéer her</h1>
+                <p>Har du en idé? Men mangler nogle udviklere til at hjælpe dig?
+                Så submit dine idéer her</p>
+                <form action="/create-idea">
+                    <button class="button">Opret din idé</button>
+
+                </form>
                 <ul>
                     <li>Go to the <a href="/user">secured pages</a></li>
                     <li>Go to the <a href="/manager">manager pages</a></li>
                 </ul>
+            </div>
             <div th:replace="fragments/footer :: footer"></div>
         </div>
     </body>

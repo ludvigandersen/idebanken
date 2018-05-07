@@ -7,7 +7,16 @@ header {
     padding-top: 15px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: cornflowerblue;
+    background-color: dodgerblue;
+}
+footer {
+    height: 35px;
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: dodgerblue;
+    position: absolute;
+    bottom: 0px;
 }
 #logo {
     float: left;
@@ -33,9 +42,38 @@ nav a:hover {
 }
 .container {
     width: 1024px;
+<<<<<<< HEAD
+    margin: auto;
+}
+.center {
+    margin: auto;
+    padding: 194px;
+    width: 35%;
+    text-align: center;
+}
+.button {
+    background-color: dodgerblue;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+.button:hover{
+    background-color: deepskyblue;
+}
+
+=======
     margin: 0 auto;
 }
 footer {
     height: 50px;
     background-color: aqua;
 }
+>>>>>>> 85678f6f80e1dcf66d8fd3bf67634dfd5fb206d9
