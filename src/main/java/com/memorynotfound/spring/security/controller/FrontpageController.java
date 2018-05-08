@@ -1,6 +1,5 @@
 package com.memorynotfound.spring.security.controller;
 
-import com.memorynotfound.spring.security.model.Developer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
