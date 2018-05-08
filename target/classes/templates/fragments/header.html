@@ -4,7 +4,13 @@
         <a href="/developers">Udviklere</a>
         <a href="/about">Om</a>
         <a href="/contact">Kontakt</a>
-        <a href="/login">Login</a>
+
+        <a th:href="${#authorization.expression('isAuthenticated()')} ?
+               '/logout' :
+               '/login'"
+           th:text="${#authorization.expression('isAuthenticated()')} ?
+               'Logout' :
+               'Login'"></a>
     </nav>
     <div class="clear"></div>
 </header>
