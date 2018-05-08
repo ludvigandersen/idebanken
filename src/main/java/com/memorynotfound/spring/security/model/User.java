@@ -3,7 +3,7 @@ package com.memorynotfound.spring.security.model;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-public class Developer {
+public class User {
     private String firstName;
     private String lastName;
     private String email;
@@ -16,7 +16,7 @@ public class Developer {
 
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public Developer(String firstName, String lastName, String email, String tlf1, String tlf2, int zipCode, String city, String password) {
+    public User(String firstName, String lastName, String email, String tlf1, String tlf2, int zipCode, String city, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -27,7 +27,7 @@ public class Developer {
         this.password = encoder.encode(password);
     }
 
-    public Developer(String firstName, String lastName, String email, String tlf1, int zipCode, String city, String password) {
+    public User(String firstName, String lastName, String email, String tlf1, int zipCode, String city, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -104,7 +104,7 @@ public class Developer {
 
     @Override
     public String toString() {
-        return "Developer{" +
+        return "User{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
