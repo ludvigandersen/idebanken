@@ -3,6 +3,8 @@ package com.memorynotfound.spring.security.controller;
 import com.memorynotfound.spring.security.model.Person;
 import com.memorynotfound.spring.security.repository.IPersonDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,10 +57,11 @@ public class FrontpageController {
             @ModelAttribute("zipCode") int zipCode,
             @ModelAttribute("city") String city,
             @ModelAttribute("password") String password,
-            @ModelAttribute("password_again") String passwordAgain,
             @ModelAttribute("role") String role){
 
-
+        Person currentPerson = new Person(firstName, lastName, email, tlf1, tlf2, zipCode, city, password, role);
+        System.out.println(currentPerson.toString());
+        iPersonDbRepository.createPerson(currentPerson);
         return "confirm-created-user";
     }
 }

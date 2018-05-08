@@ -12,11 +12,11 @@ public class Person {
     private int zipCode;
     private String city;
     private String password;
-    private String passwordAgain;
+    private String role;
 
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public Person(String firstName, String lastName, String email, String tlf1, String tlf2, int zipCode, String city, String password) {
+    public Person(String firstName, String lastName, String email, String tlf1, String tlf2, int zipCode, String city, String password, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -25,17 +25,7 @@ public class Person {
         this.zipCode = zipCode;
         this.city = city;
         this.password = encoder.encode(password);
-    }
-
-    public Person(String firstName, String lastName, String email, String tlf1, int zipCode, String city, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.tlf1 = tlf1;
-        this.tlf2 = "";
-        this.zipCode = zipCode;
-        this.city = city;
-        this.password = encoder.encode(password);
+        this.role = role;
     }
 
     public String getFirstName() {
@@ -102,6 +92,14 @@ public class Person {
         this.password = encoder.encode(password);
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -113,6 +111,7 @@ public class Person {
                 ", zipCode=" + zipCode +
                 ", city='" + city + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

@@ -4,7 +4,6 @@
         <title>Index</title>
         <link rel="stylesheet" href="css/style.css">
         <script>
-            document.getElementById("submit").disabled = true;
             function validate() {
                 var pass1 = document.getElementById("password").value;
                 var pass2 = document.getElementById("password_again").value;
@@ -58,8 +57,8 @@
                             <td>Vælg bruger type: </td>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="role" value="USER" checked="checked"> Udvikler </td>
-                            <td><input type="radio" name="role" value="IDEA"> Idéperson </td>
+                            <td><input type="radio" name="role" value="ROLE_USER" checked="checked"> Udvikler </td>
+                            <td><input type="radio" name="role" value="ROLE_IDEA"> Idéperson </td>
                         </tr>
                         <tr>
                             <td><input type="reset" value="Reset felter"></td>
