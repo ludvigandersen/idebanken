@@ -1,7 +1,11 @@
 package com.memorynotfound.spring.security.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 public class Person {
     private String firstName;
@@ -13,10 +17,12 @@ public class Person {
     private String city;
     private String password;
     private String role;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
 
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public Person(String firstName, String lastName, String email, String tlf1, String tlf2, int zipCode, String city, String password, String role) {
+    public Person(String firstName, String lastName, String email, String tlf1, String tlf2, int zipCode, String city, String password, String role, LocalDate date) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -26,6 +32,7 @@ public class Person {
         this.city = city;
         this.password = encoder.encode(password);
         this.role = role;
+        this.date = date;
     }
 
     public String getFirstName() {
@@ -98,6 +105,14 @@ public class Person {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     @Override
