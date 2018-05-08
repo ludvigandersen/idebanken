@@ -19,6 +19,11 @@
                         Du er blevet logget ud.
                     </div>
                 </div>
+                <div th:switch="${usercreated}">
+                    <div class="alert alert-info" th:case="'1'">
+                        Din bruger er nu blevet oprettet.
+                    </div>
+                </div>
                 <table>
                     <tr>
                         <td><label for="username">Brugernavn: </label></td>

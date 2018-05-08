@@ -1,4 +1,4 @@
-<header th:fragment="header">
+<header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div id="logo"><a href="/">Idébanken</a></div>
     <nav>
         <a href="/ideas">Idéer</a>
@@ -6,12 +6,7 @@
         <a href="/about">Om</a>
         <a href="/contact">Kontakt</a>
 
-        <a th:href="${#authorization.expression('isAuthenticated()')} ?
-               '/logout' :
-               '/login'"
-           th:text="${#authorization.expression('isAuthenticated()')} ?
-               'Logout' :
-               'Login'"></a>
+        <a href="/login">Login</a>
     </nav>
     <div class="clear"></div>
 </header>

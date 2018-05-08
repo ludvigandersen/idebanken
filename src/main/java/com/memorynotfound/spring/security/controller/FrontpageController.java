@@ -1,7 +1,7 @@
 package com.memorynotfound.spring.security.controller;
 
-import com.memorynotfound.spring.security.model.Developer;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,13 +36,14 @@ public class FrontpageController {
 
     @GetMapping("/create-developer")
     public String createDeveloper(){
-        return "create/create-developer";
+        return "create-developer";
     }
 
     @PostMapping("/create-developer")
-    public String createDeveloper(@ModelAttribute("firstName") String firstName){
+    public String createDeveloper(@ModelAttribute("firstName") String firstName, Model model){
         System.out.println("test");
         System.out.println(firstName);
-        return "index";
+        model.addAttribute("usercreated", "1");
+        return "/login";
     }
 }
