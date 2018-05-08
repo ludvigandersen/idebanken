@@ -7,7 +7,7 @@
     <body>
         <div class="container">
             <div th:replace="fragments/header :: header"></div>
-                <h1>Opret en udvikler bruger</h1>
+                <h1>Opret en bruger</h1>
                 <form action="/create-developer" method="post">
                     <table>
                         <tr>
@@ -39,6 +39,13 @@
                             <td><label for="password_again">Gentag password:</label></td>
                             <td><input type="password" id="password_again" name="passwordAgain" placeholder="Password"></td>
 
+                        </tr>
+                        <tr>
+                            <td>Vælg bruger type: </td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="role" value="USER" checked="checked"> Udvikler </td>
+                            <td><input type="radio" name="role" value="IDEA"> Idéperson </td>
                         </tr>
                         <tr>
                             <td><input type="reset" value="Reset felter"></td>

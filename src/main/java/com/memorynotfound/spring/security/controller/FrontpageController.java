@@ -40,10 +40,9 @@ public class FrontpageController {
     }
 
     @PostMapping("/create-developer")
-    public String createDeveloper(@ModelAttribute("firstName") String firstName, Model model){
+    public String createDeveloper(@ModelAttribute("firstName") String firstName){
         System.out.println("test");
         System.out.println(firstName);
-        model.addAttribute("usercreated", "1");
-        return "/login";
+        return "redirect:/login";
     }
 }
