@@ -66,4 +66,8 @@ public class FrontpageController {
         iPersonDbRepository.createPerson(currentPerson);
         return "confirm-created-user";
     }
+    @GetMapping("/contact")
+    public String contact(){
+        return "contact";
+    }
 }
