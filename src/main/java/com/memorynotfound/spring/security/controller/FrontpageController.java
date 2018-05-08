@@ -34,15 +34,15 @@ public class FrontpageController {
         return "/error/access-denied";
     }
 
-    @GetMapping("/create-developer")
-    public String createDeveloper(){
-        return "create-developer";
+    @GetMapping("/create-user")
+    public String createUser(){
+        return "create-user";
     }
 
-    @PostMapping("/create-developer")
-    public String createDeveloper(@ModelAttribute("firstName") String firstName){
+    @PostMapping("/create-user")
+    public String createUser(@ModelAttribute("firstName") String firstName){
         System.out.println("test");
         System.out.println(firstName);
-        return "redirect:/login";
+        return "confirm-created-user";
     }
 }

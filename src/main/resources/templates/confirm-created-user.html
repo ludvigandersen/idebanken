@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Index</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div th:replace="fragments/header :: header"></div>
+            <div class ="center">
+                <h1>Din bruger blev oprettet</h1>
+                <p>Vi har sendt en email til dig med dine oplysninger.</p>
+                <form action="/login" method="get">
+                    <button class="button">Login her</button>
+                </form>
+            </div>
+            <div th:replace="fragments/footer :: footer"></div>
+        </div>
+    </body>
+</html>

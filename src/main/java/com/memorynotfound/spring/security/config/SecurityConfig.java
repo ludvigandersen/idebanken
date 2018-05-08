@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/create-developer");
+        web.ignoring().antMatchers("/create-user");
     }
 
     @Override
