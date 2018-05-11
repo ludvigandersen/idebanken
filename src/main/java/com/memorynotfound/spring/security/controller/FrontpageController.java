@@ -70,4 +70,9 @@ public class FrontpageController {
     public String contact(){
         return "contact";
     }
+
+    @GetMapping("/about")
+    public String about(){
+        return "about";
+    }
 }
