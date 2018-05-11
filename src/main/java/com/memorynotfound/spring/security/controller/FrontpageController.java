@@ -29,9 +29,9 @@ public class FrontpageController {
         return "user/index";
     }
 
-    @GetMapping("/manager")
-    public String managerIndex() {
-        return "manager/index";
+    @GetMapping("/idea")
+    public String ideaIndex() {
+        return "idea/index";
     }
 
     @GetMapping("/login")

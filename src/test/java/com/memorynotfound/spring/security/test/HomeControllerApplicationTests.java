@@ -70,7 +70,7 @@ public class HomeControllerApplicationTests {
 
     @Test
     public void loginUserAccessProtectedInvalid() throws Exception {
-        MvcResult mvcResult = this.mockMvc.perform(formLogin().user("manager").password("password"))
+        MvcResult mvcResult = this.mockMvc.perform(formLogin().user("idea").password("password"))
                 .andExpect(authenticated()).andReturn();
 
         MockHttpSession httpSession = (MockHttpSession) mvcResult.getRequest().getSession(false);
