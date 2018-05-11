@@ -10,4 +10,5 @@ public interface IPersonDbRepository {
     void deletePerson(int id);
     List<Person> getAllPersons();
     Person getPerson(int id);
+    boolean checkEmail(String email);
 }
