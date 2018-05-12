@@ -50,20 +50,8 @@ public class FrontpageController {
     }
 
     @PostMapping("/create-user")
-    public String createUser(
-            @ModelAttribute("firstName") String firstName,
-            @ModelAttribute("lastName") String lastName,
-            @ModelAttribute("email") String email,
-            @ModelAttribute("tlf1") String tlf1,
-            @ModelAttribute("tlf2") String tlf2,
-            @ModelAttribute("zipCode") int zipCode,
-            @ModelAttribute("city") String city,
-            @ModelAttribute("password") String password,
-            @ModelAttribute("role") String role){
-
-        Person currentPerson = new Person(firstName, lastName, email, tlf1, tlf2, zipCode, city, password, role, LocalDate.now());
-        System.out.println(currentPerson.toString());
-        iPersonDbRepository.createPerson(currentPerson);
+    public String createUser(@ModelAttribute Person person){
+        iPersonDbRepository.createPerson(person);
         return "confirm-created-user";
     }
     @GetMapping("/contact")

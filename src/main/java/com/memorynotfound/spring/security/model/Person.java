@@ -22,6 +22,9 @@ public class Person {
 
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
+    public Person() {
+    }
+
     public Person(String firstName, String lastName, String email, String tlf1, String tlf2, int zipCode, String city, String password, String role, LocalDate date) {
         this.firstName = firstName;
         this.lastName = lastName;
