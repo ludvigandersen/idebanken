@@ -1,11 +1,13 @@
 package com.memorynotfound.spring.security.repository;
 
+import com.memorynotfound.spring.security.email.Email;
 import com.memorynotfound.spring.security.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import javax.mail.MessagingException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +20,10 @@ public class PersonDbRepository implements IPersonDbRepository {
     JdbcTemplate jdbc;
     SqlRowSet sqlRowSet;
 
+    Email email = new Email();
+
+    public PersonDbRepository() throws MessagingException {
+    }
 
     @Override
     public void createPerson(Person person) {
@@ -39,6 +45,7 @@ public class PersonDbRepository implements IPersonDbRepository {
             preparedStatement.setBoolean(8, emailNot);
             preparedStatement.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
         });
+        email.emailCreatePerson(person);
     }
 
     @Override
