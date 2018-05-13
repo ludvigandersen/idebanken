@@ -9,7 +9,7 @@ import javax.mail.internet.*;
 public class Email {
     // write your code here
     // change accordingly
-    final String username = "tryllemikkel@gmail.com";
+    final String username = "mikkel@dalbynielsen.dk";
 
     // change accordingly
     final String password = "dcc59vez";
@@ -38,7 +38,7 @@ public class Email {
         props.put("mail.smtp.starttls.enable", "true");
 
         // Setup mail server
-        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.host", "send.one.com");
 
         // TLS Port
         props.put("mail.smtp.port", "587");
@@ -58,7 +58,7 @@ public class Email {
             Message message = new MimeMessage(session);
 
             // header field of the header.
-            message.setFrom(new InternetAddress("tryllemikkel@gmail.com"));
+            message.setFrom(new InternetAddress(username));
 
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(person.getEmail()));
