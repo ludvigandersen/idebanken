@@ -4,6 +4,7 @@ import com.memorynotfound.spring.security.model.Person;
 import com.memorynotfound.spring.security.repository.IPersonDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,4 +59,12 @@ public class FrontpageController {
     public String about(){
         return "about";
     }
+
+    @GetMapping("/all-developers")
+    public String readAll(Model model){
+
+            model.addAttribute("person_data", iPersonDbRepository.getAllPersons());
+
+           return "all-developers";
+}
 }

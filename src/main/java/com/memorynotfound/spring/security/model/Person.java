@@ -38,6 +38,14 @@ public class Person {
         this.date = date;
     }
 
+    public Person(String first_name, String last_name, String email, String city) {
+        this.firstName = first_name;
+        this.lastName = last_name;
+        this.email = email;
+        this.city = city;
+    }
+
+
     public String getFirstName() {
         return firstName;
     }

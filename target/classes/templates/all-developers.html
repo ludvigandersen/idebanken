@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Developers</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/devstyle.css">
+
+
+</head>
+<body>
+    <div class="container">
+        <div th:replace="fragments/header :: header"></div>
+
+
+    <h1>Udviklere</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Navn</th>
+            <th>Email</th>
+            <th>By</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each = "person : ${person_data}">
+            <td th:text="${person.firstName} + ' ' + ${person.lastName}"></td>
+            <td th:text="${person.email}"></td>
+            <td th:text="${person.city}"></td>
+
+
+        </tr>
+
+
+        </tbody>
+
+
+    </table>
+
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
+</body>
+</html>
