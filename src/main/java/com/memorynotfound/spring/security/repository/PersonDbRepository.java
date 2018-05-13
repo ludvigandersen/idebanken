@@ -14,14 +14,6 @@ import java.util.List;
 @Repository
 public class PersonDbRepository implements IPersonDbRepository {
 
-    private PreparedStatement preparedStatement;
-    private Connection conn = null;
-
-    public PersonDbRepository() throws SQLException {
-        conn = DriverManager.getConnection("jdbc:mysql://idebanken.czb6si4xafah.eu-central-1.rds.amazonaws.com:3306/idebanken",
-                                           "idebankenAdmin", "idebanken");
-    }
-
     @Autowired
     JdbcTemplate jdbc;
     SqlRowSet sqlRowSet;
@@ -31,10 +23,12 @@ public class PersonDbRepository implements IPersonDbRepository {
     public void createPerson(Person person) {
         int roleId = getRoleId(person.getRole());
         boolean emailNot = false;
-        try {
-            preparedStatement = conn.prepareStatement("INSERT INTO Person(person_id, first_name, last_name, email, zip_code, city, password, role_id, email_notifications, date) " +
-                    "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? )");
 
+
+        String sql = "INSERT INTO Person(person_id, first_name, last_name, email, zip_code, city, password, role_id, email_notifications, date)"+
+                "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+
+        jdbc.update(sql, preparedStatement -> {
             preparedStatement.setString(1, person.getFirstName());
             preparedStatement.setString(2, person.getLastName());
             preparedStatement.setString(3, person.getEmail());
@@ -44,13 +38,7 @@ public class PersonDbRepository implements IPersonDbRepository {
             preparedStatement.setInt(7, roleId);
             preparedStatement.setBoolean(8, emailNot);
             preparedStatement.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
-
-            preparedStatement.execute();
-
-        }catch (SQLException e){
-             e.printStackTrace();
-        }
-
+        });
     }
 
     @Override
