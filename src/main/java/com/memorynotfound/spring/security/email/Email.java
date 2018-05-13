@@ -9,7 +9,7 @@ import javax.mail.internet.*;
 public class Email {
     // write your code here
     // change accordingly
-    final String username = "mikkel@dalbynielsen.dk";
+    final String username = "tryllemikkel@gmail.com";
 
     // change accordingly
     final String password = "dcc59vez";
@@ -36,9 +36,10 @@ public class Email {
 
         // enable STARTTLS
         props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
         // Setup mail server
-        props.put("mail.smtp.host", "send.one.com");
+        props.put("mail.smtp.host", "smtp.gmail.com");
 
         // TLS Port
         props.put("mail.smtp.port", "587");
