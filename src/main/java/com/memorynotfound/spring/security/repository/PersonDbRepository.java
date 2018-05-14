@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.mail.MessagingException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,20 +33,20 @@ public class PersonDbRepository implements IPersonDbRepository {
         boolean emailNot = false;
 
 
-        String sql = "INSERT INTO Person(person_id, first_name, last_name, email, zip_code, city, password, role_id, email_notifications, date)"+
-                "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+            String sql = "INSERT INTO Person(person_id, first_name, last_name, email, zip_code, city, password, role_id, email_notifications, date)"+
+                    "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 
-        jdbc.update(sql, preparedStatement -> {
-            preparedStatement.setString(1, person.getFirstName());
-            preparedStatement.setString(2, person.getLastName());
-            preparedStatement.setString(3, person.getEmail());
-            preparedStatement.setInt(4, person.getZipCode());
-            preparedStatement.setString(5, person.getCity());
-            preparedStatement.setString(6, person.getPassword());
-            preparedStatement.setInt(7, roleId);
-            preparedStatement.setBoolean(8, emailNot);
-            preparedStatement.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
-        });
+            jdbc.update(sql, preparedStatement -> {
+                preparedStatement.setString(1, person.getFirstName());
+                preparedStatement.setString(2, person.getLastName());
+                preparedStatement.setString(3, person.getEmail());
+                preparedStatement.setInt(4, person.getZipCode());
+                preparedStatement.setString(5, person.getCity());
+                preparedStatement.setString(6, person.getPassword());
+                preparedStatement.setInt(7, roleId);
+                preparedStatement.setBoolean(8, emailNot);
+                preparedStatement.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
+            });
         email.emailCreatePerson(person);
     }
 
@@ -60,7 +62,22 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     @Override
     public List<Person> getAllPersons() {
-        return null;
+
+        List<Person> person = new ArrayList<>();
+        String sql = "SELECT first_name, last_name, email, city FROM idebanken.Person WHERE role_id = 1 ";
+        sqlRowSet = jdbc.queryForRowSet(sql);
+
+        while (sqlRowSet.next()){
+            person.add(new Person(
+                    sqlRowSet.getString("first_name"),
+                    sqlRowSet.getString("last_name"),
+                    sqlRowSet.getString("email"),
+                    sqlRowSet.getString("city"))
+                    );
+
+        }
+
+        return person;
     }
 
     @Override

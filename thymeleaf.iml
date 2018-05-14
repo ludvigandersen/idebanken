@@ -15,17 +15,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <content url="file://$MODULE_DIR$/../Idébanken">
-      <sourceFolder url="file://$MODULE_DIR$/../Idébanken/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../Idébanken/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../Idébanken/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../Idébanken/src/test/resources" type="java-test-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/../Idébanken/target" />
-    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: javax.mail:mail:1.4.7" level="project" />
-    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: mysql:mysql-connector-java:5.1.44" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:1.5.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.5.8.RELEASE" level="project" />
