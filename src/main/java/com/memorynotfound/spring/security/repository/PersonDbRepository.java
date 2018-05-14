@@ -82,6 +82,17 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     @Override
     public Person getPerson(int id) {
+        String sql = "SELECT * FROM idebanken.Person WHERE person_id=?";
+        sqlRowSet = jdbc.queryForRowSet(sql, id);
+
+        while (sqlRowSet.next()){
+            return new Person(
+                    sqlRowSet.getString("first_name"),
+                    sqlRowSet.getString("last_name"),
+                    sqlRowSet.getString("email"),
+                    sqlRowSet.getString("city")
+            );
+        }
         return null;
     }
 
