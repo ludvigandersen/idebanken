@@ -1,8 +1,6 @@
 package com.memorynotfound.spring.security.repository;
 
-<<<<<<< HEAD
-public interface IIdeaDbRepository {
-=======
+
 import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
 
@@ -14,6 +12,4 @@ public interface IIdeaDbRepository {
     void deleteIdea(int id);
     List<Idea> getAllIdeas();
     Idea getIdea(int id);
-
->>>>>>> efa0a0b8eee722ea95c3b3796abafb78d2ad7035
 }
