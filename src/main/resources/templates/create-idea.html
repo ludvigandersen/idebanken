@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Opret Idé</title>
     <link rel="stylesheet" href="css/style.css">
@@ -18,6 +18,9 @@
             <tr>
                 <td><label for="idea_description">Idé beskrivelse:</label></td>
                 <td><input type="text" id="idea_description" name="ideaDescription" placeholder="Beskrivelse" required></td>
+
+
+                <td><input type="hidden" id="idea_person" name="ideaPerson" sec:authentication="name"></td>
             </tr>
             <tr>
                 <td><input type="reset" value="Reset felter"></td>
