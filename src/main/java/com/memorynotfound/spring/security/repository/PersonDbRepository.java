@@ -125,7 +125,18 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     @Override
     public boolean checkEmail(String email) {
-        return false;
+        String sql = "SELECT email FROM idebanken.Person";
+        sqlRowSet = jdbc.queryForRowSet(sql);
+        ArrayList<String> emails = new ArrayList<>();
+        while (sqlRowSet.next()){
+            emails.add(sqlRowSet.getString("email"));
+        }
+
+        if (emails.contains(email)){
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private int getRoleId(String role){
