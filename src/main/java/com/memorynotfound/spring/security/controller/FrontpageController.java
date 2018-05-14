@@ -30,7 +30,10 @@ public class FrontpageController {
     }
 
     @GetMapping("/user")
-    public String userIndex() {
+    public String userIndex(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute(person);
         return "user/index";
     }
 

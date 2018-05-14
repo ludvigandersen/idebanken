@@ -8,18 +8,28 @@
     <body>
     <div class="container">
         <div th:replace="fragments/user-header :: user-header"></div>
-        <h1>Dette er en side man kun kan se med USER role</h1>
-        <div class="dashboard">
+        <div class="scroll_content">
+            <h1>Dette er en side man kun kan se med USER role</h1>
+            <div class="dashboard">
+                <p>
+                    <span th:text="${person.firstName} + ' ' + ${person.lastName}"></span><br>
+                    <span th:text="${person.email}"></span>
+                </p>
+                <p>
+                    <hr>
+                    <a href="#">Min profil</a><br>
+                    <a href="#">Mine idéer</a><br>
+                    <a href="#">Find idéer</a><br>
+                    <a href="#">Grupper</a>
+                </p>
+                <p>
+                    <hr>
+                    Rating
+                </p>
+            </div>
+            <div class="user-content">
 
-        </div>
-        <div class="user-content">
-            <table>
-                <thead>
-                <tr>
-                    <td></td>
-                </tr>
-                </thead>
-            </table>
+            </div>
         </div>
         <div class="clear"></div>
         <div th:replace="fragments/footer :: footer"></div>
