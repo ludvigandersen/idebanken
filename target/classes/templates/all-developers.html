@@ -16,23 +16,19 @@
 
     <table>
         <thead>
-        <tr>
-            <th>Navn</th>
-            <th>Email</th>
-            <th>By</th>
-        </tr>
+            <tr>
+             <th>Navn</th>
+             <th>Email</th>
+             <th>By</th>
+            </tr>
         </thead>
 
         <tbody>
-        <tr th:each = "person : ${person_data}">
-            <td th:text="${person.firstName} + ' ' + ${person.lastName}"></td>
-            <td th:text="${person.email}"></td>
-            <td th:text="${person.city}"></td>
-
-
-        </tr>
-
-
+            <tr th:each = "person : ${person_data}">
+              <td th:text="${person.firstName} + ' ' + ${person.lastName}"></td>
+              <td th:text="${person.email}"></td>
+              <td th:text="${person.city}"></td>
+            </tr>
         </tbody>
 
 
