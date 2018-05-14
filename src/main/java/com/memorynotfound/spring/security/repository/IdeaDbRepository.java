@@ -8,7 +8,9 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -30,6 +32,7 @@ public class IdeaDbRepository implements IIdeaDbRepository{
             preparedStatement.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
         });
     }
+
     @Override
     public void updateIdea(Person person, int id) {
 
@@ -42,7 +45,20 @@ public class IdeaDbRepository implements IIdeaDbRepository{
 
     @Override
     public List<Idea> getAllIdeas() {
-        return null;
+        List<Idea> ideas = new ArrayList<>();
+        String sql = "SELECT * FROM idebanken.Idea";
+        sqlRowSet = jdbc.queryForRowSet(sql);
+
+        while (sqlRowSet.next()){
+            ideas.add(new Idea(
+                    sqlRowSet.getString("idea_name"),
+                    sqlRowSet.getString("idea_description"),
+                    sqlRowSet.getInt("idea_person"),
+                    LocalDate.parse(sqlRowSet.getString("date"))
+            ));
+
+        }
+        return ideas;
     }
 
     @Override

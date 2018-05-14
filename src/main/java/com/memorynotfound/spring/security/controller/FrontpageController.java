@@ -92,6 +92,7 @@ public class FrontpageController {
 
     @GetMapping("/all-ideas")
     public String readAllIdeas(Model model){
+        model.addAttribute("idea_data", iIdeaDbRepository.getAllIdeas());
         return "all-ideas";
     }
 }

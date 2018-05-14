@@ -12,22 +12,22 @@
         <div th:replace="fragments/header :: header"></div>
 
         <div class="scroll_content">
-            <h1>Udviklere</h1>
+            <h1>Idéer</h1>
 
             <table>
                 <thead>
                     <tr>
-                     <th>Navn</th>
-                     <th>Email</th>
-                     <th>By</th>
+                         <th>Idé navn</th>
+                         <th>Beskrivelse</th>
+                         <th>Oprettet</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr th:each = "person : ${person_data}">
-                      <td th:text="${person.firstName} + ' ' + ${person.lastName}"></td>
-                      <td th:text="${person.email}"></td>
-                      <td th:text="${person.city}"></td>
+                    <tr th:each = "idea : ${idea_data}">
+                        <td th:text="${idea.ideaName}"></td>
+                        <td th:text="${idea.ideaDescription}"></td>
+                        <td th:text="${idea.date}"></td>
                     </tr>
                 </tbody>
 
