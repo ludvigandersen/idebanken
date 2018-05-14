@@ -11,28 +11,29 @@
     <div class="container">
         <div th:replace="fragments/header :: header"></div>
 
+        <div class="scroll_content">
+            <h1>Udviklere</h1>
 
-    <h1>Udviklere</h1>
+            <table>
+                <thead>
+                    <tr>
+                     <th>Navn</th>
+                     <th>Email</th>
+                     <th>By</th>
+                    </tr>
+                </thead>
 
-    <table>
-        <thead>
-            <tr>
-             <th>Navn</th>
-             <th>Email</th>
-             <th>By</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr th:each = "person : ${person_data}">
-              <td th:text="${person.firstName} + ' ' + ${person.lastName}"></td>
-              <td th:text="${person.email}"></td>
-              <td th:text="${person.city}"></td>
-            </tr>
-        </tbody>
+                <tbody>
+                    <tr th:each = "person : ${person_data}">
+                      <td th:text="${person.firstName} + ' ' + ${person.lastName}"></td>
+                      <td th:text="${person.email}"></td>
+                      <td th:text="${person.city}"></td>
+                    </tr>
+                </tbody>
 
 
-    </table>
+            </table>
+        </div>
 
         <div th:replace="fragments/footer :: footer"></div>
     </div>
