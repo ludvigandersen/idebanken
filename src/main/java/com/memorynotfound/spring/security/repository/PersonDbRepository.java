@@ -4,6 +4,7 @@ import com.memorynotfound.spring.security.email.Email;
 import com.memorynotfound.spring.security.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
@@ -64,7 +65,7 @@ public class PersonDbRepository implements IPersonDbRepository {
     public List<Person> getAllPersons() {
 
         List<Person> person = new ArrayList<>();
-        String sql = "SELECT first_name, last_name, email, city FROM idebanken.Person WHERE role_id = 1 ";
+        String sql = "SELECT first_name, last_name, email, city FROM idebanken.Person WHERE role_id = 1";
         sqlRowSet = jdbc.queryForRowSet(sql);
 
         while (sqlRowSet.next()){
@@ -74,7 +75,6 @@ public class PersonDbRepository implements IPersonDbRepository {
                     sqlRowSet.getString("email"),
                     sqlRowSet.getString("city"))
                     );
-
         }
 
         return person;
@@ -82,6 +82,22 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     @Override
     public Person getPerson(int id) {
+        return null;
+    }
+
+    @Override
+    public Person getPerson(String email) {
+        String sql = "SELECT * FROM idebanken.Person WHERE email=?";
+        sqlRowSet = jdbc.queryForRowSet(sql, email);
+
+        while (sqlRowSet.next()){
+            return new Person(
+                    sqlRowSet.getString("first_name"),
+                    sqlRowSet.getString("last_name"),
+                    sqlRowSet.getString("email"),
+                    sqlRowSet.getString("city")
+            );
+        }
         return null;
     }
 
