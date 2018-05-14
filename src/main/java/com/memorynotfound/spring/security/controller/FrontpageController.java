@@ -78,7 +78,6 @@ public class FrontpageController {
     @GetMapping("/create-user-email")
     public String createUser(Model model){
         model.addAttribute("email", "email");
-        System.out.println("email");
         return "user/create-user";
     }
 
