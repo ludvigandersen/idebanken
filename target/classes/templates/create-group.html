@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Opret gruppe</title>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <h1>Opret gruppe</h1>
+    <form action="/create-group" method="post">
+        <table>
+            <tr>
+                <td><label for="group_name">Gruppe navn:</label></td>
+                <td><input type="text" id="group_name" name="Name" placeholder=" gruppe navn" required></td>
+            </tr>
+
+                <td><input type="reset" value="Reset felter"></td>
+                <td><input type="submit" value="Opret"></td>
+            </tr>
+        </table>
+    </form>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+
+</body>
+</html>
