@@ -10,3 +10,6 @@
     float: left;
     background-color: darkorange;
 }
+.clear {
+    clear: both;
+}
