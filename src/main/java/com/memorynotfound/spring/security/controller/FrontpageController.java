@@ -1,12 +1,11 @@
 package com.memorynotfound.spring.security.controller;
 
+import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
+import com.memorynotfound.spring.security.repository.IIdeaDbRepository;
 import com.memorynotfound.spring.security.repository.IPersonDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +17,9 @@ public class FrontpageController {
 
     @Autowired
     IPersonDbRepository iPersonDbRepository;
+
+    @Autowired
+    IIdeaDbRepository iIdeaDbRepository;
 
     @GetMapping("/")
     public String root() {
@@ -32,6 +34,24 @@ public class FrontpageController {
     @GetMapping("/idea")
     public String ideaIndex() {
         return "idea/index";
+    }
+    @GetMapping("/create-idea")
+    public String createIdea(){
+        return "create-idea";
+    }
+
+    @PostMapping("/create-idea")
+    public String createIdea(
+        @ModelAttribute("ideaName") String ideaName,
+        @ModelAttribute("ideaDescription") String ideaDescription,
+        @ModelAttribute("ideaPerson") int ideaPerson){
+
+
+
+            Idea currentIdea = new Idea(ideaName, ideaDescription, ideaPerson, LocalDate.now());
+            System.out.println(currentIdea.toString());
+            iIdeaDbRepository.createIdea(currentIdea);
+            return "confirm-created-idea";
     }
 
     @GetMapping("/login")
