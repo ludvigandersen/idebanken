@@ -4,6 +4,7 @@ import com.memorynotfound.spring.security.email.Email;
 import com.memorynotfound.spring.security.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
@@ -33,20 +34,20 @@ public class PersonDbRepository implements IPersonDbRepository {
         boolean emailNot = false;
 
 
-        String sql = "INSERT INTO Person(person_id, first_name, last_name, email, zip_code, city, password, role_id, email_notifications, date)"+
-                "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+            String sql = "INSERT INTO Person(person_id, first_name, last_name, email, zip_code, city, password, role_id, email_notifications, date)"+
+                    "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 
-        jdbc.update(sql, preparedStatement -> {
-            preparedStatement.setString(1, person.getFirstName());
-            preparedStatement.setString(2, person.getLastName());
-            preparedStatement.setString(3, person.getEmail());
-            preparedStatement.setInt(4, person.getZipCode());
-            preparedStatement.setString(5, person.getCity());
-            preparedStatement.setString(6, person.getPassword());
-            preparedStatement.setInt(7, roleId);
-            preparedStatement.setBoolean(8, emailNot);
-            preparedStatement.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
-        });
+            jdbc.update(sql, preparedStatement -> {
+                preparedStatement.setString(1, person.getFirstName());
+                preparedStatement.setString(2, person.getLastName());
+                preparedStatement.setString(3, person.getEmail());
+                preparedStatement.setInt(4, person.getZipCode());
+                preparedStatement.setString(5, person.getCity());
+                preparedStatement.setString(6, person.getPassword());
+                preparedStatement.setInt(7, roleId);
+                preparedStatement.setBoolean(8, emailNot);
+                preparedStatement.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
+            });
         email.emailCreatePerson(person);
     }
 
@@ -64,7 +65,7 @@ public class PersonDbRepository implements IPersonDbRepository {
     public List<Person> getAllPersons() {
 
         List<Person> person = new ArrayList<>();
-        String sql = "SELECT first_name, last_name, email, city FROM idebanken.Person WHERE role_id = 1 ";
+        String sql = "SELECT first_name, last_name, email, city FROM idebanken.Person WHERE role_id = 1";
         sqlRowSet = jdbc.queryForRowSet(sql);
 
         while (sqlRowSet.next()){
@@ -74,7 +75,6 @@ public class PersonDbRepository implements IPersonDbRepository {
                     sqlRowSet.getString("email"),
                     sqlRowSet.getString("city"))
                     );
-
         }
 
         return person;
@@ -82,7 +82,45 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     @Override
     public Person getPerson(int id) {
+        String sql = "SELECT * FROM idebanken.Person WHERE person_id=?";
+        sqlRowSet = jdbc.queryForRowSet(sql, id);
+
+        while (sqlRowSet.next()){
+            return new Person(
+                    sqlRowSet.getString("first_name"),
+                    sqlRowSet.getString("last_name"),
+                    sqlRowSet.getString("email"),
+                    sqlRowSet.getString("city")
+            );
+        }
         return null;
+    }
+
+    @Override
+    public Person getPerson(String email) {
+        String sql = "SELECT * FROM idebanken.Person WHERE email=?";
+        sqlRowSet = jdbc.queryForRowSet(sql, email);
+
+        while (sqlRowSet.next()){
+            return new Person(
+                    sqlRowSet.getString("first_name"),
+                    sqlRowSet.getString("last_name"),
+                    sqlRowSet.getString("email"),
+                    sqlRowSet.getString("city")
+            );
+        }
+        return null;
+    }
+
+    @Override
+    public int getPersonId(String email) {
+        String sql = "SELECT person_id FROM idebanken.Person WHERE email=?";
+        sqlRowSet = jdbc.queryForRowSet(sql, email);
+
+        while (sqlRowSet.next()){
+                    return sqlRowSet.getInt("person_id");
+        }
+        return 0;
     }
 
     @Override

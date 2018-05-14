@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/create-user");
+        web.ignoring().antMatchers("/create-idea-post");
     }
 
     @Override
@@ -39,7 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/create-developer",
                             "/all-developers",
                             "/contact",
-                            "/about").permitAll()
+                            "/about",
+                            "/all-ideas").permitAll()
                     .antMatchers("/user/**").hasRole("USER")
                     .antMatchers("/idea/**").hasRole("IDEA")
                     .anyRequest().authenticated()
