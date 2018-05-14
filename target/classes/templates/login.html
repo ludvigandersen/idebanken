@@ -7,8 +7,8 @@
     <body>
         <div class="container">
             <div th:replace="fragments/header :: header"></div>
-            <h1>Login</h1>
-            <form th:action="@{/login}" method="post">
+            <form class="center" th:action="@{/login}" method="post">
+                <h2>Login</h2>
                 <div th:if="${param.error}">
                     <div class="alert alert-danger">
                         Den indtastede email eller password er forkert.
@@ -38,8 +38,8 @@
                         <td><input type="submit" name="login-submit" id="login-submit" value="Log In"></td>
                     </tr>
                 </table>
-                </form>
-            <p><a href="/create-user">Opret en bruger</a></p>
+                <p><a href="/create-user">Opret en bruger</a></p>
+            </form>
             <div th:replace="fragments/footer :: footer"></div>
         </div>
     </body>

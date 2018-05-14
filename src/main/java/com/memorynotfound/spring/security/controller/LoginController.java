@@ -12,8 +12,8 @@ public class LoginController {
     public String redirect(HttpServletRequest request){
         if (request.isUserInRole("USER")){
             return "redirect:/user";
-        } else if (request.isUserInRole("manager")){
-            return "redirect:/manager";
+        } else if (request.isUserInRole("IDEA")){
+            return "redirect:/idea";
         }
         return "/login";
     }
