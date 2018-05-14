@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -18,11 +20,15 @@ public class IdeaDbRepository implements IIdeaDbRepository{
 
     @Override
     public void createIdea(Idea idea) {
-        jdbc.update("INSERT INTO Idea (idea_id, idea_name, idea_description, idea_person, date)" +
-                        "VALUES (default, ?,?,?, default,?)",
-                new Object[]{
-                        idea.getIdeaName(), idea.getIdeaDescription(), idea.getIdeaPerson(), idea.getDate()
-                });
+        String sql = "INSERT INTO Idea (idea_id, idea_name, idea_description, idea_person, date) " +
+                    "VALUES (default, ?,?,?, default,?)";
+
+        jdbc.update(sql, preparedStatement -> {
+            preparedStatement.setString(1, idea.getIdeaName());
+            preparedStatement.setString(2, idea.getIdeaDescription());
+            preparedStatement.setInt(3, idea.getIdeaPerson());
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+        });
     }
     @Override
     public void updateIdea(Person person, int id) {

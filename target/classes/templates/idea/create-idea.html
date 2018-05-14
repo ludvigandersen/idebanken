@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/idea-header :: idea-header"></div>
     <h1>Opret en idé</h1>
     <form action="/create-idea" method="post">
         <table>
@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <td><label for="idea_description">Idé beskrivelse:</label></td>
-                <td><input type="text" id="idea_description" name="ideaDescription" placeholder="Beskrivelse" required></td>
+                <td><textarea rows="5" cols="50" id="idea_description" name="ideaDescription" placeholder="Beskrivelse" required></textarea></td>
             </tr>
             <tr>
                 <td><input type="reset" value="Reset felter"></td>
