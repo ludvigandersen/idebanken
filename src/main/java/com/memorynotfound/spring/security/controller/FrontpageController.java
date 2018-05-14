@@ -18,7 +18,6 @@ import java.time.LocalDate;
 @Controller
 public class FrontpageController {
 
-
     @Autowired
     IIdeaDbRepository iIdeaDbRepository;
 
@@ -42,20 +41,20 @@ public class FrontpageController {
 
     @GetMapping("/create-idea")
     public String createIdea(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        System.out.println(name);
         return "idea/create-idea";
     }
 
-    @PostMapping("/create-idea")
+    @PostMapping("/create-idea-post")
     public String createIdea(
         @ModelAttribute("ideaName") String ideaName,
         @ModelAttribute("ideaDescription") String ideaDescription){
 
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String name = auth.getName();
+            //int ideaPerson = iPersonDbRepository.getPersonId(name);
 
-            int ideaPerson = iPersonDbRepository.getPersonId(name);
-
-            Idea currentIdea = new Idea(ideaName, ideaDescription, ideaPerson, LocalDate.now());
+            Idea currentIdea = new Idea(ideaName, ideaDescription, 1, LocalDate.now());
             System.out.println(currentIdea.toString());
             iIdeaDbRepository.createIdea(currentIdea);
             return "confirm-created-idea";
