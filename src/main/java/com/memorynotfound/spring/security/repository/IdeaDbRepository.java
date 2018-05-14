@@ -23,7 +23,7 @@ public class IdeaDbRepository implements IIdeaDbRepository{
     @Override
     public void createIdea(Idea idea) {
         String sql = "INSERT INTO Idea (idea_id, idea_name, idea_description, idea_person, date) " +
-                    "VALUES (default, ?,?,?, default,?)";
+                    "VALUES (default, ?,?,?,?)";
 
         jdbc.update(sql, preparedStatement -> {
             preparedStatement.setString(1, idea.getIdeaName());
