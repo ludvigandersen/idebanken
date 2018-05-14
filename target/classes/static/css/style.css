@@ -10,13 +10,13 @@ header {
     background-color: dodgerblue;
 }
 footer {
-    height: 35px;
-    padding-bottom: 10px;
+    height: 45px;
     padding-left: 10px;
     padding-right: 10px;
     background-color: dodgerblue;
-    position: fixed;
-    bottom: 0px;
+}
+.footer_container p {
+    padding-top: 10px;
 }
 #logo {
     float: left;
@@ -78,4 +78,8 @@ p a{
     text-decoration: none;
     margin-right: 10px;
     color: black;
+}
+.scroll_content {
+    height: 630px;
+    overflow: scroll;
 }

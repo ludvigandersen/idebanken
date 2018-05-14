@@ -5,7 +5,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Person {
     private String firstName;
@@ -22,6 +21,9 @@ public class Person {
 
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
+    public Person() {
+    }
+
     public Person(String firstName, String lastName, String email, String tlf1, String tlf2, int zipCode, String city, String password, String role, LocalDate date) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,6 +36,14 @@ public class Person {
         this.role = role;
         this.date = date;
     }
+
+    public Person(String first_name, String last_name, String email, String city) {
+        this.firstName = first_name;
+        this.lastName = last_name;
+        this.email = email;
+        this.city = city;
+    }
+
 
     public String getFirstName() {
         return firstName;
