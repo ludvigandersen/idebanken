@@ -34,6 +34,8 @@ public class FrontpageController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Person person = iPersonDbRepository.getPerson(auth.getName());
         model.addAttribute(person);
+        double rate = 2.5;
+        model.addAttribute("rate", rate);
         return "user/index";
     }
 
