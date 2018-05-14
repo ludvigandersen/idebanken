@@ -61,8 +61,13 @@ public class FrontpageController {
     }
 
     @GetMapping("/all-developers")
-    public String readAll(Model model){
+    public String readAllDevelopers(Model model){
             model.addAttribute("person_data", iPersonDbRepository.getAllPersons());
-           return "all-developers";
+            return "all-developers";
+    }
+
+    @GetMapping("/all-ideas")
+    public String readAllIdeas(Model model){
+        return "all-ideas";
     }
 }
