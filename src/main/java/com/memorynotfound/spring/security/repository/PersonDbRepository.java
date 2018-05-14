@@ -33,20 +33,20 @@ public class PersonDbRepository implements IPersonDbRepository {
         boolean emailNot = false;
 
 
-        String sql = "INSERT INTO Person(person_id, first_name, last_name, email, zip_code, city, password, role_id, email_notifications, date)"+
-                "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+            String sql = "INSERT INTO Person(person_id, first_name, last_name, email, zip_code, city, password, role_id, email_notifications, date)"+
+                    "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 
-        jdbc.update(sql, preparedStatement -> {
-            preparedStatement.setString(1, person.getFirstName());
-            preparedStatement.setString(2, person.getLastName());
-            preparedStatement.setString(3, person.getEmail());
-            preparedStatement.setInt(4, person.getZipCode());
-            preparedStatement.setString(5, person.getCity());
-            preparedStatement.setString(6, person.getPassword());
-            preparedStatement.setInt(7, roleId);
-            preparedStatement.setBoolean(8, emailNot);
-            preparedStatement.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
-        });
+            jdbc.update(sql, preparedStatement -> {
+                preparedStatement.setString(1, person.getFirstName());
+                preparedStatement.setString(2, person.getLastName());
+                preparedStatement.setString(3, person.getEmail());
+                preparedStatement.setInt(4, person.getZipCode());
+                preparedStatement.setString(5, person.getCity());
+                preparedStatement.setString(6, person.getPassword());
+                preparedStatement.setInt(7, roleId);
+                preparedStatement.setBoolean(8, emailNot);
+                preparedStatement.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
+            });
         email.emailCreatePerson(person);
     }
 
