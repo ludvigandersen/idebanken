@@ -102,6 +102,17 @@ public class PersonDbRepository implements IPersonDbRepository {
     }
 
     @Override
+    public int getPersonId(String email) {
+        String sql = "SELECT person_id FROM idebanken.Person WHERE email=?";
+        sqlRowSet = jdbc.queryForRowSet(sql, email);
+
+        while (sqlRowSet.next()){
+                    return sqlRowSet.getInt("person_id");
+        }
+        return 0;
+    }
+
+    @Override
     public boolean checkEmail(String email) {
         return false;
     }
