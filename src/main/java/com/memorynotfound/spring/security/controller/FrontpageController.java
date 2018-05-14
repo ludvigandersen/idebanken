@@ -18,11 +18,12 @@ import java.time.LocalDate;
 @Controller
 public class FrontpageController {
 
-    @Autowired
-    IPersonDbRepository iPersonDbRepository;
 
     @Autowired
     IIdeaDbRepository iIdeaDbRepository;
+
+    @Autowired
+    IPersonDbRepository iPersonDbRepository;
 
     @GetMapping("/")
     public String root() {
@@ -52,7 +53,7 @@ public class FrontpageController {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String name = auth.getName();
 
-            iPersonDbRepository.getPerson(name);
+            int ideaPerson = iPersonDbRepository.getPersonId(name);
 
             Idea currentIdea = new Idea(ideaName, ideaDescription, ideaPerson, LocalDate.now());
             System.out.println(currentIdea.toString());
