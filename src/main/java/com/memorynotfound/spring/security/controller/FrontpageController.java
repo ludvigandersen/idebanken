@@ -40,21 +40,21 @@ public class FrontpageController {
     }
 
     @GetMapping("/create-idea")
-    public String createIdea(){
+    public String createIdea(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        System.out.println(name);
+        model.addAttribute("ideaPersonName",auth.getName());
         return "idea/create-idea";
     }
 
     @PostMapping("/create-idea-post")
     public String createIdea(
         @ModelAttribute("ideaName") String ideaName,
-        @ModelAttribute("ideaDescription") String ideaDescription){
+        @ModelAttribute("ideaDescription") String ideaDescription,
+        @ModelAttribute("ideaPersonName") String ideaPersonName){
 
-            //int ideaPerson = iPersonDbRepository.getPersonId(name);
+            int ideaPersonId = iPersonDbRepository.getPersonId(ideaPersonName);
 
-            Idea currentIdea = new Idea(ideaName, ideaDescription, 1, LocalDate.now());
+            Idea currentIdea = new Idea(ideaName, ideaDescription, ideaPersonId, LocalDate.now());
             System.out.println(currentIdea.toString());
             iIdeaDbRepository.createIdea(currentIdea);
             return "confirm-created-idea";
