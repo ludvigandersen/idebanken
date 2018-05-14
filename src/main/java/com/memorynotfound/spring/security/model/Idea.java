@@ -31,19 +31,19 @@ public class Idea {
         this.ideaDescription = ideaDescription;
     }
 
-    public int getIdeaPerson() {
-        return ideaPerson;
-    }
-
-    public void setIdeaPerson(int ideaPerson) {
-        this.ideaPerson = ideaPerson;
-    }
-
     public LocalDate getDate() {
         return date;
     }
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public int getIdeaPerson() {
+        return ideaPerson;
+    }
+
+    public void setIdeaPerson(int ideaPerson) {
+        this.ideaPerson = ideaPerson;
     }
 }

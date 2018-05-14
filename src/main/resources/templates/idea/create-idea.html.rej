@@ -1,0 +1,9 @@
+diff a/src/main/resources/templates/idea/create-idea.html b/src/main/resources/templates/idea/create-idea.html	(rejected hunks)
+@@ -0,6 +0,7 @@
+                 <td><input type="hidden" id="idea_person" name="ideaPerson" sec:authentication="name"></td>
+ =======
+                 <td><textarea rows="5" cols="50" id="idea_description" name="ideaDescription" placeholder="Beskrivelse" required></textarea></td>
++>>>>>>> d69c72e734c12545db0ce2de9884956ab2abe56a:src/main/resources/templates/idea/create-idea.html
+             </tr>
+             <tr>
+                 <td><input type="reset" value="Reset felter"></td>

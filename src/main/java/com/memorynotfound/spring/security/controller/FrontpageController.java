@@ -36,9 +36,10 @@ public class FrontpageController {
     public String ideaIndex() {
         return "idea/index";
     }
+
     @GetMapping("/create-idea")
     public String createIdea(){
-        return "create-idea";
+        return "idea/create-idea";
     }
 
     @PostMapping("/create-idea")
@@ -46,8 +47,6 @@ public class FrontpageController {
         @ModelAttribute("ideaName") String ideaName,
         @ModelAttribute("ideaDescription") String ideaDescription,
         @ModelAttribute("ideaPerson") int ideaPerson){
-
-
 
             Idea currentIdea = new Idea(ideaName, ideaDescription, ideaPerson, LocalDate.now());
             System.out.println(currentIdea.toString());
@@ -93,6 +92,7 @@ public class FrontpageController {
 
     @GetMapping("/all-ideas")
     public String readAllIdeas(Model model){
+        model.addAttribute("idea_data", iIdeaDbRepository.getAllIdeas());
         return "all-ideas";
     }
 }
