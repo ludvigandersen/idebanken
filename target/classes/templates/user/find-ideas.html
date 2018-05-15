@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Find idé</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/userstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="scroll_content">
+        <h1>Find idéer</h1>
+        <div th:replace="fragments/dashboard :: dashboard"></div>
+        <div class="user-content">
+            <p class="headline">Tilknyttede idéer</p>
+            <table>
+                <thead>
+                <tr>
+                    <th>Titel</th>
+                    <th>Beskrivelse</th>
+                    <th>Oprettet</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="idea : ${ideas}">
+                    <td th:text="${idea.ideaName}">Ingen idéer fundet</td>
+                    <td th:text="${idea.ideaDescription}"></td>
+                    <td th:text="${idea.date}"></td>
+                    <td><a th:href="${'/user/idea?id=' + idea.ideaId}">Læs mere</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

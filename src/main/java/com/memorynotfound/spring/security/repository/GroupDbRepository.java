@@ -21,8 +21,8 @@ public class GroupDbRepository implements IGroupDbRepository{
     @Override
     public void createGroup(Group group){
 
-        String sql = "INSERT INTO Group(group_id, group_name)"+
-                "VALUES(DEFAULT, ? )";
+        String sql = "INSERT INTO idebanken.Group (group_id, group_name, locked)"+
+                "VALUES (default, ?, default)";
 
         jdbc.update(sql, preparedStatement -> {
             preparedStatement.setString(1, group.getName());

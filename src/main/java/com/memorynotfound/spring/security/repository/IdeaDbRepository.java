@@ -52,6 +52,7 @@ public class IdeaDbRepository implements IIdeaDbRepository{
 
         while (sqlRowSet.next()){
             ideas.add(new Idea(
+                    sqlRowSet.getInt("idea_id"),
                     sqlRowSet.getString("idea_name"),
                     sqlRowSet.getString("idea_description"),
                     sqlRowSet.getInt("idea_person"),

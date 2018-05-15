@@ -22,7 +22,7 @@
             </p>
             <p>Oprettet: <span th:text="${idea.date}"></span></p>
 
-            <form action="/user/aply-for-idea-post" method="post" th:if="${aplied.contains(idea.ideaId)}">
+            <form action="/user/aply-for-idea-post" method="post">
                 <input type="hidden" th:value="${idea.ideaId}" name="ideaId">
                 <input type="hidden" th:value="${person.email}" name="personEmail">
                 <input type="submit" value="Ansøg om idé">

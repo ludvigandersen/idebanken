@@ -53,11 +53,6 @@ public class DeveloperController {
         double rate = 3;
         model.addAttribute("rate", rate);
 
-        List<Integer> groupIds = iGroupDbRepository.getGroupIdsWithPerson(iPersonDbRepository.getPersonId(auth.getName()));
-
-        List<Integer> aplied = iGroupDbRepository.getGroupIdsWithIdea(groupIds);
-        model.addAttribute("aplied", aplied);
-
         Idea idea = iIdeaDbRepository.getIdea(id);
         model.addAttribute("idea", idea);
         return "user/idea-user";
@@ -67,6 +62,19 @@ public class DeveloperController {
     public String aplyForIdea(@RequestParam("ideaId") int ideaId, @RequestParam("personEmail") String email){
 
         return "user/confirm-aply";
+    }
+
+    @GetMapping("user/find-ideas")
+    public String findIdea(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute("person", person);
+        double rate = 3;
+        model.addAttribute("rate", rate);
+
+        List<Idea> ideas = iIdeaDbRepository.getAllIdeas();
+        model.addAttribute("ideas", ideas);
+        return "user/find-ideas";
     }
 
 }
