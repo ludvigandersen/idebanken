@@ -33,22 +33,6 @@ public class FrontpageController {
         return "index";
     }
 
-    @GetMapping("/user")
-    public String userIndex(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Person person = iPersonDbRepository.getPerson(auth.getName());
-        model.addAttribute(person);
-        double rate = 3;
-        model.addAttribute("rate", rate);
-
-        List<Idea> assigned = new ArrayList<>();
-        model.addAttribute("assigned", assigned);
-
-        List<Idea> applied = new ArrayList<>();
-        model.addAttribute("applied", applied);
-        return "user/index";
-    }
-
     @GetMapping("/login")
     public String login() {
         return "login";
