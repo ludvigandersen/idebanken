@@ -1,5 +1,6 @@
 package com.memorynotfound.spring.security.controller;
 
+import com.memorynotfound.spring.security.model.Group;
 import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
 import com.memorynotfound.spring.security.repository.IGroupDbRepository;
@@ -56,14 +57,25 @@ public class DeveloperController {
         List<Integer> ideas = iGroupDbRepository.getIdeaIdsWithGroup(iGroupDbRepository.getGroupIdsWithPerson(iPersonDbRepository.getPersonId(person.getEmail())));
         model.addAttribute("ideas", ideas);
 
+        List<Group> groups = iGroupDbRepository.getGroupsWithPersonIn(iPersonDbRepository.getPersonId(person.getEmail()));
+        model.addAttribute("groups", groups);
+
         Idea idea = iIdeaDbRepository.getIdea(id);
         model.addAttribute("idea", idea);
         return "user/idea-user";
     }
 
     @PostMapping("/aply-for-idea-post")
-    public String aplyForIdea(@RequestParam("ideaId") int ideaId, @RequestParam("personEmail") String email){
+    public String aplyForIdea(@RequestParam("ideaId") int ideaId,
+                              @RequestParam("personEmail") String email,
+                              @RequestParam("group") int groupId,
+                              @RequestParam("message") String message){
+        iGroupDbRepository.assignGroupToIdea(ideaId, groupId);
+        return "redirect:/user/confirm-apply";
+    }
 
+    @GetMapping("user/confirm-apply")
+    public String confirmApply(){
         return "user/confirm-apply";
     }
 

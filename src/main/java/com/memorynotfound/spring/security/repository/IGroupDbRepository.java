@@ -9,4 +9,6 @@ public interface IGroupDbRepository {
     void createGroup(Group group);
     List<Integer> getGroupIdsWithPerson(int personId);
     List<Integer> getIdeaIdsWithGroup(List<Integer> groupId);
+    List<Group> getGroupsWithPersonIn(int personId);
+    void assignGroupToIdea(int ideaId, int groupId);
 }

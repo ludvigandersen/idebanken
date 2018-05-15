@@ -64,4 +64,53 @@ public class GroupDbRepository implements IGroupDbRepository{
         }
         return groupIds;
     }
+
+    @Override
+    public List<Group> getGroupsWithPersonIn(int personId) {
+        List<Group> groups = new ArrayList<>();
+        String sql = "SELECT Group.group_id, Group.group_name, DeveloperGroup.person_id FROM idebanken.Group " +
+                "INNER JOIN DeveloperGroup ON Group.group_id = DeveloperGroup.group_id " +
+                "WHERE DeveloperGroup.person_id = ?";
+        sqlRowSet = jdbc.queryForRowSet(sql, personId);
+
+        while (sqlRowSet.next()){
+            groups.add(new Group(
+                            sqlRowSet.getInt("group_id"),
+                            sqlRowSet.getString("group_name")));
+        }
+
+        return groups;
+    }
+
+    @Override
+    public void assignGroupToIdea(int ideaId, int groupId) {
+        if (!checkIfAlreadyAssigned(ideaId, groupId)) {
+            String sql = "INSERT INTO GroupIdea (group_idea_id, group_id, idea_id, approved)" +
+                    "VALUES (default, ?, ?, default)";
+
+            jdbc.update(sql, preparedStatement -> {
+                preparedStatement.setInt(1, groupId);
+                preparedStatement.setInt(2, ideaId);
+            });
+            System.out.println("Updated");
+        } else {
+            System.out.println("Not updated");
+        }
+    }
+
+    private boolean checkIfAlreadyAssigned(int ideaId, int groupId){
+        List<Integer> assigned = new ArrayList<>();
+        String sql = "SELECT group_idea_id FROM GroupIdea WHERE idea_id = ? AND group_id = ?";
+        sqlRowSet = jdbc.queryForRowSet(sql, ideaId, groupId);
+
+        while (sqlRowSet.next()){
+            assigned.add(sqlRowSet.getInt("group_id"));
+        }
+
+        if (assigned.isEmpty()){
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
