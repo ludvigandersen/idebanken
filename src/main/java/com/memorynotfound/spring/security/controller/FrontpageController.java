@@ -20,9 +20,6 @@ import java.time.LocalDate;
 public class FrontpageController {
 
     @Autowired
-    IIdeaDbRepository iIdeaDbRepository;
-
-    @Autowired
     IPersonDbRepository iPersonDbRepository;
 
     @GetMapping("/")
@@ -43,27 +40,6 @@ public class FrontpageController {
     @GetMapping("/idea")
     public String ideaIndex() {
         return "idea/index";
-    }
-
-    @GetMapping("/create-idea")
-    public String createIdea(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("ideaPersonName",auth.getName());
-        return "idea/create-idea";
-    }
-
-    @PostMapping("/create-idea-post")
-    public String createIdea(
-        @ModelAttribute("ideaName") String ideaName,
-        @ModelAttribute("ideaDescription") String ideaDescription,
-        @ModelAttribute("ideaPersonName") String ideaPersonName){
-
-            int ideaPersonId = iPersonDbRepository.getPersonId(ideaPersonName);
-
-            Idea currentIdea = new Idea(ideaName, ideaDescription, ideaPersonId, LocalDate.now());
-            System.out.println(currentIdea.toString());
-            iIdeaDbRepository.createIdea(currentIdea);
-            return "idea/confirm-created-idea";
     }
 
     @GetMapping("/login")
@@ -112,12 +88,6 @@ public class FrontpageController {
     public String readAllDevelopers(Model model){
             model.addAttribute("person_data", iPersonDbRepository.getAllPersons());
             return "all-developers";
-    }
-
-    @GetMapping("/all-ideas")
-    public String readAllIdeas(Model model){
-        model.addAttribute("idea_data", iIdeaDbRepository.getAllIdeas());
-        return "all-ideas";
     }
 
     @GetMapping("/delete-user")
