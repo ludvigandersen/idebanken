@@ -1,36 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <title>test ide</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/userstyle.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-<div class="container">
-    <div th:replace="fragments/header :: header"></div>
-    <div class="scroll_content">
-        <h1>Mine idéer</h1>
-        <div th:replace="fragments/dashboard :: dashboard"></div>
-        <div class="user-content">
-            <h2 th:text="${idea.ideaName}"></h2>
-            <p th:text="${idea.ideaDescription}"></p>
-            <p>Kontakt person: <br>
-                <span th:text="${person.firstName + ' ' + person.lastName}"></span>
-                <br>
-                <span th:text="${person.email}"></span>
-            </p>
-            <p>Oprettet: <span th:text="${idea.date}"></span></p>
+    <head>
+        <title>test ide</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/userstyle.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script>
+            function showTextfield() {
+                document.getElementById("applyForm").style.display = "inline";
+                document.getElementById("button").style.display = "none";
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div th:replace="fragments/header :: header"></div>
+            <div class="scroll_content">
+                <h1>Mine idéer</h1>
+                <div th:replace="fragments/dashboard :: dashboard"></div>
+                <div class="user-content">
+                    <h2 th:text="${idea.ideaName}"></h2>
+                    <p th:text="${idea.ideaDescription}"></p>
+                    <p>Kontakt person: <br>
+                        <span th:text="${person.firstName + ' ' + person.lastName}"></span>
+                        <br>
+                        <span th:text="${person.email}"></span>
+                    </p>
+                    <p>Oprettet: <span th:text="${idea.date}"></span></p>
 
-            <form action="/user/aply-for-idea-post" method="post">
-                <input type="hidden" th:value="${idea.ideaId}" name="ideaId">
-                <input type="hidden" th:value="${person.email}" name="personEmail">
-                <input type="submit" value="Ansøg om idé">
-            </form>
+                    <button th:if="${!ideas.contains(idea.ideaId)}" onclick="showTextfield()" id="button">Ansøg om idé</button>
+
+                    <form action="/aply-for-idea-post" method="post" id="applyForm" style="display: none;">
+                        <input type="hidden" th:value="${idea.ideaId}" name="ideaId">
+                        <input type="hidden" th:value="${person.email}" name="personEmail">
+                        <label>Beskriv hvorfor det er netop dig der skal føre idéen ud i livet</label>
+                        <br>
+                        <textarea rows="5" cols="30" name="message" placeholder="Skriv en besked"></textarea>
+                        <br>
+                        <input type="submit" value="Ansøg om idé">
+                    </form>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div th:replace="fragments/footer :: footer"></div>
         </div>
-    </div>
-    <div class="clear"></div>
-    <div th:replace="fragments/footer :: footer"></div>
-</div>
-</body>
+    </body>
 </html>

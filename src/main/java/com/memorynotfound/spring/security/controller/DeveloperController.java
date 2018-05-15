@@ -53,15 +53,18 @@ public class DeveloperController {
         double rate = 3;
         model.addAttribute("rate", rate);
 
+        List<Integer> ideas = iGroupDbRepository.getIdeaIdsWithGroup(iGroupDbRepository.getGroupIdsWithPerson(iPersonDbRepository.getPersonId(person.getEmail())));
+        model.addAttribute("ideas", ideas);
+
         Idea idea = iIdeaDbRepository.getIdea(id);
         model.addAttribute("idea", idea);
         return "user/idea-user";
     }
 
-    @PostMapping("/user/aply-for-idea-post")
+    @PostMapping("/aply-for-idea-post")
     public String aplyForIdea(@RequestParam("ideaId") int ideaId, @RequestParam("personEmail") String email){
 
-        return "user/confirm-aply";
+        return "user/confirm-apply";
     }
 
     @GetMapping("user/find-ideas")
@@ -76,5 +79,4 @@ public class DeveloperController {
         model.addAttribute("ideas", ideas);
         return "user/find-ideas";
     }
-
 }

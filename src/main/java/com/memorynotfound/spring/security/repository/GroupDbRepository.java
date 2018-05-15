@@ -44,10 +44,20 @@ public class GroupDbRepository implements IGroupDbRepository{
     }
 
     @Override
-    public List<Integer> getGroupIdsWithIdea(List<Integer> groupId) {
+    public List<Integer> getIdeaIdsWithGroup(List<Integer> groupId) {
         List<Integer> groupIds = new ArrayList<>();
+        String ids = "";
+        boolean check = true;
+        for (Integer i: groupId){
+            if (check){
+                ids += i;
+                check = false;
+            } else {
+                ids += ", " + i;
+            }
+        }
         String sql = "SELECT idea_id FROM idebanken.GroupIdea WHERE group_id IN (?)";
-        sqlRowSet = jdbc.queryForRowSet(sql, groupId);
+        sqlRowSet = jdbc.queryForRowSet(sql, ids);
 
         while (sqlRowSet.next()){
             groupIds.add(sqlRowSet.getInt("idea_id"));

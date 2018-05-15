@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/create-user-post");
         web.ignoring().antMatchers("/create-idea-post");
         web.ignoring().antMatchers("/create-group-post");
+        web.ignoring().antMatchers("/aply-for-idea-post");
     }
 
     @Override
