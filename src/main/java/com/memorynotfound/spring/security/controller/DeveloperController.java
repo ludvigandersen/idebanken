@@ -11,8 +11,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -47,11 +49,24 @@ public class DeveloperController {
     public String userIdea(@RequestParam("id") int id, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Person person = iPersonDbRepository.getPerson(auth.getName());
-        model.addAttribute(person);
+        model.addAttribute("person", person);
+        double rate = 3;
+        model.addAttribute("rate", rate);
+
+        List<Integer> groupIds = iGroupDbRepository.getGroupIdsWithPerson(iPersonDbRepository.getPersonId(auth.getName()));
+
+        List<Integer> aplied = iGroupDbRepository.getGroupIdsWithIdea(groupIds);
+        model.addAttribute("aplied", aplied);
 
         Idea idea = iIdeaDbRepository.getIdea(id);
         model.addAttribute("idea", idea);
-        return "user/user-idea";
+        return "user/idea-user";
+    }
+
+    @PostMapping("/user/aply-for-idea-post")
+    public String aplyForIdea(@RequestParam("ideaId") int ideaId, @RequestParam("personEmail") String email){
+
+        return "user/confirm-aply";
     }
 
 }

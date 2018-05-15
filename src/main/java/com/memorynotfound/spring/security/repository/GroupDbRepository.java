@@ -43,4 +43,15 @@ public class GroupDbRepository implements IGroupDbRepository{
         return groupIds;
     }
 
+    @Override
+    public List<Integer> getGroupIdsWithIdea(List<Integer> groupId) {
+        List<Integer> groupIds = new ArrayList<>();
+        String sql = "SELECT idea_id FROM idebanken.GroupIdea WHERE group_id IN (?)";
+        sqlRowSet = jdbc.queryForRowSet(sql, groupId);
+
+        while (sqlRowSet.next()){
+            groupIds.add(sqlRowSet.getInt("idea_id"));
+        }
+        return groupIds;
+    }
 }

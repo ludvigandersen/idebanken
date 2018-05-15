@@ -8,4 +8,5 @@ import java.util.List;
 public interface IGroupDbRepository {
     void createGroup(Group group);
     List<Integer> getGroupIdsWithPerson(int personId);
+    List<Integer> getGroupIdsWithIdea(List<Integer> groupId);
 }
