@@ -4,6 +4,8 @@ import com.memorynotfound.spring.security.model.Group;
 import com.memorynotfound.spring.security.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
@@ -27,8 +29,16 @@ public class GroupDbRepository implements IGroupDbRepository{
         jdbc.update(sql, preparedStatement -> {
             preparedStatement.setString(1, group.getName());
         });
+    }
 
+    @Override
+    public void createGroup(Group group, boolean locked) {
+        String sql = "INSERT INTO idebanken.Group (group_id, group_name, locked)"+
+                "VALUES (default, ?, 1)";
 
+        jdbc.update(sql, preparedStatement -> {
+            preparedStatement.setString(1, group.getName());
+        });
     }
 
     @Override
@@ -96,6 +106,29 @@ public class GroupDbRepository implements IGroupDbRepository{
         } else {
             System.out.println("Not updated");
         }
+    }
+
+    @Override
+    public void assignPersonToGroup(int personId, int groupId) {
+        String sql = "INSERT INTO DeveloperGroup (developer_group_id, person_id, group_id)"+
+                "VALUES (default, ?, ?)";
+
+        jdbc.update(sql, preparedStatement -> {
+            preparedStatement.setInt(1, personId);
+            preparedStatement.setInt(2, groupId);
+        });
+    }
+
+    @Override
+    public int getGroupIdWithName(String email) {
+        int groupId = 0;
+        String sql = "SELECT group_id FROM idebanken.Group WHERE group_name=?";
+        sqlRowSet = jdbc.queryForRowSet(sql, email);
+
+        while (sqlRowSet.next()){
+            groupId = sqlRowSet.getInt("group_id");
+        }
+        return groupId;
     }
 
     private boolean checkIfAlreadyAssigned(int ideaId, int groupId){

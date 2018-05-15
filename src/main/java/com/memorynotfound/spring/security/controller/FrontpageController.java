@@ -1,5 +1,6 @@
 package com.memorynotfound.spring.security.controller;
 
+import com.memorynotfound.spring.security.model.Group;
 import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
 import com.memorynotfound.spring.security.repository.IGroupDbRepository;
@@ -58,11 +59,18 @@ public class FrontpageController {
     public String createUser(@ModelAttribute Person person){
         if (iPersonDbRepository.checkEmail(person.getEmail())) {
             iPersonDbRepository.createPerson(person);
+            iGroupDbRepository.createGroup(new Group(person.getEmail()), true);
+            iGroupDbRepository.assignPersonToGroup(iPersonDbRepository.getPersonId(person.getEmail()), iGroupDbRepository.getGroupIdWithName(person.getEmail()));
             System.out.println("User created: " + person.toString());
-            return "user/confirm-created-user";
+            return "redirect:/user/confirm-created-user";
         } else {
             return "redirect:/create-user-email";
         }
+    }
+
+    @GetMapping("user/confirm-created-user")
+    public String confirmCreatedUser(){
+        return "user/confirm-created-user";
     }
 
     @GetMapping("/contact")

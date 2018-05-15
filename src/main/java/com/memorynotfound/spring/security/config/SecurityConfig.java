@@ -45,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/about",
                             "/all-ideas",
                             "/create-user",
-                            "/create-user-email").permitAll()
+                            "/create-user-email",
+                            "user/confirm-created-user").permitAll()
                     .antMatchers("/user/**").hasRole("USER")
                     .antMatchers("/idea/**").hasRole("IDEA")
                     .anyRequest().authenticated()
