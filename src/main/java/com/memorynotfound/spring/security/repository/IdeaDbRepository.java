@@ -62,8 +62,21 @@ public class IdeaDbRepository implements IIdeaDbRepository{
     }
 
     @Override
-    public Idea getIdea(int id) {
-        return null;
+    public List<Idea> getIdea(int id) {
+        List<Idea> ideas = new ArrayList<>();
+        String sql = "SELECT * FROM idebanken.Idea WHERE idea_person=?";
+        sqlRowSet = jdbc.queryForRowSet(sql, id);
+        while (sqlRowSet.next()){
+
+                ideas.add(new Idea(
+                        sqlRowSet.getString("idea_name"),
+                        sqlRowSet.getString("idea_description"),
+                        sqlRowSet.getInt("idea_person"),
+                        LocalDate.parse(sqlRowSet.getString("date"))
+                ));
+
+        }
+        return ideas;
     }
 
     @Override

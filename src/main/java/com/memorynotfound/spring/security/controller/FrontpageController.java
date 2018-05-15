@@ -45,11 +45,6 @@ public class FrontpageController {
         return "user/index";
     }
 
-    @GetMapping("/idea")
-    public String ideaIndex() {
-        return "idea/index";
-    }
-
     @GetMapping("/login")
     public String login() {
         return "login";

@@ -4,12 +4,14 @@
         <meta charset="UTF-8">
         <title>Idé</title>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/userstyle.css">
     </head>
     <body>
         <div class="container">
             <div th:replace="fragments/header :: header"></div>
             <h1>Idea</h1>
-            <a href="/create-idea">Opret idé</a>
+            <div th:replace="fragments/dashboard :: dashboard"></div>
+            <div class="clear"></div>
             <div th:replace="fragments/footer :: footer"></div>
         </div>
     </body>

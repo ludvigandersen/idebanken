@@ -18,6 +18,8 @@
             <tr>
                 <td><label for="idea_description">Idé beskrivelse:</label></td>
                 <td><textarea rows="5" cols="50" id="idea_description" name="ideaDescription" placeholder="Beskrivelse" required></textarea></td>
+
+                <input type="hidden" th:value="${ideaPersonName}" name="ideaPersonName">
             </tr>
             <tr>
                 <td><input type="reset" value="Reset felter"></td>

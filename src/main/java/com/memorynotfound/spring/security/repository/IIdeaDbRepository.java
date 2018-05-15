@@ -11,7 +11,7 @@ public interface IIdeaDbRepository {
     void updateIdea(Person person, int id);
     void deleteIdea(int id);
     List<Idea> getAllIdeas();
-    Idea getIdea(int id);
+    List<Idea> getIdea(int id);
     List<Idea> getAssignedIdeas();
     List<Idea> getAppliedIdeas();
 }

@@ -120,7 +120,7 @@ public class PersonDbRepository implements IPersonDbRepository {
         sqlRowSet = jdbc.queryForRowSet(sql, email);
 
         while (sqlRowSet.next()){
-                    return sqlRowSet.getInt("person_id");
+            return sqlRowSet.getInt("person_id");
         }
         return 0;
     }
