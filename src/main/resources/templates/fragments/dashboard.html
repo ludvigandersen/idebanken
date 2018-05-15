@@ -1,0 +1,30 @@
+<div class="dashboard" th:fragment="dashboard">
+    <p>
+        <span th:text="${person.firstName} + ' ' + ${person.lastName}"></span><br>
+        <span th:text="${person.email}"></span>
+    </p>
+    <p>
+    <hr>
+    <a href="#">Min profil</a><br>
+    <a href="#">Mine idéer</a><br>
+    <a href="#">Find idéer</a><br>
+    <a href="#">Grupper</a>
+    </p>
+    <p>
+    <hr>
+    Rating
+    <br>
+    <span th:if="${rate == 0}">No rating</span>
+    <span th:if="${rate > 0 && rate < 1}" class="fa fa-star-half checked"></span>
+    <span th:if="${rate >= 1}" class="fa fa-star checked"></span>
+    <span th:if="${rate > 1 && rate < 2}" class="fa fa-star-half checked"></span>
+    <span th:if="${rate >= 2}" class="fa fa-star checked"></span>
+    <span th:if="${rate > 2 && rate < 3}" class="fa fa-star-half checked"></span>
+    <span th:if="${rate >= 3}" class="fa fa-star checked"></span>
+    <span th:if="${rate > 3 && rate < 4}" class="fa fa-star-half checked"></span>
+    <span th:if="${rate >= 4}" class="fa fa-star checked"></span>
+    <span th:if="${rate == 5}" class="fa fa-star-half checked"></span>
+    <br>
+    <span th:text="${rate}"></span> / 5.0
+    </p>
+</div>
