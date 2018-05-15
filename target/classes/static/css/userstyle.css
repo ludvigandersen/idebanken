@@ -5,9 +5,14 @@
     background-color: #f5f5f5;
 }
 .user-content {
-    width: 700px;
+    padding: 10px 30px 30px 30px;
+    width: 640px;
     float: left;
 }
 .clear {
     clear: both;
+}
+.headline {
+    font-size: 15px;
+    font-weight: bold;
 }
