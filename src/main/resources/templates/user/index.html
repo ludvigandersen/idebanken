@@ -3,13 +3,50 @@
     <head>
         <title>Sikker side</title>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/userstyle.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
-        <div class="container">
-            <div th:replace="fragments/user-header :: user-header"></div>
+    <div class="container">
+        <div th:replace="fragments/header :: header"></div>
+        <div class="scroll_content">
             <h1>Dette er en side man kun kan se med USER role</h1>
-            <p><a href="/">Tilbage til forsiden</a></p>
-            <div th:replace="fragments/footer :: footer"></div>
+            <div class="dashboard">
+                <p>
+                    <span th:text="${person.firstName} + ' ' + ${person.lastName}"></span><br>
+                    <span th:text="${person.email}"></span>
+                </p>
+                <p>
+                    <hr>
+                    <a href="#">Min profil</a><br>
+                    <a href="#">Mine idéer</a><br>
+                    <a href="#">Find idéer</a><br>
+                    <a href="#">Grupper</a>
+                </p>
+                <p>
+                    <hr>
+                    Rating
+                    <br>
+                    <span th:if="${rate == 0}">No rating</span>
+                    <span th:if="${rate > 0 && rate < 1}" class="fa fa-star-half checked"></span>
+                    <span th:if="${rate > 0.5}" class="fa fa-star checked"></span>
+                    <span th:if="${rate > 1 && rate < 2}" class="fa fa-star-half checked"></span>
+                    <span th:if="${rate > 1.5}" class="fa fa-star checked"></span>
+                    <span th:if="${rate > 2 && rate < 3}" class="fa fa-star-half checked"></span>
+                    <span th:if="${rate > 2.5}" class="fa fa-star checked"></span>
+                    <span th:if="${rate > 3 && rate < 4}" class="fa fa-star-half checked"></span>
+                    <span th:if="${rate > 3.5}" class="fa fa-star checked"></span>
+                    <span th:if="${rate == 5}" class="fa fa-star-half checked"></span>
+                    <br>
+                    <span th:text="${rate}"></span> / 5.0
+                </p>
+            </div>
+            <div class="user-content">
+
+            </div>
         </div>
+        <div class="clear"></div>
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
     </body>
 </html>

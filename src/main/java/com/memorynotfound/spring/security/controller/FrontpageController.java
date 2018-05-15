@@ -19,7 +19,6 @@ import java.time.LocalDate;
 @Controller
 public class FrontpageController {
 
-
     @Autowired
     IIdeaDbRepository iIdeaDbRepository;
 
@@ -32,7 +31,12 @@ public class FrontpageController {
     }
 
     @GetMapping("/user")
-    public String userIndex() {
+    public String userIndex(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute(person);
+        double rate = 2.5;
+        model.addAttribute("rate", rate);
         return "user/index";
     }
 
@@ -42,24 +46,24 @@ public class FrontpageController {
     }
 
     @GetMapping("/create-idea")
-    public String createIdea(){
+    public String createIdea(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("ideaPersonName",auth.getName());
         return "idea/create-idea";
     }
 
-    @PostMapping("/create-idea")
+    @PostMapping("/create-idea-post")
     public String createIdea(
         @ModelAttribute("ideaName") String ideaName,
-        @ModelAttribute("ideaDescription") String ideaDescription){
+        @ModelAttribute("ideaDescription") String ideaDescription,
+        @ModelAttribute("ideaPersonName") String ideaPersonName){
 
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String name = auth.getName();
+            int ideaPersonId = iPersonDbRepository.getPersonId(ideaPersonName);
 
-            int ideaPerson = iPersonDbRepository.getPersonId(name);
-
-            Idea currentIdea = new Idea(ideaName, ideaDescription, ideaPerson, LocalDate.now());
+            Idea currentIdea = new Idea(ideaName, ideaDescription, ideaPersonId, LocalDate.now());
             System.out.println(currentIdea.toString());
             iIdeaDbRepository.createIdea(currentIdea);
-            return "confirm-created-idea";
+            return "idea/confirm-created-idea";
     }
 
     @GetMapping("/login")
@@ -74,14 +78,26 @@ public class FrontpageController {
 
     @GetMapping("/create-user")
     public String createUser(){
-        return "create-user";
+        return "user/create-user";
     }
 
-    @PostMapping("/create-user")
-    public String createUser(@ModelAttribute Person person){
-        iPersonDbRepository.createPerson(person);
-        return "confirm-created-user";
+    @GetMapping("/create-user-email")
+    public String createUser(Model model){
+        model.addAttribute("email", "email");
+        return "user/create-user";
     }
+
+    @PostMapping("/create-user-post")
+    public String createUser(@ModelAttribute Person person){
+        if (iPersonDbRepository.checkEmail(person.getEmail())) {
+            iPersonDbRepository.createPerson(person);
+            System.out.println("User created: " + person.toString());
+            return "user/confirm-created-user";
+        } else {
+            return "redirect:/create-user-email";
+        }
+    }
+
     @GetMapping("/contact")
     public String contact(){
         return "contact";
