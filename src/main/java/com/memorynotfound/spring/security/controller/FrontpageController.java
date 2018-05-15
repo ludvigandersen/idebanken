@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class FrontpageController {
@@ -37,6 +39,12 @@ public class FrontpageController {
         model.addAttribute(person);
         double rate = 3;
         model.addAttribute("rate", rate);
+
+        List<Idea> assigned = new ArrayList<>();
+        model.addAttribute("assigned", assigned);
+
+        List<Idea> applied = new ArrayList<>();
+        model.addAttribute("applied", applied);
         return "user/index";
     }
 

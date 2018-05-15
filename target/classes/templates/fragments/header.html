@@ -1,4 +1,5 @@
-<header sec:authorize="isAnonymous()" th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">     <div id="logo"><a href="/">Idébanken</a></div>
+<header sec:authorize="isAnonymous()" th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <div id="logo"><a href="/">Idébanken</a></div>
     <nav>
         <a href="/all-ideas">Idéer</a>
         <a href="/all-developers">Udviklere</a>
@@ -7,7 +8,7 @@
     <div class="clear"></div>
 </header>
 
-<header sec:authorize="hasRole('USER')" th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">     <div id="logo"><a href="/">Idébanken</a></div>
+<header sec:authorize="hasRole('USER')" th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div id="logo"><a href="/">Idébanken</a></div>
     <nav>
         <a href="/user">Min side</a>
@@ -18,7 +19,7 @@
     <div class="clear"></div>
 </header>
 
-<header sec:authorize="hasRole('IDEA')" th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">     <div id="logo"><a href="/">Idébanken</a></div>
+<header sec:authorize="hasRole('IDEA')" th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div id="logo"><a href="/">Idébanken</a></div>
     <nav>
         <a href="/idea">Min side</a>

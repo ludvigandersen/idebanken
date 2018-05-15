@@ -12,4 +12,6 @@ public interface IIdeaDbRepository {
     void deleteIdea(int id);
     List<Idea> getAllIdeas();
     Idea getIdea(int id);
+    List<Idea> getAssignedIdeas();
+    List<Idea> getAppliedIdeas();
 }

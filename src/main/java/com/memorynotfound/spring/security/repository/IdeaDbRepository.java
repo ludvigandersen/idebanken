@@ -65,4 +65,14 @@ public class IdeaDbRepository implements IIdeaDbRepository{
     public Idea getIdea(int id) {
         return null;
     }
+
+    @Override
+    public List<Idea> getAssignedIdeas() {
+        return null;
+    }
+
+    @Override
+    public List<Idea> getAppliedIdeas() {
+        return null;
+    }
 }

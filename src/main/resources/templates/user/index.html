@@ -10,10 +10,52 @@
     <div class="container">
         <div th:replace="fragments/header :: header"></div>
         <div class="scroll_content">
-            <h1>Dette er en side man kun kan se med USER role</h1>
+            <h1>Mine idéer</h1>
             <div th:replace="fragments/dashboard :: dashboard"></div>
             <div class="user-content">
+                <p class="headline">Tilknyttede idéer</p>
+                <p th:if="${assigned.empty}">Ingen idéer fundet</p>
+                <table th:if="${!assigned.empty}">
+                    <thead>
+                        <tr>
+                            <th>
+                                <td>Titel</td>
+                                <td>Beskrivelse</td>
+                                <td>Oprettet</td>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="idea : ${assigned}">
+                            <td th:text="${idea.ideaName}">Ingen idéer fundet</td>
+                            <td th:text="${idea.ideaDescription}"></td>
+                            <td th:text="${idea.date}"></td>
+                        </tr>
+                    </tbody>
+                </table>
 
+                <hr>
+
+                <p class="headline">Ansøgte idéer</p>
+                <p th:if="${applied.empty}">Ingen idéer fundet</p>
+                <table th:if="${!applied.empty}">
+                    <thead>
+                    <tr>
+                        <th>
+                        <td>Titel</td>
+                        <td>Beskrivelse</td>
+                        <td>Oprettet</td>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="idea : ${applied}">
+                        <td th:text="${idea.ideaName}"></td>
+                        <td th:text="${idea.ideaDescription}"></td>
+                        <td th:text="${idea.date}"></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="clear"></div>
