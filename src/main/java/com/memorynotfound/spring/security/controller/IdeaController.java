@@ -41,7 +41,12 @@ public class IdeaController {
                 Idea currentIdea = new Idea(ideaName, ideaDescription, ideaPersonId, LocalDate.now());
                 System.out.println(currentIdea.toString());
                 iIdeaDbRepository.createIdea(currentIdea);
-                return "idea/confirm-created-idea";
+                return "redirect:/idea/confirm-created-idea";
+    }
+
+    @GetMapping("idea/confirm-created-idea")
+    public String confirmCreatedIdea(){
+        return "idea/confirm-created-idea";
     }
 
     @GetMapping("/idea")
