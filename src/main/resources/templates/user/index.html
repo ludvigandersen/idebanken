@@ -18,11 +18,9 @@
                 <table th:if="${!assigned.empty}">
                     <thead>
                         <tr>
-                            <th>
-                                <td>Titel</td>
-                                <td>Beskrivelse</td>
-                                <td>Oprettet</td>
-                            </th>
+                            <th>Titel</th>
+                            <th>Beskrivelse</th>
+                            <th>Oprettet</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +28,7 @@
                             <td th:text="${idea.ideaName}">Ingen idéer fundet</td>
                             <td th:text="${idea.ideaDescription}"></td>
                             <td th:text="${idea.date}"></td>
+                            <td><a th:href="${'/user/idea?id=' + idea.ideaId}">Læs mere</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -40,20 +39,19 @@
                 <p th:if="${applied.empty}">Ingen idéer fundet</p>
                 <table th:if="${!applied.empty}">
                     <thead>
-                    <tr>
-                        <th>
-                        <td>Titel</td>
-                        <td>Beskrivelse</td>
-                        <td>Oprettet</td>
-                        </th>
-                    </tr>
+                        <tr>
+                            <th>Titel</th>
+                            <th>Beskrivelse</th>
+                            <th>Oprettet</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="idea : ${applied}">
-                        <td th:text="${idea.ideaName}"></td>
-                        <td th:text="${idea.ideaDescription}"></td>
-                        <td th:text="${idea.date}"></td>
-                    </tr>
+                        <tr th:each="idea : ${applied}">
+                            <td th:text="${idea.ideaName}"></td>
+                            <td th:text="${idea.ideaDescription}"></td>
+                            <td th:text="${idea.date}"></td>
+                            <td><a th:href="${'/user/idea?id=' + idea.ideaId}">Læs mere</a></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -2,6 +2,7 @@ package com.memorynotfound.spring.security.controller;
 
 import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
+import com.memorynotfound.spring.security.repository.IGroupDbRepository;
 import com.memorynotfound.spring.security.repository.IIdeaDbRepository;
 import com.memorynotfound.spring.security.repository.IPersonDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,25 +28,12 @@ public class FrontpageController {
     @Autowired
     IPersonDbRepository iPersonDbRepository;
 
+    @Autowired
+    IGroupDbRepository iGroupDbRepository;
+
     @GetMapping("/")
     public String root() {
         return "index";
-    }
-
-    @GetMapping("/user")
-    public String userIndex(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Person person = iPersonDbRepository.getPerson(auth.getName());
-        model.addAttribute(person);
-        double rate = 3;
-        model.addAttribute("rate", rate);
-
-        List<Idea> assigned = new ArrayList<>();
-        model.addAttribute("assigned", assigned);
-
-        List<Idea> applied = new ArrayList<>();
-        model.addAttribute("applied", applied);
-        return "user/index";
     }
 
     @GetMapping("/idea")

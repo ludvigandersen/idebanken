@@ -1,15 +1,21 @@
 package com.memorynotfound.spring.security.repository;
 
 import com.memorynotfound.spring.security.model.Group;
+import com.memorynotfound.spring.security.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class GroupDbRepository implements IGroupDbRepository{
 
     @Autowired
     JdbcTemplate jdbc;
+    SqlRowSet sqlRowSet;
 
 
     @Override
@@ -23,6 +29,18 @@ public class GroupDbRepository implements IGroupDbRepository{
         });
 
 
+    }
+
+    @Override
+    public List<Integer> getGroupIdsWithPerson(int personId) {
+        List<Integer> groupIds = new ArrayList<>();
+        String sql = "SELECT group_id FROM idebanken.DeveloperGroup WHERE person_id=?";
+        sqlRowSet = jdbc.queryForRowSet(sql, personId);
+
+        while (sqlRowSet.next()){
+            groupIds.add(sqlRowSet.getInt("group_id"));
+        }
+        return groupIds;
     }
 
 }
