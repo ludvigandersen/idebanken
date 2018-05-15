@@ -12,13 +12,8 @@ public interface IIdeaDbRepository {
     void updateIdea(Person person, int id);
     void deleteIdea(int id);
     List<Idea> getAllIdeas();
-<<<<<<< HEAD
-    List<Idea> getIdea(int id);
-    List<Idea> getAssignedIdeas();
-    List<Idea> getAppliedIdeas();
-=======
+    List<Idea> getIdeaList(int id);
     Idea getIdea(int id);
     List<Idea> getAssignedIdeas(List<Integer> groups);
     List<Idea> getAppliedIdeas(List<Integer> groups);
->>>>>>> 87bf0a217fa5eb24fe8aa374bba05f2d6b14b131
 }

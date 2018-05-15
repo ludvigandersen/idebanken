@@ -64,23 +64,23 @@ public class IdeaDbRepository implements IIdeaDbRepository{
     }
 
     @Override
-<<<<<<< HEAD
-    public List<Idea> getIdea(int id) {
+    public List<Idea> getIdeaList(int id) {
         List<Idea> ideas = new ArrayList<>();
         String sql = "SELECT * FROM idebanken.Idea WHERE idea_person=?";
         sqlRowSet = jdbc.queryForRowSet(sql, id);
-        while (sqlRowSet.next()){
+        while (sqlRowSet.next()) {
 
-                ideas.add(new Idea(
-                        sqlRowSet.getString("idea_name"),
-                        sqlRowSet.getString("idea_description"),
-                        sqlRowSet.getInt("idea_person"),
-                        LocalDate.parse(sqlRowSet.getString("date"))
-                ));
+            ideas.add(new Idea(
+                    sqlRowSet.getString("idea_name"),
+                    sqlRowSet.getString("idea_description"),
+                    sqlRowSet.getInt("idea_person"),
+                    LocalDate.parse(sqlRowSet.getString("date"))
+            ));
 
         }
         return ideas;
-=======
+    }
+
     public Idea getIdea(int id) {
         String sql = "SELECT * FROM idebanken.Idea WHERE idea_id=?";
         sqlRowSet = jdbc.queryForRowSet(sql, id);
@@ -96,7 +96,6 @@ public class IdeaDbRepository implements IIdeaDbRepository{
 
         }
         return null;
->>>>>>> 87bf0a217fa5eb24fe8aa374bba05f2d6b14b131
     }
 
     @Override

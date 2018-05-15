@@ -33,7 +33,6 @@ public class FrontpageController {
         return "index";
     }
 
-<<<<<<< HEAD
     @GetMapping("/user")
     public String userIndex(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -48,11 +47,6 @@ public class FrontpageController {
         List<Idea> applied = new ArrayList<>();
         model.addAttribute("applied", applied);
         return "user/index";
-=======
-    @GetMapping("/idea")
-    public String ideaIndex() {
-        return "idea/index";
->>>>>>> 87bf0a217fa5eb24fe8aa374bba05f2d6b14b131
     }
 
     @GetMapping("/login")

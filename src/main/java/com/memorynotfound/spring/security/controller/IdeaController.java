@@ -59,7 +59,7 @@ public class IdeaController {
 
         int ideaPersonId = iPersonDbRepository.getPersonId(name);
 
-        model.addAttribute("idea_text",iIdeaDbRepository.getIdea(ideaPersonId));
+        model.addAttribute("idea_text",iIdeaDbRepository.getIdeaList(ideaPersonId));
 
         return "my-ideas";
     }
