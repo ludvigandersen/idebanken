@@ -9,8 +9,13 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.sql.Statement.RETURN_GENERATED_KEYS;
 
 @Repository
 public class GroupDbRepository implements IGroupDbRepository{
@@ -39,6 +44,19 @@ public class GroupDbRepository implements IGroupDbRepository{
         jdbc.update(sql, preparedStatement -> {
             preparedStatement.setString(1, group.getName());
         });
+    }
+
+    @Override
+    public void addCurrentDeveloperGroup(int personId, int groupId) {
+            String sql = "INSERT INTO DeveloperGroup (developer_group_id, person_id, group_id)"+
+                    "VALUES (default, ?, ?)";
+
+
+            jdbc.update(sql, preparedStatement -> {
+                preparedStatement.getGeneratedKeys();
+                preparedStatement.setInt(1, personId);
+                preparedStatement.setInt(2, groupId);
+            });
     }
 
     @Override
@@ -76,6 +94,23 @@ public class GroupDbRepository implements IGroupDbRepository{
     }
 
     @Override
+    public List<Group> getDeveloperGroupsWithPersonId(int personId) {
+        List<Group> groups = new ArrayList<>();
+        String sql = "SELECT Group.group_id, Group.group_name,Group.locked, DeveloperGroup.person_id FROM idebanken.Group " +
+                "INNER JOIN DeveloperGroup ON Group.group_id = DeveloperGroup.group_id " +
+                "WHERE Group.locked = 0 and DeveloperGroup.person_id = ?";
+        sqlRowSet = jdbc.queryForRowSet(sql, personId);
+
+        while (sqlRowSet.next()){
+            groups.add(new Group(
+                    sqlRowSet.getInt("group_id"),
+                    sqlRowSet.getString("group_name")));
+        }
+
+        return groups;
+    }
+
+    @Override
     public List<Group> getGroupsWithPersonIn(int personId) {
         List<Group> groups = new ArrayList<>();
         String sql = "SELECT Group.group_id, Group.group_name, DeveloperGroup.person_id FROM idebanken.Group " +
@@ -96,7 +131,7 @@ public class GroupDbRepository implements IGroupDbRepository{
     public void assignGroupToIdea(int ideaId, int groupId) {
         if (!checkIfAlreadyAssigned(ideaId, groupId)) {
             String sql = "INSERT INTO GroupIdea (group_idea_id, group_id, idea_id, approved)" +
-                    "VALUES (default, ?, ?, default)";
+                    "VALUES (default, , ?, default)";
 
             jdbc.update(sql, preparedStatement -> {
                 preparedStatement.setInt(1, groupId);
