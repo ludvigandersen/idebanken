@@ -3,12 +3,21 @@ package com.memorynotfound.spring.security.model;
 import java.time.LocalDate;
 
 public class Idea {
+    private int ideaId;
     private String ideaName;
     private String ideaDescription;
     private int ideaPerson;
     private LocalDate date;
 
     public Idea(String ideaName, String ideaDescription, int ideaPerson, LocalDate date) {
+        this.ideaName = ideaName;
+        this.ideaDescription = ideaDescription;
+        this.ideaPerson = ideaPerson;
+        this.date = date;
+    }
+
+    public Idea(int ideaId, String ideaName, String ideaDescription, int ideaPerson, LocalDate date) {
+        this.ideaId = ideaId;
         this.ideaName = ideaName;
         this.ideaDescription = ideaDescription;
         this.ideaPerson = ideaPerson;
@@ -45,5 +54,13 @@ public class Idea {
 
     public void setIdeaPerson(int ideaPerson) {
         this.ideaPerson = ideaPerson;
+    }
+
+    public int getIdeaId() {
+        return ideaId;
+    }
+
+    public void setIdeaId(int ideaId) {
+        this.ideaId = ideaId;
     }
 }

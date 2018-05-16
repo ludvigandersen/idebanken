@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Opret Idé</title>
     <link rel="stylesheet" href="css/style.css">
@@ -18,6 +18,8 @@
             <tr>
                 <td><label for="idea_description">Idé beskrivelse:</label></td>
                 <td><textarea rows="5" cols="50" id="idea_description" name="ideaDescription" placeholder="Beskrivelse" required></textarea></td>
+
+                <input type="hidden" th:value="${ideaPersonName}" name="ideaPersonName">
             </tr>
             <tr>
                 <td><input type="reset" value="Reset felter"></td>

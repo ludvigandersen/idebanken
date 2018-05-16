@@ -16,12 +16,14 @@ public class GroupController {
 
     @GetMapping ("/create-group")
     public String createGroup (){
-        return "create-group";
+        return "user/create-group";
     }
+
     @PostMapping("/create-group-post")
-    public String createGroup (@ModelAttribute Group group){
+    public String createGroup (@ModelAttribute("name") String groupName){
+        Group group = new Group(groupName);
         iGroupDbRepository.createGroup(group);
-        return "CreateGroup";
+        return "redirect:/";
     }
 
 

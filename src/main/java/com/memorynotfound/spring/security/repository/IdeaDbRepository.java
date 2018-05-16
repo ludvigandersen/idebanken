@@ -1,5 +1,6 @@
 package com.memorynotfound.spring.security.repository;
 
+import com.memorynotfound.spring.security.model.Group;
 import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,7 @@ public class IdeaDbRepository implements IIdeaDbRepository{
 
         while (sqlRowSet.next()){
             ideas.add(new Idea(
+                    sqlRowSet.getInt("idea_id"),
                     sqlRowSet.getString("idea_name"),
                     sqlRowSet.getString("idea_description"),
                     sqlRowSet.getInt("idea_person"),
@@ -62,7 +64,102 @@ public class IdeaDbRepository implements IIdeaDbRepository{
     }
 
     @Override
+    public List<Idea> getIdeaList(int id) {
+        List<Idea> ideas = new ArrayList<>();
+        String sql = "SELECT * FROM idebanken.Idea WHERE idea_person=?";
+        sqlRowSet = jdbc.queryForRowSet(sql, id);
+        while (sqlRowSet.next()) {
+
+            ideas.add(new Idea(
+                    sqlRowSet.getString("idea_name"),
+                    sqlRowSet.getString("idea_description"),
+                    sqlRowSet.getInt("idea_person"),
+                    LocalDate.parse(sqlRowSet.getString("date"))
+            ));
+
+        }
+        return ideas;
+    }
+
     public Idea getIdea(int id) {
+        String sql = "SELECT * FROM idebanken.Idea WHERE idea_id=?";
+        sqlRowSet = jdbc.queryForRowSet(sql, id);
+
+        while (sqlRowSet.next()){
+            return new Idea(
+                    sqlRowSet.getInt("idea_id"),
+                    sqlRowSet.getString("idea_name"),
+                    sqlRowSet.getString("idea_description"),
+                    sqlRowSet.getInt("idea_person"),
+                    LocalDate.parse(sqlRowSet.getString("date"))
+            );
+
+        }
         return null;
+    }
+
+    @Override
+    public List<Idea> getAssignedIdeas(List<Integer> groups) {
+        List<Idea> ideas = new ArrayList<>();
+
+        String groupString = "";
+        boolean check = true;
+        for (Integer i: groups){
+            if (check){
+                groupString += i;
+                check = false;
+            } else {
+                groupString += ", " + i;
+            }
+        }
+        String sql = "SELECT Idea.idea_id, Idea.idea_name, Idea.idea_description, Idea.idea_person, Idea.date\n" +
+                "FROM idebanken.Idea INNER JOIN GroupIdea ON Idea.idea_id = GroupIdea.idea_id \n" +
+                "WHERE GroupIdea.approved = 1 AND GroupIdea.group_id IN (?)";
+        sqlRowSet = jdbc.queryForRowSet(sql, groupString);
+
+        while (sqlRowSet.next()){
+            ideas.add(new Idea(
+                    sqlRowSet.getInt("idea_id"),
+                    sqlRowSet.getString("idea_name"),
+                    sqlRowSet.getString("idea_description"),
+                    sqlRowSet.getInt("idea_person"),
+                    LocalDate.parse(sqlRowSet.getString("date"))
+            ));
+
+        }
+        return ideas;
+    }
+
+    @Override
+    public List<Idea> getAppliedIdeas(List<Integer> groups) {
+        List<Idea> ideas = new ArrayList<>();
+
+        String groupString = "";
+        boolean check = true;
+        for (Integer i: groups){
+            if (check){
+                groupString += i;
+                check = false;
+            } else {
+                groupString += ", " + i;
+            }
+        }
+
+        String sql = "SELECT Idea.idea_id, Idea.idea_name, Idea.idea_description, Idea.idea_person, Idea.date\n" +
+                "FROM idebanken.Idea INNER JOIN GroupIdea ON Idea.idea_id = GroupIdea.idea_id \n" +
+                "WHERE GroupIdea.approved = 0 AND GroupIdea.group_id IN (?)";
+        sqlRowSet = jdbc.queryForRowSet(sql, groupString);
+
+        while (sqlRowSet.next()){
+            ideas.add(new Idea(
+                    sqlRowSet.getInt("idea_id"),
+                    sqlRowSet.getString("idea_name"),
+                    sqlRowSet.getString("idea_description"),
+                    sqlRowSet.getInt("idea_person"),
+                    LocalDate.parse(sqlRowSet.getString("date"))
+            ));
+
+        }
+        return ideas;
     }
 }
