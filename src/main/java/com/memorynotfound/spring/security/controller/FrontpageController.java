@@ -121,8 +121,30 @@ public class FrontpageController {
     }
 
     @GetMapping("/delete-user")
-    public String deleteUser(@RequestParam("id") int id, Model model){
-        model.addAttribute("person", iPersonDbRepository.getPerson(id));
-        return "delete-user";
+    public String deleteUser(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute(person);
+        return "user/delete-user";
+    }
+
+    @PostMapping("/delete-user-post")
+    public String deleteUser(@ModelAttribute Person person){
+        iPersonDbRepository.deletePerson(iPersonDbRepository.getPersonId(person.getEmail()));
+        return "redirect:/login";
+    }
+
+    @GetMapping("/edit-user")
+    public String editUser(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute(person);
+        return "user/edit-user";
+    }
+
+    @PostMapping("/edit-user-post")
+    public String editUser(){
+
+        return "user/edit-user";
     }
 }
