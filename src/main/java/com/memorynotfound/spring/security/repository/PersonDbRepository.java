@@ -54,13 +54,13 @@ public class PersonDbRepository implements IPersonDbRepository {
     @Override
     public void updatePerson(Person person, int id) {
 
+
+
     }
 
     @Override
     public void deletePerson(int id) {
-
-
-
+        jdbc.update("DELETE FROM Person WHERE person_id = " + id);
     }
 
     @Override
