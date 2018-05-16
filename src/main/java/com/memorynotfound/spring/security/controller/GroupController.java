@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class GroupController {
@@ -51,5 +52,13 @@ public class GroupController {
         return "/groups";
     }
 
+    @GetMapping("/groupDetails")
+    public String details (@RequestParam("id") int id, Model model){
+
+        Group group = iGroupDbRepository.read(id);
+        model.addAttribute("group", group);
+
+        return "details";
+    }
 
 }

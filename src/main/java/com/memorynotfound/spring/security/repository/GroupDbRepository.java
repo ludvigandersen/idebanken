@@ -1,21 +1,14 @@
 package com.memorynotfound.spring.security.repository;
 
 import com.memorynotfound.spring.security.model.Group;
-import com.memorynotfound.spring.security.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.sql.Statement.RETURN_GENERATED_KEYS;
 
 @Repository
 public class GroupDbRepository implements IGroupDbRepository{
@@ -47,16 +40,26 @@ public class GroupDbRepository implements IGroupDbRepository{
     }
 
     @Override
-    public void addCurrentDeveloperGroup(int personId, int groupId) {
-            String sql = "INSERT INTO DeveloperGroup (developer_group_id, person_id, group_id)"+
-                    "VALUES (default, ?, ?)";
+    public Group read(int id) {
 
+        String sql = "SELECT * FROM Group " +
+                "INNER JOIN DeveloperGroup ON Group.group_id = DeveloperGroup.group_id " +
+                "INNER JOIN Person ON DeveloperGroup.person_id = Person.person_id " +
+                "WHERE Group.group_id " + id;
 
-            jdbc.update(sql, preparedStatement -> {
-                preparedStatement.getGeneratedKeys();
-                preparedStatement.setInt(1, personId);
-                preparedStatement.setInt(2, groupId);
-            });
+//        String sql = "SELECT group_id, group_name,locked, DeveloperGroup.person_id, Person.first_name FROM Group" +
+//                "INNER JOIN DeveloperGroup ON Group.group_id = DeveloperGroup.group_id" +
+//                "INNER JOIN Person on DeveloperGroup.person_id = Person.person_id" +
+//                "WHERE locked = 0 and Group.group_id = " + id;
+        sqlRowSet = jdbc.queryForRowSet(sql);
+        while (sqlRowSet.next()){
+
+            return new Group(
+                    sqlRowSet.getString("group_name"),
+                    sqlRowSet.getString("first_name")
+                    );
+        }
+        return null;
     }
 
     @Override

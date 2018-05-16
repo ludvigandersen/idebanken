@@ -8,7 +8,7 @@ import java.util.List;
 public interface IGroupDbRepository {
     void createGroup(Group group);
     void createGroup(Group group, boolean locked);
-    void addCurrentDeveloperGroup(int personId, int groupId);
+    Group read(int id);
     List<Integer> getGroupIdsWithPerson(int personId);
     List<Integer> getIdeaIdsWithGroup(List<Integer> groupId);
     List<Group> getDeveloperGroupsWithPersonId(int personId);

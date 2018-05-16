@@ -20,6 +20,8 @@
             <tbody>
             <tr th:each = "group : ${groups}">
                 <td th:text="${group.name}"></td>
+                <td><a th:href=" ${'/groupDetails?id=' + group.groupId}">Detalijer</a>
+                    <!--<a th:href="${'/delete?id=' + student.studentId}">Delete</a></td>-->
                 <!--<td><a th:href=" ${'/edit?id=' + student.studentId}">Edit</a>-->
                     <!--<a th:href="${'/delete?id=' + student.studentId}">Delete</a></td>-->
             </tr>
