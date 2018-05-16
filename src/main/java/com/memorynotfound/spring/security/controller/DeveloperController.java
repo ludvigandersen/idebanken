@@ -105,4 +105,14 @@ public class DeveloperController {
 
         return "user/group";
     }
+
+    @GetMapping("user/my-profile")
+    public String myProfile(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute("person", person);
+        double rate = 3;
+        model.addAttribute("rate", rate);
+        return "user/my-profile";
+    }
 }
