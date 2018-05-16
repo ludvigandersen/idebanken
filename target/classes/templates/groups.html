@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>groups</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="scroll_content">
+
+        <table>
+            <thead>
+            <tr>
+                <th>Grupper</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each = "group : ${groups}">
+                <td th:text="${group.name}"></td>
+                <!--<td><a th:href=" ${'/edit?id=' + student.studentId}">Edit</a>-->
+                    <!--<a th:href="${'/delete?id=' + student.studentId}">Delete</a></td>-->
+            </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+
+
+</body>
+</html>
