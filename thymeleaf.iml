@@ -1,33 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module version="4">
-  <component name="ExternalSystem" externalSystem="Maven" />
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
       <configuration />
+    </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <webroots />
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
+      </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
-<<<<<<< HEAD
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
-    </content>
-    <content url="file://$MODULE_DIR$/../Idébanken">
-      <sourceFolder url="file://$MODULE_DIR$/../Idébanken/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../Idébanken/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../Idébanken/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../Idébanken/src/test/resources" type="java-test-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/../Idébanken/target" />
-=======
-     <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
-     <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
-     <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-     <excludeFolder url="file://$MODULE_DIR$/target" />
->>>>>>> 05eecb8cc0d2cd1153cafd198d6a3a941bb37dbf
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
