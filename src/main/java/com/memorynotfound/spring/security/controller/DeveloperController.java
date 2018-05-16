@@ -91,4 +91,28 @@ public class DeveloperController {
         model.addAttribute("ideas", ideas);
         return "user/find-ideas";
     }
+
+    @GetMapping("user/group")
+    public String groups(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute("person", person);
+        double rate = 3;
+        model.addAttribute("rate", rate);
+
+        List<Group> groups = iGroupDbRepository.getGroupsWithPersonIn(iPersonDbRepository.getPersonId(person.getEmail()));
+        model.addAttribute("groups", groups);
+
+        return "user/group";
+    }
+
+    @GetMapping("user/my-profile")
+    public String myProfile(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute("person", person);
+        double rate = 3;
+        model.addAttribute("rate", rate);
+        return "user/my-profile";
+    }
 }

@@ -25,7 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/create-user-post");
         web.ignoring().antMatchers("/create-idea-post");
+<<<<<<< HEAD
         web.ignoring().antMatchers("/delete-user-post");
+=======
+>>>>>>> e0a8ec4d0cce0f28c21f83e1dbba4042caff48b7
         web.ignoring().antMatchers("/create-group-post");
         web.ignoring().antMatchers("/aply-for-idea-post");
     }
