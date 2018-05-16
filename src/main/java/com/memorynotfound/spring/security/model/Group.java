@@ -2,6 +2,7 @@ package com.memorynotfound.spring.security.model;
 
 public class Group {
 
+    private int groupId;
     private String name;
     private String resume;
 
@@ -12,6 +13,11 @@ public class Group {
     public Group(String name, String resume) {
         this.name = name;
         this.resume = resume;
+    }
+
+    public Group(int groupId, String name) {
+        this.groupId = groupId;
+        this.name = name;
     }
 
     public String getName() {
@@ -28,6 +34,14 @@ public class Group {
 
     public void setResume(String resume) {
         this.resume = resume;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 }
 

@@ -1,7 +1,9 @@
 package com.memorynotfound.spring.security.controller;
 
+import com.memorynotfound.spring.security.model.Group;
 import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
+import com.memorynotfound.spring.security.repository.IGroupDbRepository;
 import com.memorynotfound.spring.security.repository.IIdeaDbRepository;
 import com.memorynotfound.spring.security.repository.IPersonDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,55 +17,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class FrontpageController {
 
     @Autowired
-    IIdeaDbRepository iIdeaDbRepository;
+    IPersonDbRepository iPersonDbRepository;
 
     @Autowired
-    IPersonDbRepository iPersonDbRepository;
+    IGroupDbRepository iGroupDbRepository;
 
     @GetMapping("/")
     public String root() {
         return "index";
-    }
-
-    @GetMapping("/user")
-    public String userIndex(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Person person = iPersonDbRepository.getPerson(auth.getName());
-        model.addAttribute(person);
-        double rate = 2.5;
-        model.addAttribute("rate", rate);
-        return "user/index";
-    }
-
-    @GetMapping("/idea")
-    public String ideaIndex() {
-        return "idea/index";
-    }
-
-    @GetMapping("/create-idea")
-    public String createIdea(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("ideaPersonName",auth.getName());
-        return "idea/create-idea";
-    }
-
-    @PostMapping("/create-idea-post")
-    public String createIdea(
-        @ModelAttribute("ideaName") String ideaName,
-        @ModelAttribute("ideaDescription") String ideaDescription,
-        @ModelAttribute("ideaPersonName") String ideaPersonName){
-
-            int ideaPersonId = iPersonDbRepository.getPersonId(ideaPersonName);
-
-            Idea currentIdea = new Idea(ideaName, ideaDescription, ideaPersonId, LocalDate.now());
-            System.out.println(currentIdea.toString());
-            iIdeaDbRepository.createIdea(currentIdea);
-            return "idea/confirm-created-idea";
     }
 
     @GetMapping("/login")
@@ -91,11 +59,18 @@ public class FrontpageController {
     public String createUser(@ModelAttribute Person person){
         if (iPersonDbRepository.checkEmail(person.getEmail())) {
             iPersonDbRepository.createPerson(person);
+            iGroupDbRepository.createGroup(new Group(person.getEmail()), true);
+            iGroupDbRepository.assignPersonToGroup(iPersonDbRepository.getPersonId(person.getEmail()), iGroupDbRepository.getGroupIdWithName(person.getEmail()));
             System.out.println("User created: " + person.toString());
-            return "user/confirm-created-user";
+            return "redirect:/user/confirm-created-user";
         } else {
             return "redirect:/create-user-email";
         }
+    }
+
+    @GetMapping("user/confirm-created-user")
+    public String confirmCreatedUser(){
+        return "user/confirm-created-user";
     }
 
     @GetMapping("/contact")
@@ -112,12 +87,6 @@ public class FrontpageController {
     public String readAllDevelopers(Model model){
             model.addAttribute("person_data", iPersonDbRepository.getAllPersons());
             return "all-developers";
-    }
-
-    @GetMapping("/all-ideas")
-    public String readAllIdeas(Model model){
-        model.addAttribute("idea_data", iIdeaDbRepository.getAllIdeas());
-        return "all-ideas";
     }
 
     @GetMapping("/delete-user")

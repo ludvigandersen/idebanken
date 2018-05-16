@@ -1,6 +1,7 @@
 package com.memorynotfound.spring.security.repository;
 
 
+import com.memorynotfound.spring.security.model.Group;
 import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
 
@@ -11,5 +12,8 @@ public interface IIdeaDbRepository {
     void updateIdea(Person person, int id);
     void deleteIdea(int id);
     List<Idea> getAllIdeas();
+    List<Idea> getIdeaList(int id);
     Idea getIdea(int id);
+    List<Idea> getAssignedIdeas(List<Integer> groups);
+    List<Idea> getAppliedIdeas(List<Integer> groups);
 }
