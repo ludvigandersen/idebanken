@@ -56,9 +56,18 @@
                         </tr>
                     </table>
                 </form>
+
+                <br>
+
+                <form action="/delete-user-post" method="post" onsubmit = "return confirm('Er du sikker på at du vil slette brugeren?')">
+                    <input type="hidden" th:value="${person.email}" name="email">
+                    <input type="submit" value="Slet bruger">
+                </form>
+
             </div>
         </div>
         <div class="clear"></div>
+
         <div th:replace="fragments/footer :: footer"></div>
     </div>
     </body>
