@@ -14,7 +14,7 @@
             <div th:replace="fragments/dashboard :: dashboard"></div>
             <div class="user-content">
                 <p class="headline">Mine oplysninger</p>
-                <form action="user/update-person" method="post">
+                <form action="/user-update-person" method="post">
                     <table>
                         <tr>
                             <td><label for="first_name">Fornavn:</label></td>
@@ -24,7 +24,7 @@
                         </tr>
                         <tr>
                             <td><label for="email">Email:</label></td>
-                            <td><input type="email" id="email" name="email" th:value="${person.email}" disabled></td>
+                            <td><input type="email" id="email" name="email" th:value="${person.email}"></td>
                         </tr>
                         <tr>
                             <td><label for="tlf1">Telefon:</label></td>
@@ -39,6 +39,15 @@
                             <td><input type="text" id="city" name="city" th:value="${person.city}"></td>
                         </tr>
                         <tr>
+                            <td><button type="submit">Opdatér oplysninger</button></td>
+                        </tr>
+                    </table>
+                </form>
+
+                <br>
+
+                <form action="/user-update-password-post" method="post">
+                    <table>
                             <td>Ændre password</td>
                         </tr>
                         <tr>
@@ -52,16 +61,17 @@
                             <td><input type="password" id="password_again" name="passwordAgain"></td>
                         </tr>
                         <tr>
-                            <td><input type="submit" value="Opdater oplysninger" id="submit"></td>
+                            <td><button type="submit">Opdatér oplusninger</button></td>
                         </tr>
                     </table>
+
                 </form>
 
                 <br>
 
                 <form action="/delete-user-post" method="post" onsubmit = "return confirm('Er du sikker på at du vil slette brugeren?')">
                     <input type="hidden" th:value="${person.email}" name="email">
-                    <input type="submit" value="Slet bruger">
+                    <button type="submit">Slet bruger</button>
                 </form>
 
             </div>
