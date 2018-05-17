@@ -1,6 +1,7 @@
 package com.memorynotfound.spring.security.repository;
 
 import com.memorynotfound.spring.security.model.Group;
+import com.memorynotfound.spring.security.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -30,6 +31,20 @@ public class GroupDbRepository implements IGroupDbRepository{
     }
 
     @Override
+    public void addMember(int groupId, int personId){
+        String sql = "INSERT INTO idebanken.DeveloperGroup "+
+                "SET DeveloperGroup.developer_group_id = default, " +
+                "DeveloperGroup.person_id = (SELECT Person.person_id FROM idebanken.Person WHERE Person.person_id = ?), " +
+                "DeveloperGroup.group_id = (SELECT Group.group_id FROM idebanken.Group WHERE Group.group_id = ?)";
+
+        jdbc.update(sql, preparedStatement -> {
+            preparedStatement.setInt(1, personId);
+            preparedStatement.setInt(2, groupId);
+        });
+
+    }
+
+    @Override
     public void createGroup(Group group, boolean locked) {
         String sql = "INSERT INTO idebanken.Group (group_id, group_name, locked)"+
                 "VALUES (default, ?, 1)";
@@ -40,23 +55,37 @@ public class GroupDbRepository implements IGroupDbRepository{
     }
 
     @Override
-    public Group read(int id) {
-//        String sql = "SELECT group_id, group_name FROM idebanken.Group WHERE group_id = ?";
-
-        String sql = "SELECT Group.group_id, Group.group_name, Group.locked, DeveloperGroup.person_id, Person.first_name FROM idebanken.Group " +
+    public List<Person> read(int id) {
+        List<Person> personList = new ArrayList<>();
+        String sql = "SELECT Group.group_id, Group.group_name, Group.locked, DeveloperGroup.person_id, " +
+                "Person.first_name, Person.last_name, Person.email, Person.city FROM idebanken.Group " +
                 "INNER JOIN idebanken.DeveloperGroup ON Group.group_id = DeveloperGroup.group_id " +
                 "INNER JOIN idebanken.Person on DeveloperGroup.person_id = Person.person_id " +
-                "WHERE Group.locked = 0 and Group.group_id = ?" ;
+                "WHERE Group.group_id = ?" ;
         sqlRowSet = jdbc.queryForRowSet(sql, id);
         while (sqlRowSet.next()){
 
-            return new Group(
-                    sqlRowSet.getInt("group_id"),
-                    sqlRowSet.getString("group_name"),
-                    sqlRowSet.getString("first_name")
-            );
+            personList.add(new Person(
+                    sqlRowSet.getString("first_name"),
+                    sqlRowSet.getString("last_name"),
+                    sqlRowSet.getString("email"),
+                    sqlRowSet.getString("city")
+                    ));
+            System.out.println(sqlRowSet.getString("first_name"));
         }
-        return null;
+        return personList;
+    }
+
+    @Override
+    public int findGroup(String name){
+        String sql = "SELECT Group.group_id" +
+                " FROM idebanken.Group WHERE Group.group_name = ?";
+
+        sqlRowSet = jdbc.queryForRowSet(sql, name);
+        while (sqlRowSet.next()){
+            return sqlRowSet.getInt("group_id");
+        }
+        return 0;
     }
 
     @Override
