@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Group details</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/userstyle.css">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="scroll_content">
+        <h1>Gruppe</h1>
+        <div th:replace="fragments/dashboard :: dashboard"></div>
+        <div class="user-content">
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Gruppe navn</th>
+                    <th>Medlemmer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="group : ${group}">
+                    <td th:text="${group.name}">Ingen grupper fundet</td>
+                    <td th:text="${person.firstName}"></td>
+                </tr>
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

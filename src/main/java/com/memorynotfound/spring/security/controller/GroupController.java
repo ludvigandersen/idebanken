@@ -1,6 +1,7 @@
 package com.memorynotfound.spring.security.controller;
 
 import com.memorynotfound.spring.security.model.Group;
+import com.memorynotfound.spring.security.model.Person;
 import com.memorynotfound.spring.security.repository.IGroupDbRepository;
 import com.memorynotfound.spring.security.repository.IPersonDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,23 +43,17 @@ public class GroupController {
         return "redirect:/";
     }
 
-    @GetMapping("/groups")
-    public String developerGroups(Model model ){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        int personId = iPersonDbRepository.getPersonId(name);
-        model.addAttribute("groups", iGroupDbRepository.getDeveloperGroupsWithPersonId(personId));
-
-        return "/groups";
-    }
-
-    @GetMapping("/groupDetails")
+    @GetMapping("/group-details")
     public String details (@RequestParam("id") int id, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute("person", person);
+        double rate = 3;
+        model.addAttribute("rate", rate);
 
         Group group = iGroupDbRepository.read(id);
         model.addAttribute("group", group);
 
-        return "details";
+        return "user/groupDetails";
     }
-
 }
