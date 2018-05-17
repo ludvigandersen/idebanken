@@ -24,7 +24,7 @@
                     <tbody>
                         <tr th:each="group : ${groups}">
                             <td th:text="${group.name}">Ingen grupper fundet</td>
-                            <td><a href=" ${'/groupDetails?id=' + group.groupId}">Læs mere</a></td>
+                            <td><a th:href=" ${'/group-details?id=' + group.groupId}">Læs mere</a></td>
                         </tr>
                     </tbody>
                 </table>

@@ -42,23 +42,12 @@ public class GroupController {
         return "redirect:/";
     }
 
-    @GetMapping("/groups")
-    public String developerGroups(Model model ){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        int personId = iPersonDbRepository.getPersonId(name);
-        model.addAttribute("groups", iGroupDbRepository.getDeveloperGroupsWithPersonId(personId));
-
-        return "/groups";
-    }
-
-    @GetMapping("/groupDetails")
+    @GetMapping("/group-details")
     public String details (@RequestParam("id") int id, Model model){
 
         Group group = iGroupDbRepository.read(id);
         model.addAttribute("group", group);
 
-        return "details";
+        return "user/groupDetails";
     }
-
 }
