@@ -1,5 +1,6 @@
 package com.memorynotfound.spring.security.controller;
 
+import com.memorynotfound.spring.security.email.Email;
 import com.memorynotfound.spring.security.model.Group;
 import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,11 @@ public class DeveloperController {
 
     @Autowired
     IGroupDbRepository iGroupDbRepository;
+
+    Email email = new Email();
+
+    public DeveloperController() throws MessagingException {
+    }
 
     @GetMapping("/user")
     public String userIndex(Model model) {
@@ -62,15 +69,20 @@ public class DeveloperController {
 
         Idea idea = iIdeaDbRepository.getIdea(id);
         model.addAttribute("idea", idea);
+
+        Person ideaPerson = iPersonDbRepository.getPerson(idea.getIdeaPerson());
+        model.addAttribute("ideaPerson", ideaPerson);
         return "user/idea-user";
     }
 
     @PostMapping("/aply-for-idea-post")
     public String aplyForIdea(@RequestParam("ideaId") int ideaId,
-                              @RequestParam("personEmail") String email,
+                              @RequestParam("personEmail") String developerEmail,
                               @RequestParam("group") int groupId,
-                              @RequestParam("message") String message){
+                              @RequestParam("message") String message,
+                              @RequestParam("ideaEmail") String ideaEmail){
         iGroupDbRepository.assignGroupToIdea(ideaId, groupId);
+        email.emailApplyToIdea(iPersonDbRepository.getPerson(developerEmail), message, ideaEmail, iIdeaDbRepository.getIdea(ideaId));
         return "redirect:/user/confirm-apply";
     }
 
