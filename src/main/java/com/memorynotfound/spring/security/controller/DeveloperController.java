@@ -100,8 +100,10 @@ public class DeveloperController {
         double rate = 3;
         model.addAttribute("rate", rate);
 
-        List<Group> groups = iGroupDbRepository.getGroupsWithPersonIn(iPersonDbRepository.getPersonId(person.getEmail()));
-        model.addAttribute("groups", groups);
+        int personId = iPersonDbRepository.getPersonId(auth.getName());
+        model.addAttribute("groups", iGroupDbRepository.getDeveloperGroupsWithPersonId(personId));
+
+
 
         return "user/group";
     }

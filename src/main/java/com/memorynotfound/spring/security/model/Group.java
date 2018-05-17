@@ -26,7 +26,7 @@ public class Group {
         this.personId = personId;
     }
 
-    public Group(String groupName, int personId) {
+    public Group(int personId, String name, String personName ) {
     }
 
     public String getName() {

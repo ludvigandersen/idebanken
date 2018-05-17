@@ -41,10 +41,8 @@ public class GroupDbRepository implements IGroupDbRepository{
 
     @Override
     public Group read(int id) {
-
+        List<Group>groups = new ArrayList<>();
         String sql = "SELECT * FROM Group " +
-                "INNER JOIN DeveloperGroup ON Group.group_id = DeveloperGroup.group_id " +
-                "INNER JOIN Person ON DeveloperGroup.person_id = Person.person_id " +
                 "WHERE Group.group_id " + id;
 
 //        String sql = "SELECT group_id, group_name,locked, DeveloperGroup.person_id, Person.first_name FROM Group" +
@@ -55,9 +53,12 @@ public class GroupDbRepository implements IGroupDbRepository{
         while (sqlRowSet.next()){
 
             return new Group(
+                    sqlRowSet.getInt("group_id"),
                     sqlRowSet.getString("group_name"),
                     sqlRowSet.getString("first_name")
-                    );
+
+
+            );
         }
         return null;
     }
