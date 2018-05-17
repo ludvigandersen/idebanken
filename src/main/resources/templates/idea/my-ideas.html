@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>My ideas</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/userstyle.css">
-
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/userstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
@@ -31,10 +31,9 @@
                 <td th:text="${idea.ideaName}"></td>
                 <td th:text="${idea.ideaDescription}"></td>
                 <td th:text="${idea.date}"></td>
-                <td><a href="/edit-idea">Ændre idé</a></td>
+                <td><a th:href="${'/edit-idea?id=' + idea.ideaId}">Ændre idé</a></td>
             </tr>
             </tbody>
-
         </table>
         </div>
     </div>

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IIdeaDbRepository {
     void createIdea(Idea idea);
-    void updateIdea(Person person, int id);
+    void updateIdea(Idea idea);
     void deleteIdea(int id);
     List<Idea> getAllIdeas();
     List<Idea> getIdeaList(int id);

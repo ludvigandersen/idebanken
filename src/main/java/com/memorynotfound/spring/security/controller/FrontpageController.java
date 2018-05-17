@@ -93,7 +93,13 @@ public class FrontpageController {
     @PostMapping("/delete-user-post")
     public String deleteUser(@ModelAttribute Person person){
         iPersonDbRepository.deletePerson(iPersonDbRepository.getPersonId(person.getEmail()));
-        return "redirect:/login";
+        return "redirect:/confirm-delete-user";
+    }
+
+    @GetMapping("/confirm-delete-user")
+    public String confirmDeleteUser(){
+
+        return "user/confirm-delete-user";
     }
 
     @GetMapping("/edit-user")
