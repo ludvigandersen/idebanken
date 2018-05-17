@@ -7,26 +7,32 @@
     <link rel="stylesheet" href="../css/userstyle.css">
 </head>
 <body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="scroll_content">
+        <h1>Gruppe</h1>
+        <div th:replace="fragments/dashboard :: dashboard"></div>
+        <div class="user-content">
 
-<table>
-    <thead>
-    <tr>
-        <th>Gruppe</th>
+            <table>
+                <thead>
+                <tr>
+                    <th>Gruppe navn</th>
+                    <th>Medlemmer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="group : ${group}">
+                    <td th:text="${group.name}">Ingen grupper fundet</td>
+                    <td th:text="${person.firstName}"></td>
+                </tr>
+                </tbody>
 
-    </tr>
-    </thead>
-
-    <!--<tbody>-->
-    <!--<tr th:each = "group : ${groups}">-->
-        <!--<td th:text="${group.name}"></td>-->
-        <!--<td th:text="${group.}"></td>-->
-        <!--<td th:text="${group.name}"></td>-->
-        <!--<td><a th:href=" ${'/groupDetails?id=' + group.groupId}">Detalijer</a>-->
-        <!---->
-    <!--</tr>-->
-    <!--</tbody>-->
-
-</table>
-
+            </table>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
 </body>
 </html>

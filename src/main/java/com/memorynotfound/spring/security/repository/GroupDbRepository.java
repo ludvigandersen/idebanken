@@ -41,18 +41,19 @@ public class GroupDbRepository implements IGroupDbRepository{
 
     @Override
     public Group read(int id) {
-        String sql = "SELECT group_id, group_name FROM idebanken.Group WHERE group_id = ?";
+//        String sql = "SELECT group_id, group_name FROM idebanken.Group WHERE group_id = ?";
 
-//        String sql = "SELECT group_id, group_name,locked, DeveloperGroup.person_id, Person.first_name FROM Group" +
-//                "INNER JOIN DeveloperGroup ON Group.group_id = DeveloperGroup.group_id" +
-//                "INNER JOIN Person on DeveloperGroup.person_id = Person.person_id" +
-//                "WHERE locked = 0 and Group.group_id = " + id;
+        String sql = "SELECT Group.group_id, Group.group_name, Group.locked, DeveloperGroup.person_id, Person.first_name FROM idebanken.Group " +
+                "INNER JOIN idebanken.DeveloperGroup ON Group.group_id = DeveloperGroup.group_id " +
+                "INNER JOIN idebanken.Person on DeveloperGroup.person_id = Person.person_id " +
+                "WHERE Group.locked = 0 and Group.group_id = ?" ;
         sqlRowSet = jdbc.queryForRowSet(sql, id);
         while (sqlRowSet.next()){
 
             return new Group(
                     sqlRowSet.getInt("group_id"),
-                    sqlRowSet.getString("group_name")
+                    sqlRowSet.getString("group_name"),
+                    sqlRowSet.getString("first_name")
             );
         }
         return null;
