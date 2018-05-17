@@ -28,6 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/delete-user-post");
         web.ignoring().antMatchers("/create-group-post");
         web.ignoring().antMatchers("/aply-for-idea-post");
+        web.ignoring().antMatchers("/edit-idea-post");
+        web.ignoring().antMatchers("/delete-idea-post");
     }
 
     @Override

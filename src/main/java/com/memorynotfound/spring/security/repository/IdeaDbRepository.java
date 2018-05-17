@@ -35,13 +35,23 @@ public class IdeaDbRepository implements IIdeaDbRepository{
     }
 
     @Override
-    public void updateIdea(Person person, int id) {
+    public void updateIdea(Idea idea) {
+        String sql = "UPDATE Idea SET idea_name = ?, idea_description = ? WHERE idea_id = ?";
 
+            jdbc.update(sql, preparedStatement -> {
+            preparedStatement.setString(1, idea.getIdeaName());
+            preparedStatement.setString(2, idea.getIdeaDescription());
+            preparedStatement.setInt(3,idea.getIdeaId());
+        });
     }
 
     @Override
     public void deleteIdea(int id) {
+        String sql = "DELETE FROM Idea WHERE idea_id = ?";
 
+        jdbc.update(sql, preparedStatement -> {
+            preparedStatement.setInt(1,id);
+        });
     }
 
     @Override
@@ -71,6 +81,7 @@ public class IdeaDbRepository implements IIdeaDbRepository{
         while (sqlRowSet.next()) {
 
             ideas.add(new Idea(
+                    sqlRowSet.getInt("idea_id"),
                     sqlRowSet.getString("idea_name"),
                     sqlRowSet.getString("idea_description"),
                     sqlRowSet.getInt("idea_person"),
