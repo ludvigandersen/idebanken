@@ -13,18 +13,18 @@
         <h1>Gruppe</h1>
         <div th:replace="fragments/dashboard :: dashboard"></div>
         <div class="user-content">
-
+            <a href="/add-group-member"> Tilføj medlem</a>
             <table>
                 <thead>
                 <tr>
-                    <th>Gruppe navn</th>
-                    <th>Medlemmer</th>
+                    <th>Fornavn</th>
+                    <th>Efternavn</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="group : ${group}">
-                    <td th:text="${group.name}">Ingen grupper fundet</td>
-                    <td th:text="${person.firstName}"></td>
+                <tr th:each="developer : ${developers}">
+                    <td th:text="${developer.firstName}">Ingen grupper fundet</td>
+                    <td th:text="${developer.lastName}"></td>
                 </tr>
                 </tbody>
 

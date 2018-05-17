@@ -55,23 +55,25 @@ public class GroupDbRepository implements IGroupDbRepository{
     }
 
     @Override
-    public Group read(int id) {
-//        String sql = "SELECT group_id, group_name FROM idebanken.Group WHERE group_id = ?";
-
-        String sql = "SELECT Group.group_id, Group.group_name, Group.locked, DeveloperGroup.person_id, Person.first_name FROM idebanken.Group " +
+    public List<Person> read(int id) {
+        List<Person> personList = new ArrayList<>();
+        String sql = "SELECT Group.group_id, Group.group_name, Group.locked, DeveloperGroup.person_id, " +
+                "Person.first_name, Person.last_name, Person.email, Person.city FROM idebanken.Group " +
                 "INNER JOIN idebanken.DeveloperGroup ON Group.group_id = DeveloperGroup.group_id " +
                 "INNER JOIN idebanken.Person on DeveloperGroup.person_id = Person.person_id " +
-                "WHERE Group.locked = 0 and Group.group_id = ?" ;
+                "WHERE Group.group_id = ?" ;
         sqlRowSet = jdbc.queryForRowSet(sql, id);
         while (sqlRowSet.next()){
 
-            return new Group(
-                    sqlRowSet.getInt("group_id"),
-                    sqlRowSet.getString("group_name"),
-                    sqlRowSet.getString("first_name")
-            );
+            personList.add(new Person(
+                    sqlRowSet.getString("first_name"),
+                    sqlRowSet.getString("last_name"),
+                    sqlRowSet.getString("email"),
+                    sqlRowSet.getString("city")
+                    ));
+            System.out.println(sqlRowSet.getString("first_name"));
         }
-        return null;
+        return personList;
     }
 
     @Override
