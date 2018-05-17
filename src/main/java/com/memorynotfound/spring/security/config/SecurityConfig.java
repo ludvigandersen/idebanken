@@ -78,8 +78,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         // password = $2a$10$GkHRhh4AHWS.WHUzRucUIeBoEmowH7qZ2HLVas544VbXFscstpEE6
         auth.jdbcAuthentication().dataSource(dataSource)
-                .authoritiesByUsernameQuery("SELECT email, role FROM Person INNER JOIN PersonRole ON Person.role_id = PersonRole.role_id WHERE email=?")
-                .usersByUsernameQuery("select email,password as password,1 FROM Person where email=?")
+                .authoritiesByUsernameQuery("SELECT email, role FROM Person INNER JOIN PersonRole ON " +
+                        "Person.role_id = PersonRole.role_id WHERE email=?")
+                .usersByUsernameQuery("select email, password as password, 1 FROM Person where email=?")
                 .passwordEncoder(passEncoder());
 
     }

@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/idebanken.iml" filepath="$PROJECT_DIR$/idebanken.iml" />
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/../Idébanken/thymeleaf.iml" filepath="$PROJECT_DIR$/../Idébanken/thymeleaf.iml" />
-=======
-      <module fileurl="file://$USER_HOME$/Idébanken/thymeleaf.iml" filepath="$USER_HOME$/Idébanken/thymeleaf.iml" />
->>>>>>> 7649ef95d05dc37c47399acd9e1e609e8fccf160
+      <module fileurl="file://$PROJECT_DIR$/../Idébanken/idebanken.iml" filepath="$PROJECT_DIR$/../Idébanken/idebanken.iml" />
     </modules>
   </component>
 </project>
