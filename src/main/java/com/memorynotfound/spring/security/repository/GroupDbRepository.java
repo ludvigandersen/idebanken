@@ -1,6 +1,7 @@
 package com.memorynotfound.spring.security.repository;
 
 import com.memorynotfound.spring.security.model.Group;
+import com.memorynotfound.spring.security.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -27,6 +28,20 @@ public class GroupDbRepository implements IGroupDbRepository{
         jdbc.update(sql, preparedStatement -> {
             preparedStatement.setString(1, group.getName());
         });
+    }
+
+    @Override
+    public void addMember(int groupId, int personId){
+        String sql = "INSERT INTO idebanken.DeveloperGroup "+
+                "SET DeveloperGroup.developer_group_id = default, " +
+                "DeveloperGroup.person_id = (SELECT Person.person_id FROM idebanken.Person WHERE Person.person_id = ?), " +
+                "DeveloperGroup.group_id = (SELECT Group.group_id FROM idebanken.Group WHERE Group.group_id = ?)";
+
+        jdbc.update(sql, preparedStatement -> {
+            preparedStatement.setInt(1, personId);
+            preparedStatement.setInt(2, groupId);
+        });
+
     }
 
     @Override
@@ -57,6 +72,18 @@ public class GroupDbRepository implements IGroupDbRepository{
             );
         }
         return null;
+    }
+
+    @Override
+    public int findGroup(String name){
+        String sql = "SELECT Group.group_id" +
+                " FROM idebanken.Group WHERE Group.group_name = ?";
+
+        sqlRowSet = jdbc.queryForRowSet(sql, name);
+        while (sqlRowSet.next()){
+            return sqlRowSet.getInt("group_id");
+        }
+        return 0;
     }
 
     @Override

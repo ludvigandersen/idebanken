@@ -9,6 +9,8 @@ public interface IGroupDbRepository {
     void createGroup(Group group);
     void createGroup(Group group, boolean locked);
     Group read(int id);
+    int findGroup(String name);
+    void addMember(int groupId, int personId);
     List<Integer> getGroupIdsWithPerson(int personId);
     List<Integer> getIdeaIdsWithGroup(List<Integer> groupId);
     List<Group> getDeveloperGroupsWithPersonId(int personId);

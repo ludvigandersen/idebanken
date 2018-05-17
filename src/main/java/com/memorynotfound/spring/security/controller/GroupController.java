@@ -26,21 +26,31 @@ public class GroupController {
     public String createGroup (Model model){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("PersonName",auth.getName());
+        model.addAttribute("personName",auth.getName());
         return "user/create-group";
     }
 
     @PostMapping("/create-group-post")
     public String createGroup (@ModelAttribute("name") String groupName,
-                               @ModelAttribute("PersonName") String PersonName){
-
+                               @ModelAttribute("personName") String personName){
 
         Group group = new Group(groupName);
         iGroupDbRepository.createGroup(group);
-        int PersonId = iPersonDbRepository.getPersonId(PersonName);
-
+        int personId = iPersonDbRepository.getPersonId(personName);
+        int groupId = iGroupDbRepository.findGroup(groupName);
+        iGroupDbRepository.addMember(groupId, personId);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/add-group-member")
+    public String addGroupMember(Model model){
+        return "user/add-group-member";
+    }
+
+    @PostMapping("/add-group-member-post")
+    public String addGroupMember(){
+        return "user/add-group-member";
     }
 
     @GetMapping("/group-details")
