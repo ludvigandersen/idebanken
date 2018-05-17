@@ -9,6 +9,12 @@ public class Idea {
     private int ideaPerson;
     private LocalDate date;
 
+    public Idea(int ideaId, String ideaName, String ideaDescription) {
+        this.ideaId = ideaId;
+        this.ideaName = ideaName;
+        this.ideaDescription = ideaDescription;
+    }
+
     public Idea(String ideaName, String ideaDescription, int ideaPerson, LocalDate date) {
         this.ideaName = ideaName;
         this.ideaDescription = ideaDescription;

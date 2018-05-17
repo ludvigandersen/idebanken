@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 
@@ -57,27 +58,17 @@ public class IdeaController {
         return "idea/index";
     }
 
-    @GetMapping("/my-ideas")
+    @GetMapping("/idea/my-ideas")
     public String myIdeas(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
 
         int ideaPersonId = iPersonDbRepository.getPersonId(name);
+        Person person = iPersonDbRepository.getPerson(auth.getName());
 
         model.addAttribute("idea_text",iIdeaDbRepository.getIdeaList(ideaPersonId));
-
-        return "my-ideas";
-    }
-
-    @GetMapping("/edit-idea")
-    public String editIdea(int t ){
-        return "idea/edit-idea";
-    }
-
-    @PostMapping("/edit-idea")
-    public String editIdea(){
-
-        return "idea/edit-idea";
+        model.addAttribute(person);
+        return "idea/my-ideas";
     }
 
     @GetMapping("/all-ideas")
@@ -86,6 +77,37 @@ public class IdeaController {
         return "all-ideas";
     }
 
+    @GetMapping("/edit-idea")
+    public String userIdeaPerson(@RequestParam("id") int id, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute( person);
+
+        Idea idea = iIdeaDbRepository.getIdea(id);
+        model.addAttribute("idea", idea);
+        return "idea/edit-idea";
+    }
+
+    @PostMapping("/edit-idea-post")
+    public String editIdea(
+            @ModelAttribute("ideaName") String ideaName,
+            @ModelAttribute("ideaDescription") String ideaDescription,
+            @ModelAttribute("ideaId") int ideaId){
+
+            Idea currentIdea = new Idea(ideaId, ideaName, ideaDescription);
+            iIdeaDbRepository.updateIdea(currentIdea);
+
+        return "redirect:/idea/confirm-created-idea";
+    }
+
+    @PostMapping("/delete-idea-post")
+    public String deleteIdea(
+            @ModelAttribute("ideaId") int ideaId){
+
+        iIdeaDbRepository.deleteIdea(ideaId);
+
+        return "redirect:/idea/confirm-created-idea";
+    }
 
 
 }
