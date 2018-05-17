@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -52,6 +53,26 @@ public class DeveloperController {
         model.addAttribute("applied", applied);
         return "user/index";
     }
+
+    @PostMapping("/user-update-person")
+    public String updatePerson(
+        @ModelAttribute("firstName") String firstName,
+        @ModelAttribute("lastName") String lastName,
+        @ModelAttribute("email") String email,
+        @ModelAttribute("tlf1") String tlf1,
+        @ModelAttribute("tlf2") String tlf2,
+        @ModelAttribute("zipCode") int zipCode,
+        @ModelAttribute("city") String city){
+
+        System.out.println(zipCode);
+                int personId = iPersonDbRepository.getPersonId(email);
+
+                Person currentPerson = new Person(personId, firstName, lastName, email, tlf1, tlf2, zipCode, city);
+                iPersonDbRepository.updatePerson(currentPerson);
+
+                return "redirect:/user/confirm-apply";
+    }
+
 
     @GetMapping("/user/idea")
     public String userIdea(@RequestParam("id") int id, Model model){

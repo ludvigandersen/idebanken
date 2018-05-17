@@ -9,10 +9,11 @@
     <div th:replace="fragments/header :: header"></div>
     <h1>Opret gruppe</h1>
     <form action="/create-group-post" method="post">
+        <input type="hidden" name="personName" th:value="${personName}">
         <table>
             <tr>
                 <td><label for="group_name">Gruppe navn:</label></td>
-                <td><input type="text" id="group_name" name="name" placeholder=" gruppe navn" required></td>
+                <td><input type="text" id="group_name" name="name" placeholder="Gruppe navn" required></td>
             </tr>
                 <td><input type="submit" value="Opret"></td>
             </tr>
