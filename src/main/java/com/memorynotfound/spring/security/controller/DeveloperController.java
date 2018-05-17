@@ -61,6 +61,8 @@ public class DeveloperController {
         @ModelAttribute("email") String email,
         @ModelAttribute("tlf1") String tlf1,
         @ModelAttribute("tlf2") String tlf2,
+        @ModelAttribute("oldTlf1") String oldTlf1,
+        @ModelAttribute("oldTlf2") String oldTlf2,
         @ModelAttribute("zipCode") int zipCode,
         @ModelAttribute("city") String city){
 
@@ -68,7 +70,7 @@ public class DeveloperController {
                 int personId = iPersonDbRepository.getPersonId(email);
 
                 Person currentPerson = new Person(personId, firstName, lastName, email, tlf1, tlf2, zipCode, city);
-                iPersonDbRepository.updatePerson(currentPerson);
+                iPersonDbRepository.updatePerson(currentPerson, oldTlf1, oldTlf2);
 
                 return "redirect:/user/confirm-apply";
     }
