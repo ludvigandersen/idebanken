@@ -5,6 +5,19 @@
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/userstyle.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script>
+            function validate() {
+                var pass1 = document.getElementById("password").value;
+                var pass2 = document.getElementById("password_again").value;
+                if (pass1 == pass2){
+                    document.getElementById("validatePass").innerHTML = "";
+                    document.getElementById("submit").disabled = false;
+                } else {
+                    document.getElementById("validatePass").innerHTML = "Begge passwords skal være identiske.";
+                    document.getElementById("submit").disabled = true;
+                }
+            }
+        </script>
     </head>
     <body>
     <div class="container">
@@ -23,14 +36,17 @@
                             <td><input type="text" id="last_name" name="lastName" th:value="${person.lastName}"></td>
                         </tr>
                         <tr>
-                            <td><label for="email">Email:</label></td>
-                            <td><input type="email" id="email" name="email" th:value="${person.email}"></td>
+                            <td><input type="hidden" id="email" name="email" th:value="${person.email}"></td>
                         </tr>
                         <tr>
                             <td><label for="tlf1">Telefon:</label></td>
                             <td><input type="text" id="tlf1" name="tlf1" th:value="${person.tlf1}"></td>
                             <td><label for="tlf2">Mobil:</label></td>
                             <td><input type="text" id="tlf2" name="tlf2" th:value="${person.tlf2}"></td>
+
+                            <td><input type="hidden" id="oldTlf1" name="oldTlf1" th:value="${person.tlf1}"></td>
+
+                            <td><input type="hidden" id="oldTlf2" name="oldTlf2" th:value="${person.tlf2}"></td>
                         </tr>
                         <tr>
                             <td><label for="zip_code">Post nr.:</label></td>
@@ -46,22 +62,21 @@
 
                 <br>
 
-                <form action="/user-update-password-post" method="post">
+                <form action="/user-update-password" method="post">
                     <table>
-                            <td>Ændre password</td>
-                        </tr>
                         <tr>
                             <td><label>Gammelt password: </label></td>
-                            <td><input type="password" name="oldPassword"></td>
+                            <td><input type="password" name="oldPassword" placeholder="Gamle Password"></td>
                         </tr>
                         <tr>
-                            <td><label for="password">Nyt password:</label></td>
-                            <td><input type="password" id="password" name="password"></td>
+                            <td><label for="password">Password:</label></td>
+                            <td><input type="password" id="password" name="password" placeholder="Password" required></td>
                             <td><label for="password_again">Gentag password:</label></td>
-                            <td><input type="password" id="password_again" name="passwordAgain"></td>
+                            <td><input type="password" id="password_again" name="passwordAgain" placeholder="Password" onkeyup="validate()" required></td>
+                            <td id="validatePass"></td>
                         </tr>
                         <tr>
-                            <td><button type="submit">Opdatér oplusninger</button></td>
+                            <td><button type="submit">Opdatér oplysninger</button></td>
                         </tr>
                     </table>
 

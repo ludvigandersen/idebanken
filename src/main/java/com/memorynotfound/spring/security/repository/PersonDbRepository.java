@@ -52,11 +52,10 @@ public class PersonDbRepository implements IPersonDbRepository {
     }
 
     @Override
-    public void updatePerson(Person person) {
+    public void updatePerson(Person person, String oldTlf1, String oldTlf2) {
         String sql = "UPDATE Person SET  first_name = ?, last_name = ?," +
                 " zip_code = ?, city = ? WHERE person_id = ?";
 
-        System.out.println(person.getZipCode());
         jdbc.update(sql, preparedStatement -> {
             preparedStatement.setString(1, person.getFirstName());
             preparedStatement.setString(2, person.getLastName());
@@ -66,6 +65,51 @@ public class PersonDbRepository implements IPersonDbRepository {
 
         });
 
+        if(!person.getTlf1().equalsIgnoreCase("")){
+            if(!person.getTlf1().equalsIgnoreCase(oldTlf2)) {
+                if (oldTlf1.equalsIgnoreCase("")) {
+                    sql = "INSERT INTO PhoneNumbers  (tlf_id, person_id, tlf) " +
+                            "VALUES (DEFAULT, ?, ?)";
+
+                    jdbc.update(sql, preparedStatement -> {
+                        preparedStatement.setInt(1, person.getPersonId());
+                        preparedStatement.setString(2, person.getTlf1());
+
+                    });
+                } else if (!oldTlf1.equalsIgnoreCase(person.getTlf1())) {
+                    String sql1 = "UPDATE PhoneNumbers SET  tlf = ? WHERE person_id = ? AND tlf = ?";
+
+                    jdbc.update(sql1, preparedStatement -> {
+                        preparedStatement.setString(1, person.getTlf1());
+                        preparedStatement.setInt(2, person.getPersonId());
+                        preparedStatement.setString(3, oldTlf1);
+                    });
+                }
+            }
+        }
+
+        if(!person.getTlf2().equalsIgnoreCase("")) {
+            if (!person.getTlf2().equalsIgnoreCase(oldTlf1)) {
+                if (oldTlf2.equalsIgnoreCase("")) {
+                    sql = "INSERT INTO PhoneNumbers  (tlf_id, person_id tlf) " +
+                            "VALUES (DEFAULT, ?, ?)";
+
+                    jdbc.update(sql, preparedStatement -> {
+                        preparedStatement.setInt(1, person.getPersonId());
+                        preparedStatement.setString(2, person.getTlf2());
+
+                    });
+                } else if (!oldTlf2.equalsIgnoreCase(person.getTlf2())) {
+                    sql = "UPDATE PhoneNumbers SET  tlf = ? WHERE person_id = ? AND tlf = ? ";
+
+                    jdbc.update(sql, preparedStatement -> {
+                        preparedStatement.setString(1, person.getTlf2());
+                        preparedStatement.setInt(2, person.getPersonId());
+                        preparedStatement.setString(3, oldTlf2);
+                    });
+                }
+            }
+        }
 
     }
 
