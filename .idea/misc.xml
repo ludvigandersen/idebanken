@@ -3,19 +3,11 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-<<<<<<< HEAD
         <option value="$PROJECT_DIR$/../Idébanken/pom.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="8" project-jdk-type="JavaSDK">
-=======
-        <option value="$PROJECT_DIR$/pom.xml" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
->>>>>>> 6c120efb054ea6a213d032a13bb2be23dc9aa095
     <output url="file://$PROJECT_DIR$/classes" />
   </component>
 </project>
