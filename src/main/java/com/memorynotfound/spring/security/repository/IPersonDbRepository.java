@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IPersonDbRepository {
     void createPerson(Person person);
-    void updatePerson(Person person, int id);
+    void updatePerson(Person person, String oldTlf1, String oldTlf2);
     void deletePerson(int id);
     List<Person> getAllPersons();
     Person getPerson(int id);

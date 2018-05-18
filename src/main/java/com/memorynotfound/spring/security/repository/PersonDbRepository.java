@@ -52,9 +52,64 @@ public class PersonDbRepository implements IPersonDbRepository {
     }
 
     @Override
-    public void updatePerson(Person person, int id) {
+    public void updatePerson(Person person, String oldTlf1, String oldTlf2) {
+        String sql = "UPDATE Person SET  first_name = ?, last_name = ?," +
+                " zip_code = ?, city = ? WHERE person_id = ?";
 
+        jdbc.update(sql, preparedStatement -> {
+            preparedStatement.setString(1, person.getFirstName());
+            preparedStatement.setString(2, person.getLastName());
+            preparedStatement.setInt(3, person.getZipCode());
+            preparedStatement.setString(4, person.getCity());
+            preparedStatement.setInt(5, person.getPersonId());
 
+        });
+
+        if(!person.getTlf1().equalsIgnoreCase("")){
+            if(!person.getTlf1().equalsIgnoreCase(oldTlf2)) {
+                if (oldTlf1.equalsIgnoreCase("")) {
+                    sql = "INSERT INTO PhoneNumbers  (tlf_id, person_id, tlf) " +
+                            "VALUES (DEFAULT, ?, ?)";
+
+                    jdbc.update(sql, preparedStatement -> {
+                        preparedStatement.setInt(1, person.getPersonId());
+                        preparedStatement.setString(2, person.getTlf1());
+
+                    });
+                } else if (!oldTlf1.equalsIgnoreCase(person.getTlf1())) {
+                    String sql1 = "UPDATE PhoneNumbers SET  tlf = ? WHERE person_id = ? AND tlf = ?";
+
+                    jdbc.update(sql1, preparedStatement -> {
+                        preparedStatement.setString(1, person.getTlf1());
+                        preparedStatement.setInt(2, person.getPersonId());
+                        preparedStatement.setString(3, oldTlf1);
+                    });
+                }
+            }
+        }
+
+        if(!person.getTlf2().equalsIgnoreCase("")) {
+            if (!person.getTlf2().equalsIgnoreCase(oldTlf1)) {
+                if (oldTlf2.equalsIgnoreCase("")) {
+                    sql = "INSERT INTO PhoneNumbers  (tlf_id, person_id tlf) " +
+                            "VALUES (DEFAULT, ?, ?)";
+
+                    jdbc.update(sql, preparedStatement -> {
+                        preparedStatement.setInt(1, person.getPersonId());
+                        preparedStatement.setString(2, person.getTlf2());
+
+                    });
+                } else if (!oldTlf2.equalsIgnoreCase(person.getTlf2())) {
+                    sql = "UPDATE PhoneNumbers SET  tlf = ? WHERE person_id = ? AND tlf = ? ";
+
+                    jdbc.update(sql, preparedStatement -> {
+                        preparedStatement.setString(1, person.getTlf2());
+                        preparedStatement.setInt(2, person.getPersonId());
+                        preparedStatement.setString(3, oldTlf2);
+                    });
+                }
+            }
+        }
 
     }
 
@@ -102,16 +157,54 @@ public class PersonDbRepository implements IPersonDbRepository {
     public Person getPerson(String email) {
         String sql = "SELECT * FROM idebanken.Person WHERE email=?";
         sqlRowSet = jdbc.queryForRowSet(sql, email);
+        Person person = new Person();
+
 
         while (sqlRowSet.next()){
-            return new Person(
-                    sqlRowSet.getString("first_name"),
-                    sqlRowSet.getString("last_name"),
-                    sqlRowSet.getString("email"),
-                    sqlRowSet.getString("city")
-            );
+            person.setPersonId(sqlRowSet.getInt("person_id"));
+            person.setFirstName(sqlRowSet.getString("first_name"));
+            person.setLastName(sqlRowSet.getString("last_name"));
+            person.setEmail(sqlRowSet.getString("email"));
+            person.setZipCode(sqlRowSet.getInt("zip_code"));
+            person.setCity(sqlRowSet.getString("city"));
         }
-        return null;
+        List<String> tlf = findPhoneNumbers(person.getPersonId());
+
+        int counter = 1;
+
+        for (String i: tlf){
+            if(counter == 2){
+                if(i.equalsIgnoreCase("") || i.equalsIgnoreCase(null)){
+                    break;
+
+                }else {
+                    person.setTlf2(i);
+                    counter++;
+                }
+            }
+            if(counter == 1) {
+                if (i.equalsIgnoreCase("") || i.equalsIgnoreCase(null)) {
+                    break;
+
+                } else {
+                    person.setTlf1(i);
+                    counter++;
+                }
+            }
+        }
+        return person;
+    }
+
+    private List<String> findPhoneNumbers(int id){
+        List<String> tlf = new ArrayList<>();
+        String sql = "SELECT tlf FROM idebanken.PhoneNumbers WHERE person_id=?";
+        sqlRowSet = jdbc.queryForRowSet(sql, id);
+
+        while (sqlRowSet.next()){
+            tlf.add(sqlRowSet.getString("tlf"));
+        }
+        return tlf;
+
     }
 
     @Override
