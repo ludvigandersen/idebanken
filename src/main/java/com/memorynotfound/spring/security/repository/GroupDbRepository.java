@@ -188,7 +188,7 @@ public class GroupDbRepository implements IGroupDbRepository{
     public void assignGroupToIdea(int ideaId, int groupId) {
         if (!checkIfAlreadyAssigned(ideaId, groupId)) {
             String sql = "INSERT INTO GroupIdea (group_idea_id, group_id, idea_id, approved)" +
-                    "VALUES (default, , ?, default)";
+                    "VALUES (default, ?, ?, default)";
 
             jdbc.update(sql, preparedStatement -> {
                 preparedStatement.setInt(1, groupId);
