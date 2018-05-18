@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import javax.mail.MessagingException;
@@ -49,6 +51,40 @@ public class PersonDbRepository implements IPersonDbRepository {
                 preparedStatement.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
             });
         email.emailCreatePerson(person);
+    }
+
+    @Override
+    public void updatePersonPassword(Person person, String oldPassword){
+
+        if(checkPassword(oldPassword, person.getPersonId())) {
+            String sql = "UPDATE idebanken.Person SET password = ? WHERE person_id = ?";
+
+            jdbc.update(sql, preparedStatement -> {
+                preparedStatement.setString(1, person.getPassword());
+                preparedStatement.setInt(2, person.getPersonId());
+            });
+        }
+    }
+
+    private boolean checkPassword(String oldPassword, int personId){
+        String sql = "SELECT * FROM idebanken.Person WHERE person_id = ?";
+        sqlRowSet = jdbc.queryForRowSet(sql,personId);
+
+        String password = "";
+        while (sqlRowSet.next()){
+                    password = sqlRowSet.getString("password");
+        }
+
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        if(passwordEncoder.matches(oldPassword, password)){
+            System.out.println("Pass check true");
+            return true;
+        }else{
+            System.out.println("Pass check false");
+            return false;
+        }
+
     }
 
     @Override

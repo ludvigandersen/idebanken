@@ -66,7 +66,7 @@ public class DeveloperController {
         @ModelAttribute("zipCode") int zipCode,
         @ModelAttribute("city") String city){
 
-        System.out.println(zipCode);
+
                 int personId = iPersonDbRepository.getPersonId(email);
 
                 Person currentPerson = new Person(personId, firstName, lastName, email, tlf1, tlf2, zipCode, city);
@@ -74,6 +74,25 @@ public class DeveloperController {
 
                 return "redirect:/user/confirm-apply";
     }
+
+    @PostMapping("/user-update-password")
+    public String updatePersonPassword(
+            @ModelAttribute("email") String email,
+            @ModelAttribute("password") String password,
+            @ModelAttribute("oldPassword") String oldPassword){
+        Person person = new Person();
+
+        int personId = iPersonDbRepository.getPersonId(email);
+
+        person.setPersonId(personId);
+        person.setPassword(password);
+
+        iPersonDbRepository.updatePersonPassword(person,oldPassword);
+
+        return "redirect:/user/confirm-apply";
+    }
+
+
 
 
     @GetMapping("/user/idea")

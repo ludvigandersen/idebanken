@@ -9,12 +9,12 @@
             function validate() {
                 var pass1 = document.getElementById("password").value;
                 var pass2 = document.getElementById("password_again").value;
-                if (pass1 == pass2){
+                if (pass1 == pass2) {
                     document.getElementById("validatePass").innerHTML = "";
-                    document.getElementById("submit").disabled = false;
+                    document.getElementById("password_submit").disabled = false;
                 } else {
                     document.getElementById("validatePass").innerHTML = "Begge passwords skal være identiske.";
-                    document.getElementById("submit").disabled = true;
+                    document.getElementById("password_submit").disabled = true;
                 }
             }
         </script>
@@ -74,9 +74,10 @@
                             <td><label for="password_again">Gentag password:</label></td>
                             <td><input type="password" id="password_again" name="passwordAgain" placeholder="Password" onkeyup="validate()" required></td>
                             <td id="validatePass"></td>
+                            <input type="hidden" name="email" th:value="${person.email}">
                         </tr>
                         <tr>
-                            <td><button type="submit">Opdatér oplysninger</button></td>
+                            <td><button id="password_submit" type="submit">Ændre password</button></td>
                         </tr>
                     </table>
 
