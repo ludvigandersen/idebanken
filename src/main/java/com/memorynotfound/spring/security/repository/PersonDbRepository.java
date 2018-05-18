@@ -151,7 +151,7 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     @Override
     public void deletePerson(int id) {
-        jdbc.update("DELETE FROM Person WHERE person_id = " + id);
+        jdbc.update("DELETE FROM Person WHERE person_id = ?", id);
     }
 
     @Override

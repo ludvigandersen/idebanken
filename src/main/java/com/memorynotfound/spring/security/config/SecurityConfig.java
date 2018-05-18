@@ -33,6 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/add-group-member-post");
         web.ignoring().antMatchers("/user-update-person");
         web.ignoring().antMatchers("/user-update-password");
+        web.ignoring().antMatchers("/user-update-group");
+        web.ignoring().antMatchers("/delete-group-post");
     }
 
     @Override

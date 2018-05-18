@@ -13,7 +13,7 @@
         <h1>Gruppe</h1>
         <div th:replace="fragments/dashboard :: dashboard"></div>
         <div class="user-content">
-            <a href="/add-group-member"> Tilføj medlem</a>
+            <a th:href=" ${'/edit-group?id=' + groupId}"> Tilføj medlem</a>
             <table>
                 <thead>
                 <tr>

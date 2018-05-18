@@ -45,6 +45,32 @@ public class GroupController {
         return "redirect:/";
     }
 
+    @GetMapping("/edit-group")
+    public String editGroup (@RequestParam("id") int id, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        String name = iGroupDbRepository.findGroupName(id);
+
+        double rate = 3;
+        model.addAttribute("rate", rate);
+
+        model.addAttribute("person", person);
+        model.addAttribute("groupId", id);
+        model.addAttribute("name", name);
+
+        return "user/edit-group";
+    }
+
+    @PostMapping("/user-update-group")
+    public String updateGroup(
+            @ModelAttribute("name") String name,
+            @ModelAttribute("groupId") int id){
+
+        iGroupDbRepository.updateGroup(name, id);
+
+        return "redirect:/user/confirm-apply";
+    }
+
     @GetMapping("/add-group-member")
     public String addGroupMember(@RequestParam("id") int id, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -68,7 +94,7 @@ public class GroupController {
         System.out.println("Person id: " + personId);
         System.out.println("group id: " + groupId);
         iGroupDbRepository.addMember(groupId, personId);
-        return "redirect:/add-group-member?id="+groupId;
+        return "redirect:/edit-group?id="+groupId;
     }
 
     @GetMapping("/group-details")
@@ -79,9 +105,18 @@ public class GroupController {
         double rate = 3;
         model.addAttribute("rate", rate);
 
+        model.addAttribute("groupId", id);
+
         List<Person> persons = iGroupDbRepository.read(id);
         model.addAttribute("developers", persons);
 
         return "user/groupDetails";
+    }
+
+    @PostMapping("/delete-group-post")
+    public String deleteUser(@ModelAttribute("groupId") int groupId){
+        iGroupDbRepository.deleteGroup(groupId);
+
+        return "redirect:/user/group";
     }
 }

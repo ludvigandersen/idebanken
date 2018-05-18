@@ -92,9 +92,6 @@ public class DeveloperController {
         return "redirect:/user/confirm-apply";
     }
 
-
-
-
     @GetMapping("/user/idea")
     public String userIdea(@RequestParam("id") int id, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
