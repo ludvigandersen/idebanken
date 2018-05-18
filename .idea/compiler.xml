@@ -7,15 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="idebanken" />
-<<<<<<< HEAD
-        <module name="thymeleaf" />
-=======
->>>>>>> 7649ef95d05dc37c47399acd9e1e609e8fccf160
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="idebanken" target="1.8" />
-      <module name="thymeleaf" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
