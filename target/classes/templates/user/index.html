@@ -20,6 +20,7 @@
                         <tr>
                             <th>Titel</th>
                             <th>Beskrivelse</th>
+                            <th>Ansøgt som</th>
                             <th>Oprettet</th>
                         </tr>
                     </thead>
@@ -27,6 +28,7 @@
                         <tr th:each="idea : ${assigned}">
                             <td th:text="${idea.ideaName}">Ingen idéer fundet</td>
                             <td th:text="${idea.ideaDescription}"></td>
+                            <td th:text="${}"></td>
                             <td th:text="${idea.date}"></td>
                             <td><a th:href="${'/user/idea?id=' + idea.ideaId}">Læs mere</a></td>
                         </tr>
