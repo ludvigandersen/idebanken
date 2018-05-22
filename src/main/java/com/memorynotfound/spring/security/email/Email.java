@@ -7,6 +7,9 @@ import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+/**
+ * @author Mikkel Dalby Nielsen
+ */
 public class Email {
 
     // Her skal du ændre email adressen
@@ -24,6 +27,10 @@ public class Email {
                 }
             });
 
+    /**
+     * Her i constructoren sætter vi flere smtp parametre, bla. at vores mail host er googles gmail server
+     * som bruger port 587.
+     */
     public Email(){
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -32,6 +39,10 @@ public class Email {
         props.put("mail.smtp.port", "587");
     }
 
+    /**
+     * Denne metode bliver kaldt når der bliver oprettet en ny person på vores side
+     * E-mailen bliver sendt til personen der har oprettet en profil.
+     */
     public void emailCreatePerson(Person person){
         try {
             Message message = new MimeMessage(session);
@@ -49,6 +60,10 @@ public class Email {
         }
     }
 
+    /**
+     * Denne metode bliver brugt når en udvikler på siden ansøger en idé.
+     * E-mailen bliver sendt til den person som har oprettet idéen.
+     */
     public void emailApplyToIdea(Person developer, String applyMessage, String ideaEmail, Idea idea){
         try {
             Message message = new MimeMessage(session);
