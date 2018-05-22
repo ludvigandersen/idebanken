@@ -30,26 +30,37 @@ public class PersonDbRepository implements IPersonDbRepository {
     public PersonDbRepository() throws MessagingException {
     }
 
+    private void insertIntoCity(int zipCode, String city){
+        String sql = "INSERT IGNORE INTO city(zip_code, city)"+
+                "VALUES(?,?)";
+
+        jdbc.update(sql, preparedStatement -> {
+            preparedStatement.setInt(1, zipCode);
+            preparedStatement.setString(2, city);
+        });
+    }
+
     @Override
     public void createPerson(Person person) {
         int roleId = getRoleId(person.getRole());
         boolean emailNot = false;
 
 
-            String sql = "INSERT INTO Person(person_id, first_name, last_name, email, zip_code, city, password, role_id, email_notifications, date)"+
-                    "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+            String sql = "INSERT INTO Person(person_id, first_name, last_name, email, zip_code, password, role_id, email_notifications, date)"+
+                    "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             jdbc.update(sql, preparedStatement -> {
                 preparedStatement.setString(1, person.getFirstName());
                 preparedStatement.setString(2, person.getLastName());
                 preparedStatement.setString(3, person.getEmail());
                 preparedStatement.setInt(4, person.getZipCode());
-                preparedStatement.setString(5, person.getCity());
-                preparedStatement.setString(6, person.getPassword());
-                preparedStatement.setInt(7, roleId);
-                preparedStatement.setBoolean(8, emailNot);
-                preparedStatement.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
+                preparedStatement.setString(5, person.getPassword());
+                preparedStatement.setInt(6, roleId);
+                preparedStatement.setBoolean(7, emailNot);
+                preparedStatement.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now()));
             });
+
+            insertIntoCity(person.getZipCode(), person.getCity());
         email.emailCreatePerson(person);
     }
 
@@ -67,7 +78,7 @@ public class PersonDbRepository implements IPersonDbRepository {
     }
 
     private boolean checkPassword(String oldPassword, int personId){
-        String sql = "SELECT * FROM idebanken.Person WHERE person_id = ?";
+        String sql = "SELECT Person.password FROM idebanken.Person WHERE person_id = ?";
         sqlRowSet = jdbc.queryForRowSet(sql,personId);
 
         String password = "";
@@ -90,16 +101,16 @@ public class PersonDbRepository implements IPersonDbRepository {
     @Override
     public void updatePerson(Person person, String oldTlf1, String oldTlf2) {
         String sql = "UPDATE Person SET  first_name = ?, last_name = ?," +
-                " zip_code = ?, city = ? WHERE person_id = ?";
+                " zip_code = ? WHERE person_id = ?";
 
         jdbc.update(sql, preparedStatement -> {
             preparedStatement.setString(1, person.getFirstName());
             preparedStatement.setString(2, person.getLastName());
             preparedStatement.setInt(3, person.getZipCode());
-            preparedStatement.setString(4, person.getCity());
-            preparedStatement.setInt(5, person.getPersonId());
+            preparedStatement.setInt(4, person.getPersonId());
 
         });
+        insertIntoCity(person.getZipCode(), person.getCity());
 
         if(!person.getTlf1().equalsIgnoreCase("")){
             if(!person.getTlf1().equalsIgnoreCase(oldTlf2)) {
@@ -158,7 +169,7 @@ public class PersonDbRepository implements IPersonDbRepository {
     public List<Person> getAllPersons() {
 
         List<Person> person = new ArrayList<>();
-        String sql = "SELECT first_name, last_name, email, city FROM idebanken.Person WHERE role_id = 1";
+        String sql = "SELECT * FROM idebanken.Person INNER JOIN city ON city.zip_code = Person.zip_code WHERE Person.role_id = 1";
         sqlRowSet = jdbc.queryForRowSet(sql);
 
         while (sqlRowSet.next()){
@@ -175,7 +186,7 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     @Override
     public Person getPerson(int id) {
-        String sql = "SELECT * FROM idebanken.Person WHERE person_id=?";
+        String sql = "SELECT * FROM idebanken.Person INNER JOIN city ON city.zip_code = Person.zip_code WHERE Person.person_id=?";
         sqlRowSet = jdbc.queryForRowSet(sql, id);
 
         while (sqlRowSet.next()){
@@ -191,7 +202,7 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     @Override
     public Person getPerson(String email) {
-        String sql = "SELECT * FROM idebanken.Person WHERE email=?";
+        String sql = "SELECT * FROM idebanken.Person INNER JOIN city ON city.zip_code = Person.zip_code WHERE Person.email=?";
         sqlRowSet = jdbc.queryForRowSet(sql, email);
         Person person = new Person();
 
