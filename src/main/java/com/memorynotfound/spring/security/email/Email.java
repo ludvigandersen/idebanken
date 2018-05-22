@@ -8,71 +8,42 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 public class Email {
-    // write your code here
-    // change accordingly
+
+    // Her skal du ændre email adressen
     final String username = "tryllemikkel@gmail.com";
 
-    // change accordingly
+    // Her skal du ændre passwordet, som passer til ovenstående e-mail adresse
     final String password = "dcc59vez";
 
-    // Get system properties
     Properties props = new Properties();
 
     Session session = Session.getInstance(props,
             new javax.mail.Authenticator() {
-
-                //override the getPasswordAuthentication method
-                protected PasswordAuthentication
-                getPasswordAuthentication() {
-
-                    return new PasswordAuthentication(username,
-                            password);
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
                 }
             });
 
-    public Email() throws AddressException, MessagingException {
-
-        // enable authentication
+    public Email(){
         props.put("mail.smtp.auth", "true");
-
-        // enable STARTTLS
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-
-        // Setup mail server
         props.put("mail.smtp.host", "smtp.gmail.com");
-
-        // TLS Port
         props.put("mail.smtp.port", "587");
-
-        // creating Session instance referenced to
-        // Authenticator object to pass in
-        // Session.getInstance argument
-
     }
 
     public void emailCreatePerson(Person person){
         try {
-
-            // compose the message
-            // javax.mail.internet.MimeMessage class is
-            // mostly used for abstraction.
             Message message = new MimeMessage(session);
-
-            // header field of the header.
             message.setFrom(new InternetAddress(username));
-
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(person.getEmail()));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(person.getEmail()));
             message.setSubject("Din bruger er oprettet");
             message.setText("Hej, du har oprettet en bruger på Idébanken. " +
                     "Du kan logge ind på siden med din email: " + person.getEmail() +
                     " samt det kodeord du har valgt.");
-
-            Transport.send(message);         //send Message
+            Transport.send(message);
 
             System.out.println("Email sent");
-
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
@@ -80,17 +51,11 @@ public class Email {
 
     public void emailApplyToIdea(Person developer, String applyMessage, String ideaEmail, Idea idea){
         try {
-
-            // compose the message
-            // javax.mail.internet.MimeMessage class is
-            // mostly used for abstraction.
             Message message = new MimeMessage(session);
 
-            // header field of the header.
             message.setFrom(new InternetAddress(username));
 
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(ideaEmail));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(ideaEmail));
             message.setSubject("En udvikler har ansøgt din idé");
             message.setText("Hej, en udvikler på sitet har ansøgt din idé: " + idea.getIdeaName() +
                             " login på idebanken for at godkende udvikleren. \n " +
@@ -99,7 +64,7 @@ public class Email {
                             "Email: " + developer.getEmail() + "\n" +
                             "Besked fra udvikleren: " + applyMessage);
 
-            Transport.send(message);         //send Message
+            Transport.send(message);
 
             System.out.println("Email sent");
 
