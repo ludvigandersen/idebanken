@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 
+/**
+ * @author mikkeldalbynielsen
+ * @author Christoffer
+ */
+
 @Controller
 public class IdeaController {
 
@@ -24,6 +29,9 @@ public class IdeaController {
     @Autowired
     IPersonDbRepository iPersonDbRepository;
 
+    /**
+     * Her mapper vi til opret idé siden.
+     */
     @GetMapping("/create-idea")
     public String createIdea(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -31,6 +39,11 @@ public class IdeaController {
         return "idea/create-idea";
     }
 
+    /**
+     * Her henter vi det data som brugeren har indtastet på opret idé siden, og gennem iIdeaDbRepository,
+     * kalder vi createIdea metoden og tilføjer den nye idé i databasen.
+     * Derefter redirecter den til en kvittering
+     */
     @PostMapping("/create-idea-post")
     public String createIdea(
             @ModelAttribute("ideaName") String ideaName,
@@ -45,6 +58,9 @@ public class IdeaController {
                 return "redirect:/idea/confirm-created-idea";
     }
 
+    /**
+     * Her mapper vi til kvitteringen, som brugen får efter en idé er oprettet
+     */
     @GetMapping("idea/confirm-created-idea")
     public String confirmCreatedIdea(){
         return "idea/confirm-created-idea";
@@ -58,6 +74,10 @@ public class IdeaController {
         return "idea/index";
     }
 
+    /**
+     * Her viser vi idébrugeren en liste over alle de idéer han har oprettet, vi henter hans navn via. auth
+     * og bruger det til at finde hans PersonId.
+     */
     @GetMapping("/idea/my-ideas")
     public String myIdeas(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -71,12 +91,18 @@ public class IdeaController {
         return "idea/my-ideas";
     }
 
+    /**
+     * Her henter vi en liste af alle idéer der er lagt op websiden
+     */
     @GetMapping("/all-ideas")
     public String readAllIdeas(Model model){
         model.addAttribute("idea_data", iIdeaDbRepository.getAllIdeas());
         return "all-ideas";
     }
 
+    /**
+     * Her mapper vi til edit idea siden, hvor idépersonen har mulighed for at ændre sin idé.
+     */
     @GetMapping("/edit-idea")
     public String userIdeaPerson(@RequestParam("id") int id, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -87,7 +113,10 @@ public class IdeaController {
         model.addAttribute("idea", idea);
         return "idea/edit-idea";
     }
-
+    /**
+     * Her henter vi al den indtastede data på ændre idé siden, og bruger den til at ændre idépersonens idé via.
+     * metoden updateIdea()
+     */
     @PostMapping("/edit-idea-post")
     public String editIdea(
             @ModelAttribute("ideaName") String ideaName,
@@ -100,6 +129,10 @@ public class IdeaController {
         return "redirect:/idea/confirm-created-idea";
     }
 
+    /**
+     * Denne metode bruger vi til at slette en idé, det gør vi ved at hente ideaId fra html'en og
+     * bruger den i deleteIdea metoden .
+     */
     @PostMapping("/delete-idea-post")
     public String deleteIdea(
             @ModelAttribute("ideaId") int ideaId){

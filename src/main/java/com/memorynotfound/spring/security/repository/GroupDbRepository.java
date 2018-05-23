@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Mikkel Dalby Nielsen
+ * @author Christoffer
+ * @author Nicolai
+ */
 
 @Repository
 public class GroupDbRepository implements IGroupDbRepository{
@@ -31,6 +36,9 @@ public class GroupDbRepository implements IGroupDbRepository{
         });
     }
 
+    /**
+     * Her modtager vi gruppens groupId, som vi bruger i et DELETE statement for at slette den rigtige.
+     */
     @Override
     public void deleteGroup(int id) {
         jdbc.update("DELETE FROM idebanken.Group WHERE group_id = ?", id);
@@ -50,6 +58,10 @@ public class GroupDbRepository implements IGroupDbRepository{
 
     }
 
+    /**
+     * Her kan vi modtager vi et navn og gruppens groupId, som vi bruger i et UPDATE statement for
+     * at opdatere gruppens data.
+     */
     @Override
     public void updateGroup(String name, int id) {
         String sql = "UPDATE idebanken.Group SET group_name = ? WHERE group_id = ?";
@@ -92,6 +104,9 @@ public class GroupDbRepository implements IGroupDbRepository{
         return personList;
     }
 
+    /**
+     * Her modtager vi gruppens navn, som vi derefter kan bruge for at finde gruppens groupId
+     */
     @Override
     public int findGroup(String name){
         String sql = "SELECT Group.group_id" +
@@ -104,6 +119,9 @@ public class GroupDbRepository implements IGroupDbRepository{
         return 0;
     }
 
+    /**
+     * Her modtager vi gruppens groupId, som vi derefter kan bruge for at finde gruppens navn
+     */
     @Override
     public String findGroupName(int id){
         String sql = "SELECT Group.group_name" +

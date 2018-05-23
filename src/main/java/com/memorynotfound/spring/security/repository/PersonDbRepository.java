@@ -1,5 +1,7 @@
 package com.memorynotfound.spring.security.repository;
 
+import com.memorynotfound.spring.security.controller.DeveloperController;
+import com.memorynotfound.spring.security.controller.FrontpageController;
 import com.memorynotfound.spring.security.email.Email;
 import com.memorynotfound.spring.security.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Mikkel Dalby Nielsen
+ * @author Christoffer
+ * @author Ludvig
+ */
 
 @Repository
 public class PersonDbRepository implements IPersonDbRepository {
@@ -64,6 +70,12 @@ public class PersonDbRepository implements IPersonDbRepository {
         email.emailCreatePerson(person);
     }
 
+    /**
+     * Her modtager vi al den data brugeren har indtastet i form af en Person person og et gammelt password.
+     * Vi tjekker om det gamle password matcher passwordet
+     * indtastet i gammel password baren via. {@link #checkPassword(String, int)}
+     * Vi bruger herefter en UPDATE sql statement til at opdatere idéens data i databasen
+    */
     @Override
     public void updatePersonPassword(Person person, String oldPassword){
 
@@ -77,6 +89,9 @@ public class PersonDbRepository implements IPersonDbRepository {
         }
     }
 
+    /**
+     * Her tjekker vi om det gamle password matcher passwordet ndtastet i gammel password baren
+     */
     private boolean checkPassword(String oldPassword, int personId){
         String sql = "SELECT Person.password FROM idebanken.Person WHERE person_id = ?";
         sqlRowSet = jdbc.queryForRowSet(sql,personId);
@@ -98,6 +113,16 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     }
 
+    /**
+     * Her modtager vi al den data brugeren har indtastet i form af en Person person, olfTlf1 og oldTlf2
+     * Som vi bruger i et UPDATE statement og opdatere brugeren i databasen
+     * Før vi kan indsætte tlf nr. er vi nødt til at tjekke om brugeren allerede har et tlf nr.
+     * For at se om det er et UPDATE statement eller et INSERT statement der skal bruges.
+     *
+     * Derefter tjekker om tlf nummerne er ens, da det skaber problemmer hvis de er,
+     * som f.eks. hvis der bliver indtastet noget i tlf1 men ikke tlf2, men de to gamle nr er ens, vil
+     * den stadig ændre dem begge
+     */
     @Override
     public void updatePerson(Person person, String oldTlf1, String oldTlf2) {
         String sql = "UPDATE Person SET  first_name = ?, last_name = ?," +
@@ -242,6 +267,9 @@ public class PersonDbRepository implements IPersonDbRepository {
         return person;
     }
 
+    /**
+     * Her finder vi brugerens tlf nummere ud fra personens personId, og indsætter dem i en liste
+     */
     private List<String> findPhoneNumbers(int id){
         List<String> tlf = new ArrayList<>();
         String sql = "SELECT tlf FROM idebanken.PhoneNumbers WHERE person_id=?";
@@ -254,6 +282,9 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     }
 
+    /**
+     * Her finder vi brugerens personId ud fra E-mailen
+     */
     @Override
     public int getPersonId(String email) {
         String sql = "SELECT person_id FROM idebanken.Person WHERE email=?";

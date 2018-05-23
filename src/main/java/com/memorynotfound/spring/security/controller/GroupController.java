@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/**
+ * @author Nicolai
+ * @author Christoffer
+ */
+
 @Controller
 public class GroupController {
 
@@ -45,6 +50,10 @@ public class GroupController {
         return "redirect:/";
     }
 
+    /**
+     * Her mapper vi til ændre gruppe siden, hvor brugeren får mulighed for at indtaste de
+     * ændre han vil tilføje
+     */
     @GetMapping("/edit-group")
     public String editGroup (@RequestParam("id") int id, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -60,7 +69,11 @@ public class GroupController {
 
         return "user/edit-group";
     }
-
+    /**
+     * Her henter vi al den indtastede data på ændre gruppe siden, og bruger den til at ændre
+     * gruppens data via. metoden updateGroup(), derefter redirecter den til en kvittering for
+     * at den er opdateret
+     */
     @PostMapping("/user-update-group")
     public String updateGroup(
             @ModelAttribute("name") String name,
@@ -113,6 +126,10 @@ public class GroupController {
         return "user/groupDetails";
     }
 
+    /**
+     * Denne metode bruger vi til at slette en gruppe, det gør vi ved at hente groupId fra html'en som vi
+     * derefter bruger den i deleteGroup metoden.
+     */
     @PostMapping("/delete-group-post")
     public String deleteUser(@ModelAttribute("groupId") int groupId){
         iGroupDbRepository.deleteGroup(groupId);

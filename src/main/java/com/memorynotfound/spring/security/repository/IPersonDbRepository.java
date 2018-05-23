@@ -3,6 +3,12 @@ package com.memorynotfound.spring.security.repository;
 import com.memorynotfound.spring.security.model.Person;
 
 import java.util.List;
+/**
+ * Dette er vores interface for PersonDbRepository
+ * @author Mikkel Dalby Nielsen
+ * @author Christoffer
+ * @author Ludvig
+ */
 
 public interface IPersonDbRepository {
     void createPerson(Person person);

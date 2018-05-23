@@ -6,6 +6,11 @@ import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
 
 import java.util.List;
+/**
+ * Dette er vores interface for IdeaDbRepository
+ * @author Mikkel Dalby Nielsen
+ * @author Christoffer
+ */
 
 public interface IIdeaDbRepository {
     void createIdea(Idea idea);
