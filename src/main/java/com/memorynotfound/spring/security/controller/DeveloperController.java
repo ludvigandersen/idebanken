@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author mikkeldalbynielsen
+ * @author Mikkel
  * @author Nicolai
  * @author Christoffer
  */

@@ -6,6 +6,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
+/**
+ * @author Mikkel
+ */
 public class Person {
     private int personId;
     private String firstName;

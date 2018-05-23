@@ -1,5 +1,8 @@
 package com.memorynotfound.spring.security.model;
 
+/**
+ * @author Nicolai
+ */
 public class Group {
 
     private int groupId;
