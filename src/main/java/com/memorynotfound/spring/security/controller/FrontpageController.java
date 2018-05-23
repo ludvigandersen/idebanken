@@ -1,10 +1,8 @@
 package com.memorynotfound.spring.security.controller;
 
 import com.memorynotfound.spring.security.model.Group;
-import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
 import com.memorynotfound.spring.security.repository.IGroupDbRepository;
-import com.memorynotfound.spring.security.repository.IIdeaDbRepository;
 import com.memorynotfound.spring.security.repository.IPersonDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,11 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class FrontpageController {
@@ -100,7 +93,13 @@ public class FrontpageController {
     @PostMapping("/delete-user-post")
     public String deleteUser(@ModelAttribute Person person){
         iPersonDbRepository.deletePerson(iPersonDbRepository.getPersonId(person.getEmail()));
-        return "redirect:/login";
+        return "redirect:/confirm-delete-user";
+    }
+
+    @GetMapping("/confirm-delete-user")
+    public String confirmDeleteUser(){
+
+        return "user/confirm-delete-user";
     }
 
     @GetMapping("/edit-user")

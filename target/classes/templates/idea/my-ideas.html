@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>My ideas</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/userstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+
+    <div class="scroll_content">
+        <h1>Idéer</h1>
+    <div th:replace="fragments/dashboard :: dashboard"></div>
+
+        <div class="user-content">
+        <table>
+            <thead>
+            <tr>
+                <th>Idé navn</th>
+                <th>Beskrivelse</th>
+                <th>Oprettet</th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each = "idea : ${idea_text}">
+                <td th:text="${idea.ideaName}"></td>
+                <td th:text="${idea.ideaDescription}"></td>
+                <td th:text="${idea.date}"></td>
+                <td><a th:href="${'/edit-idea?id=' + idea.ideaId}">Ændre idé</a></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

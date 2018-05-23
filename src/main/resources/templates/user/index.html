@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Sikker side</title>
+        <title>Se ansøgte idéer</title>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/userstyle.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,6 +20,7 @@
                         <tr>
                             <th>Titel</th>
                             <th>Beskrivelse</th>
+                            <th>Ansøgt som</th>
                             <th>Oprettet</th>
                         </tr>
                     </thead>
@@ -27,6 +28,7 @@
                         <tr th:each="idea : ${assigned}">
                             <td th:text="${idea.ideaName}">Ingen idéer fundet</td>
                             <td th:text="${idea.ideaDescription}"></td>
+                            <td th:text="${}"></td>
                             <td th:text="${idea.date}"></td>
                             <td><a th:href="${'/user/idea?id=' + idea.ideaId}">Læs mere</a></td>
                         </tr>

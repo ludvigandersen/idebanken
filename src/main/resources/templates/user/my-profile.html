@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Min profil</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/userstyle.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script>
+            function validate() {
+                var pass1 = document.getElementById("password").value;
+                var pass2 = document.getElementById("password_again").value;
+                if (pass1 == pass2) {
+                    document.getElementById("validatePass").innerHTML = "";
+                    document.getElementById("password_submit").disabled = false;
+                } else {
+                    document.getElementById("validatePass").innerHTML = "Begge passwords skal være identiske.";
+                    document.getElementById("password_submit").disabled = true;
+                }
+            }
+        </script>
+    </head>
+    <body>
+    <div class="container">
+        <div th:replace="fragments/header :: header"></div>
+        <div class="scroll_content">
+            <h1>Min profil</h1>
+            <div th:replace="fragments/dashboard :: dashboard"></div>
+            <div class="user-content">
+                <p class="headline">Mine oplysninger</p>
+                <form action="/user-update-person" method="post">
+                    <table>
+                        <tr>
+                            <td><label for="first_name">Fornavn:</label></td>
+                            <td><input type="text" id="first_name" name="firstName" th:value="${person.firstName}"></td>
+                            <td><label for="last_name">Efternavn:</label></td>
+                            <td><input type="text" id="last_name" name="lastName" th:value="${person.lastName}"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="hidden" id="email" name="email" th:value="${person.email}"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="tlf1">Telefon:</label></td>
+                            <td><input type="text" id="tlf1" name="tlf1" th:value="${person.tlf1}"></td>
+                            <td><label for="tlf2">Mobil:</label></td>
+                            <td><input type="text" id="tlf2" name="tlf2" th:value="${person.tlf2}"></td>
+
+                            <td><input type="hidden" id="oldTlf1" name="oldTlf1" th:value="${person.tlf1}"></td>
+
+                            <td><input type="hidden" id="oldTlf2" name="oldTlf2" th:value="${person.tlf2}"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="zip_code">Post nr.:</label></td>
+                            <td><input type="number" id="zip_code" name="zipCode" th:value="${person.zipCode}"></td>
+                            <td><label for="city">By:</label></td>
+                            <td><input type="text" id="city" name="city" th:value="${person.city}"></td>
+                        </tr>
+                        <tr>
+                            <td><button type="submit">Opdatér oplysninger</button></td>
+                        </tr>
+                    </table>
+                </form>
+
+                <br>
+
+                <form action="/user-update-password" method="post">
+                    <table>
+                        <tr>
+                            <td><label>Gammelt password: </label></td>
+                            <td><input type="password" name="oldPassword" placeholder="Gamle Password"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="password">Password:</label></td>
+                            <td><input type="password" id="password" name="password" placeholder="Password" required></td>
+                            <td><label for="password_again">Gentag password:</label></td>
+                            <td><input type="password" id="password_again" name="passwordAgain" placeholder="Password" onkeyup="validate()" required></td>
+                            <td id="validatePass"></td>
+                            <input type="hidden" name="email" th:value="${person.email}">
+                        </tr>
+                        <tr>
+                            <td><button id="password_submit" type="submit">Ændre password</button></td>
+                        </tr>
+                    </table>
+
+                </form>
+
+                <br>
+
+                <form action="/delete-user-post" method="post" onsubmit = "return confirm('Er du sikker på at du vil slette brugeren?')">
+                    <input type="hidden" th:value="${person.email}" name="email">
+                    <button type="submit">Slet bruger</button>
+                </form>
+
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
+    </body>
+</html>

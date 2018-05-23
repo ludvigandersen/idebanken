@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Se dine grupper</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/userstyle.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+    <div class="container">
+        <div th:replace="fragments/header :: header"></div>
+        <div class="scroll_content">
+            <h1>Grupper</h1>
+            <div th:replace="fragments/dashboard :: dashboard"></div>
+            <div class="user-content">
+                <a href="/create-group"> Opret gruppe</a>
+                <p class="headline">Tilknyttede grupper</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Gruppe navn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="group : ${groups}">
+                            <td th:text="${group.name}">Ingen grupper fundet</td>
+                            <td><a th:href=" ${'/group-details?id=' + group.groupId}">Læs mere</a></td>
+                            <td><a th:href=" ${'/edit-group?id=' + group.groupId}">Ændre gruppe</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
+    </body>
+</html>

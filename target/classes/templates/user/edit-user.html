@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" href="css/style.css">
-    <title>opdater bruger</title>
+    <title>Opdater bruger</title>
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <td><label for="">Post nr</label></td>
-                    <td><input type="text" th:placeholder="${person.zipCode}"></td>
+                    <td><input type="number" th:placeholder="${person.zipCode}"></td>
                     <td><label for="">by</label></td>
                     <td><input type="text" th:placeholder="${person.city}"></td>
                 </tr>

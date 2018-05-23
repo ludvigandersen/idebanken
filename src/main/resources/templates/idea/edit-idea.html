@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Se idé</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/userstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="scroll_content">
+        <div th:replace="fragments/dashboard :: dashboard"></div>
+        <div class="user-content">
+            <h1>Ændre idé</h1>
+
+            <form action="/edit-idea-post" method="post">
+                <td><p>Idé navn:</p></td>
+                <td><input type="text" id ="idea_name" name="ideaName" th:value="${idea.ideaName}"></td>
+                <td><p>Beskrivelse: </p></td>
+                <td><textarea rows="5" cols="50" id="idea_description" name="ideaDescription"
+                              th:text="${idea.ideaDescription}"></textarea></td>
+                <td><input type="hidden" id="idea_id" name="ideaId" th:value="${idea.ideaId}"></td>
+                <td><br><button type="submit" style="float: left">Gem</button></td>
+            </form>
+
+            <form action="/delete-idea-post" method="post">
+                <td><input type="hidden" id="idea_id_delete" name="ideaId" th:value="${idea.ideaId}"></td>
+                <button type="submit" style="float: left">Slet idé</button>
+            </form>
+
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

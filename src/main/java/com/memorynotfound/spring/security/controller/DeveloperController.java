@@ -1,5 +1,6 @@
 package com.memorynotfound.spring.security.controller;
 
+import com.memorynotfound.spring.security.email.Email;
 import com.memorynotfound.spring.security.model.Group;
 import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
@@ -12,12 +13,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author mikkeldalbynielsen
+ * @author Nicolai
+ */
 @Controller
 public class DeveloperController {
 
@@ -30,8 +37,14 @@ public class DeveloperController {
     @Autowired
     IGroupDbRepository iGroupDbRepository;
 
+    Email email = new Email();
+
+    public DeveloperController() throws MessagingException {
+    }
+
     @GetMapping("/user")
     public String userIndex(Model model) {
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Person person = iPersonDbRepository.getPerson(auth.getName());
         model.addAttribute(person);
@@ -44,6 +57,48 @@ public class DeveloperController {
         List<Idea> applied = iIdeaDbRepository.getAppliedIdeas(iGroupDbRepository.getGroupIdsWithPerson(iPersonDbRepository.getPersonId(auth.getName())));
         model.addAttribute("applied", applied);
         return "user/index";
+    }
+
+    /**
+     * Her er en kommentar til updatePerson metoden
+     * Skriv bla... bla.... bla...
+     */
+    @PostMapping("/user-update-person")
+    public String updatePerson(
+        @ModelAttribute("firstName") String firstName,
+        @ModelAttribute("lastName") String lastName,
+        @ModelAttribute("email") String email,
+        @ModelAttribute("tlf1") String tlf1,
+        @ModelAttribute("tlf2") String tlf2,
+        @ModelAttribute("oldTlf1") String oldTlf1,
+        @ModelAttribute("oldTlf2") String oldTlf2,
+        @ModelAttribute("zipCode") int zipCode,
+        @ModelAttribute("city") String city){
+
+
+                int personId = iPersonDbRepository.getPersonId(email);
+
+                Person currentPerson = new Person(personId, firstName, lastName, email, tlf1, tlf2, zipCode, city);
+                iPersonDbRepository.updatePerson(currentPerson, oldTlf1, oldTlf2);
+
+                return "redirect:/user/confirm-apply";
+    }
+
+    @PostMapping("/user-update-password")
+    public String updatePersonPassword(
+            @ModelAttribute("email") String email,
+            @ModelAttribute("password") String password,
+            @ModelAttribute("oldPassword") String oldPassword){
+        Person person = new Person();
+
+        int personId = iPersonDbRepository.getPersonId(email);
+
+        person.setPersonId(personId);
+        person.setPassword(password);
+
+        iPersonDbRepository.updatePersonPassword(person,oldPassword);
+
+        return "redirect:/user/confirm-apply";
     }
 
     @GetMapping("/user/idea")
@@ -62,15 +117,20 @@ public class DeveloperController {
 
         Idea idea = iIdeaDbRepository.getIdea(id);
         model.addAttribute("idea", idea);
+
+        Person ideaPerson = iPersonDbRepository.getPerson(idea.getIdeaPerson());
+        model.addAttribute("ideaPerson", ideaPerson);
         return "user/idea-user";
     }
 
     @PostMapping("/aply-for-idea-post")
     public String aplyForIdea(@RequestParam("ideaId") int ideaId,
-                              @RequestParam("personEmail") String email,
+                              @RequestParam("personEmail") String developerEmail,
                               @RequestParam("group") int groupId,
-                              @RequestParam("message") String message){
+                              @RequestParam("message") String message,
+                              @RequestParam("ideaEmail") String ideaEmail){
         iGroupDbRepository.assignGroupToIdea(ideaId, groupId);
+        email.emailApplyToIdea(iPersonDbRepository.getPerson(developerEmail), message, ideaEmail, iIdeaDbRepository.getIdea(ideaId));
         return "redirect:/user/confirm-apply";
     }
 
@@ -90,5 +150,31 @@ public class DeveloperController {
         List<Idea> ideas = iIdeaDbRepository.getAllIdeas();
         model.addAttribute("ideas", ideas);
         return "user/find-ideas";
+    }
+
+    @GetMapping("user/group")
+    public String groups(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute("person", person);
+        double rate = 3;
+        model.addAttribute("rate", rate);
+
+        int personId = iPersonDbRepository.getPersonId(auth.getName());
+        model.addAttribute("groups", iGroupDbRepository.getDeveloperGroupsWithPersonId(personId));
+
+
+
+        return "user/group";
+    }
+
+    @GetMapping("user/my-profile")
+    public String myProfile(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute("person", person);
+        double rate = 3;
+        model.addAttribute("rate", rate);
+        return "user/my-profile";
     }
 }

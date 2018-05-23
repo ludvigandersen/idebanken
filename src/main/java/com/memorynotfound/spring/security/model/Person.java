@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
 
 public class Person {
+    private int personId;
     private String firstName;
     private String lastName;
     private String email;
@@ -22,6 +23,17 @@ public class Person {
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public Person() {
+    }
+
+    public Person(int personId, String firstName, String lastName, String email, String tlf1, String tlf2, int zipCode, String city) {
+        this.personId = personId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.tlf1 = tlf1;
+        this.tlf2 = tlf2;
+        this.zipCode = zipCode;
+        this.city = city;
     }
 
     public Person(String firstName, String lastName, String email, String tlf1, String tlf2, int zipCode, String city, String password, String role, LocalDate date) {
@@ -43,6 +55,15 @@ public class Person {
         this.email = email;
         this.city = city;
     }
+
+    public Person(String first_name, String last_name, String email, int zipCode, String city) {
+        this.firstName = first_name;
+        this.lastName = last_name;
+        this.email = email;
+        this.zipCode = zipCode;
+        this.city = city;
+    }
+
 
 
     public String getFirstName() {
@@ -123,6 +144,15 @@ public class Person {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public int getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(int personId) {
+
+        this.personId = personId;
     }
 
     @Override
