@@ -24,7 +24,9 @@ public class GroupDbRepository implements IGroupDbRepository{
     JdbcTemplate jdbc;
     SqlRowSet sqlRowSet;
 
-
+    /**
+     * Her opretter vi en gruppe med det indtastet gruppenavn.
+     */
     @Override
     public void createGroup(Group group){
 
@@ -44,6 +46,9 @@ public class GroupDbRepository implements IGroupDbRepository{
         jdbc.update("DELETE FROM idebanken.Group WHERE group_id = ?", id);
     }
 
+    /**
+     * Her gør vi brug af groupId og personId for at tilføje udvikler til en gruppe.
+     */
     @Override
     public void addMember(int groupId, int personId){
         String sql = "INSERT INTO idebanken.DeveloperGroup "+
@@ -82,6 +87,9 @@ public class GroupDbRepository implements IGroupDbRepository{
         });
     }
 
+    /**
+     * Her henter vi gruppens detaljer og indsætter i en liste ved brug af groupId
+     */
     @Override
     public List<Person> read(int id) {
         List<Person> personList = new ArrayList<>();
@@ -168,6 +176,9 @@ public class GroupDbRepository implements IGroupDbRepository{
         return groupIds;
     }
 
+    /**
+     * Her henter vi gruppeliste med personId
+     */
     @Override
     public List<Group> getDeveloperGroupsWithPersonId(int personId) {
         List<Group> groups = new ArrayList<>();
@@ -184,6 +195,7 @@ public class GroupDbRepository implements IGroupDbRepository{
 
         return groups;
     }
+
 
     @Override
     public List<Group> getGroupsWithPersonIn(int personId) {
