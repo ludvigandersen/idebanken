@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 /**
  * I denne klasse ligger metoden main() der starter hele programmet.
- * @author Mikkel Dalby Nielsen
+ * @author Mikkel
  */
 @SpringBootApplication
 public class Run {

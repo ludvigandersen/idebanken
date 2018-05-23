@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Mikkel Dalby Nielsen
+ * @author Mikkel
  * @author Christoffer
  * @author Nicolai
  */

@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * Denne klasse bliver brugt til at vise HTML siden access-denied.html når man ikke er logget ind
  * og requester en side som man skal vaelig;re logget ind med en bestemt user role for at se.
- * @author Mikkel Dalby Nielsen
+ * @author Mikkel
  */
 
 @Component

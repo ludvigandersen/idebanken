@@ -5,7 +5,7 @@ import com.memorynotfound.spring.security.model.Person;
 import java.util.List;
 /**
  * Dette er vores interface for PersonDbRepository
- * @author Mikkel Dalby Nielsen
+ * @author Mikkel
  * @author Christoffer
  * @author Ludvig
  */

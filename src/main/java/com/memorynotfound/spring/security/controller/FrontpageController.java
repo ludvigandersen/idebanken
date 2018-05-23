@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * @author Mikkel
+ */
 @Controller
 public class FrontpageController {
 
@@ -48,6 +51,11 @@ public class FrontpageController {
         return "user/create-user";
     }
 
+    /**
+     * Denne metode bruger vi når en person ønsker at oprette en bruger på vores side.
+     * Om det er som en Idéperson eller som udvikler betyder ikke noget for metoden,
+     * den bruges nemlig til at oprette begge typer Person.
+     */
     @PostMapping("/create-user-post")
     public String createUser(@ModelAttribute Person person){
         if (iPersonDbRepository.checkEmail(person.getEmail())) {

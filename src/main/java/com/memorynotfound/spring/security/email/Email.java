@@ -8,7 +8,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 /**
- * @author Mikkel Dalby Nielsen
+ * @author Mikkel
  */
 public class Email {
 

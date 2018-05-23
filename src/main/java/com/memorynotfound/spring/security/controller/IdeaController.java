@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 
 /**
- * @author mikkeldalbynielsen
  * @author Christoffer
  */
 
