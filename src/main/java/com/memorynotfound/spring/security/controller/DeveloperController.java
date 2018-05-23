@@ -21,6 +21,10 @@ import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author mikkeldalbynielsen
+ * @author Nicolai
+ */
 @Controller
 public class DeveloperController {
 
@@ -40,6 +44,7 @@ public class DeveloperController {
 
     @GetMapping("/user")
     public String userIndex(Model model) {
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Person person = iPersonDbRepository.getPerson(auth.getName());
         model.addAttribute(person);
@@ -54,6 +59,10 @@ public class DeveloperController {
         return "user/index";
     }
 
+    /**
+     * Her er en kommentar til updatePerson metoden
+     * Skriv bla... bla.... bla...
+     */
     @PostMapping("/user-update-person")
     public String updatePerson(
         @ModelAttribute("firstName") String firstName,

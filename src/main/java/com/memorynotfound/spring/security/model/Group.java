@@ -57,5 +57,3 @@ public class Group {
         this.groupId = groupId;
     }
 }
-
-
