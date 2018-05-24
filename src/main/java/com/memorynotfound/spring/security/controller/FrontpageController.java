@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * @author Mikkel
+ * @author Ludvig
  */
 @Controller
 public class FrontpageController {
@@ -84,6 +85,10 @@ public class FrontpageController {
         return "about";
     }
 
+    /**
+     * I denne metode tager vi data fra alle vores developers så vi kan vise dem for vores brugere
+     * på /all-developers på vores hjemmside.
+     * */
     @GetMapping("/all-developers")
     public String readAllDevelopers(Model model){
             model.addAttribute("person_data", iPersonDbRepository.getAllPersons());
@@ -98,6 +103,10 @@ public class FrontpageController {
         return "user/delete-user";
     }
 
+    /**
+     * Denne metode ligger til rådighed for brugeren, når de ønsker at slette deres profil.
+     * Den kan tilgås for dem på "min side"
+     */
     @PostMapping("/delete-user-post")
     public String deleteUser(@ModelAttribute Person person){
         iPersonDbRepository.deletePerson(iPersonDbRepository.getPersonId(person.getEmail()));

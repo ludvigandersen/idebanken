@@ -3,263 +3,266 @@
   <ID>JAVA</ID>
   <OriginalElement>com.memorynotfound.spring.security</OriginalElement>
   <nodes>
-    <node x="185.9829656862746" y="242.0">com.memorynotfound.spring.security.model.Idea</node>
-    <node x="0.0" y="2070.0">com.memorynotfound.spring.security.config</node>
-    <node x="158.0" y="1991.0">com.memorynotfound.spring.security.Run</node>
-    <node x="2060.4218545751637" y="264.0">com.memorynotfound.spring.security.model.Group</node>
-    <node x="319.0" y="1597.0">com.memorynotfound.spring.security.controller.IdeaController</node>
-    <node x="1308.5218545751636" y="1107.0">com.memorynotfound.spring.security.repository.IPersonDbRepository</node>
-    <node x="1604.7218545751634" y="1531.0">com.memorynotfound.spring.security.controller.FrontpageController</node>
-    <node x="264.70000000000005" y="1118.0">com.memorynotfound.spring.security.repository.IIdeaDbRepository</node>
-    <node x="2228.721854575164" y="1520.0">com.memorynotfound.spring.security.repository.GroupDbRepository</node>
-    <node x="1916.7218545751634" y="1608.0">com.memorynotfound.spring.security.controller.GroupController</node>
-    <node x="669.6829656862745" y="1563.5">com.memorynotfound.spring.security.controller.DeveloperController</node>
-    <node x="1246.0843545751636" y="1541.5">com.memorynotfound.spring.security.repository.PersonDbRepository</node>
-    <node x="951.5218545751634" y="1128.0">com.memorynotfound.spring.security.email.Email</node>
-    <node x="402.0" y="1991.0">com.memorynotfound.spring.security.controller.LoginController</node>
-    <node x="0.0" y="1608.0">com.memorynotfound.spring.security.repository.IdeaDbRepository</node>
-    <node x="6.0" y="1991.0">com.memorynotfound.spring.security.web</node>
-    <node x="1762.2718545751636" y="1041.0">com.memorynotfound.spring.security.repository.IGroupDbRepository</node>
-    <node x="1381.5218545751634" y="0.0">com.memorynotfound.spring.security.model.Person</node>
+    <node x="1900.1375000000003" y="111.0">com.memorynotfound.spring.security.model.Idea</node>
+    <node x="0.0" y="1587.0">com.memorynotfound.spring.security.config</node>
+    <node x="158.0" y="1508.0">com.memorynotfound.spring.security.Run</node>
+    <node x="307.29999999999995" y="88.5">com.memorynotfound.spring.security.model.Group</node>
+    <node x="1853.4375" y="1114.0">com.memorynotfound.spring.security.controller.IdeaController</node>
+    <node x="672.0" y="1048.0">com.memorynotfound.spring.security.controller.FrontpageController</node>
+    <node x="866.5" y="643.5">com.memorynotfound.spring.security.repository.IPersonDbRepository</node>
+    <node x="1960.6189950980392" y="654.5">com.memorynotfound.spring.security.repository.IIdeaDbRepository</node>
+    <node x="0.0" y="1037.0">com.memorynotfound.spring.security.repository.GroupDbRepository</node>
+    <node x="360.0" y="1125.0">com.memorynotfound.spring.security.controller.GroupController</node>
+    <node x="1339.4375" y="1080.5">com.memorynotfound.spring.security.controller.DeveloperController</node>
+    <node x="1214.598611111111" y="665.0">com.memorynotfound.spring.security.email.Email</node>
+    <node x="1020.4375" y="1047.0">com.memorynotfound.spring.security.repository.PersonDbRepository</node>
+    <node x="402.0" y="1508.0">com.memorynotfound.spring.security.controller.LoginController</node>
+    <node x="2165.4375" y="1124.5">com.memorynotfound.spring.security.repository.IdeaDbRepository</node>
+    <node x="6.0" y="1508.0">com.memorynotfound.spring.security.web</node>
+    <node x="466.45000000000005" y="578.0">com.memorynotfound.spring.security.repository.IGroupDbRepository</node>
+    <node x="853.9999999999998" y="0.0">com.memorynotfound.spring.security.model.Person</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="com.memorynotfound.spring.security.repository.GroupDbRepository" target="com.memorynotfound.spring.security.model.Group">
-      <point x="68.0" y="-213.0" />
-      <point x="2466.721854575164" y="1490.0" />
-      <point x="2555.8353874883287" y="1490.0" />
-      <point x="2555.8353874883287" y="951.0" />
-      <point x="2218.350426003735" y="951.0" />
-      <point x="57.428571428571445" y="191.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.repository.IPersonDbRepository" target="com.memorynotfound.spring.security.model.Person">
-      <point x="0.0" y="-113.5" />
-      <point x="1458.0218545751636" y="991.0" />
-      <point x="1563.0218545751634" y="991.0" />
-      <point x="-60.49999999999997" y="455.5" />
-    </edge>
     <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.model.Group">
       <point x="0.0" y="-169.5" />
-      <point x="916.6829656862745" y="1420.0" />
-      <point x="837.3010212418301" y="1420.0" />
-      <point x="837.3010212418301" y="1001.0" />
-      <point x="2074.7789974323064" y="1001.0" />
-      <point x="-86.14285714285711" y="191.5" />
+      <point x="1586.4375" y="997.0" />
+      <point x="1640.05160480859" y="997.0" />
+      <point x="1640.05160480859" y="478.0" />
+      <point x="493.94285714285706" y="478.0" />
+      <point x="86.14285714285711" y="125.5" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.repository.IPersonDbRepository" target="com.memorynotfound.spring.security.model.Person">
+      <point x="0.0" y="-114.0" />
+      <point x="1016.0" y="558.0" />
+      <point x="1075.8333333333333" y="558.0" />
+      <point x="-20.166666666666515" y="214.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.repository.GroupDbRepository" target="com.memorynotfound.spring.security.model.Group">
+      <point x="-136.0" y="-213.0" />
+      <point x="34.0" y="1017.0" />
+      <point x="20.548231792716706" y="1017.0" />
+      <point x="20.548231792716706" y="468.0" />
+      <point x="321.65714285714284" y="468.0" />
+      <point x="-86.14285714285711" y="125.5" />
     </edge>
     <edge source="com.memorynotfound.spring.security.controller.FrontpageController" target="com.memorynotfound.spring.security.model.Group">
-      <point x="36.5" y="-202.0" />
-      <point x="1787.2218545751634" y="1490.0" />
-      <point x="1723.7218545751634" y="1490.0" />
-      <point x="1723.7218545751634" y="1011.0" />
-      <point x="2103.493283146592" y="1011.0" />
-      <point x="-57.428571428571445" y="191.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.repository.IIdeaDbRepository" target="com.memorynotfound.spring.security.model.Idea">
-      <point x="0.0" y="-102.5" />
-      <point x="414.20000000000005" y="1021.0" />
-      <point x="358.26867997198883" y="1021.0" />
-      <point x="38.28571428571428" y="213.5" />
+      <point x="-36.5" y="-202.0" />
+      <point x="781.5" y="1007.0" />
+      <point x="845.0" y="1007.0" />
+      <point x="845.0" y="488.0" />
+      <point x="465.2285714285714" y="488.0" />
+      <point x="57.428571428571445" y="125.5" />
     </edge>
     <edge source="com.memorynotfound.spring.security.controller.GroupController" target="com.memorynotfound.spring.security.model.Person">
       <point x="0.0" y="-125.0" />
-      <point x="2062.7218545751634" y="1480.0" />
-      <point x="2149.9218545751637" y="1480.0" />
-      <point x="2149.9218545751637" y="981.0" />
-      <point x="1764.6885212418301" y="981.0" />
-      <point x="141.16666666666686" y="455.5" />
+      <point x="506.0" y="987.0" />
+      <point x="418.79999999999995" y="987.0" />
+      <point x="418.79999999999995" y="528.0" />
+      <point x="954.833333333333" y="528.0" />
+      <point x="-141.16666666666674" y="214.0" />
     </edge>
     <edge source="com.memorynotfound.spring.security.controller.FrontpageController" target="com.memorynotfound.spring.security.repository.IPersonDbRepository">
-      <point x="-109.5" y="-202.0" />
-      <point x="1641.2218545751634" y="1470.0" />
-      <point x="1517.8218545751633" y="1470.0" />
-      <point x="59.799999999999955" y="113.5" />
+      <point x="109.5" y="-202.0" />
+      <point x="927.5" y="1017.0" />
+      <point x="956.2" y="1017.0" />
+      <point x="-59.799999999999955" y="114.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.repository.IIdeaDbRepository" target="com.memorynotfound.spring.security.model.Idea">
+      <point x="2.2737367544323206E-13" y="-103.0" />
+      <point x="2110.1189950980392" y="558.0" />
+      <point x="2034.1375000000003" y="558.0" />
+      <point x="0.0" y="103.0" />
     </edge>
     <edge source="com.memorynotfound.spring.security.controller.IdeaController" target="com.memorynotfound.spring.security.model.Idea">
-      <point x="-58.39999999999998" y="-136.0" />
-      <point x="406.6" y="1480.0" />
-      <point x="226.2292366946781" y="1480.0" />
-      <point x="226.2292366946781" y="1021.0" />
-      <point x="319.9829656862746" y="1021.0" />
-      <point x="0.0" y="213.5" />
+      <point x="0.0" y="-136.0" />
+      <point x="1999.4375" y="1007.0" />
+      <point x="1950.1189950980392" y="1007.0" />
+      <point x="1950.1189950980392" y="558.0" />
+      <point x="1995.851785714286" y="558.0" />
+      <point x="-38.28571428571422" y="103.0" />
     </edge>
     <edge source="com.memorynotfound.spring.security.repository.IGroupDbRepository" target="com.memorynotfound.spring.security.model.Person">
-      <point x="-85.0" y="-179.5" />
-      <point x="1847.2718545751636" y="991.0" />
-      <point x="1724.3551879084969" y="991.0" />
-      <point x="100.83333333333348" y="455.5" />
+      <point x="85.0" y="-179.5" />
+      <point x="721.45" y="538.0" />
+      <point x="995.1666666666665" y="538.0" />
+      <point x="-100.83333333333326" y="214.0" />
     </edge>
     <edge source="com.memorynotfound.spring.security.repository.GroupDbRepository" target="com.memorynotfound.spring.security.model.Person">
-      <point x="-68.0" y="-213.0" />
-      <point x="2330.721854575164" y="1500.0" />
-      <point x="2333.67862394958" y="1500.0" />
-      <point x="2333.67862394958" y="971.0" />
-      <point x="1805.0218545751636" y="971.0" />
-      <point x="181.50000000000023" y="455.5" />
+      <point x="0.0" y="-213.0" />
+      <point x="170.0" y="1017.0" />
+      <point x="141.5" y="1017.0" />
+      <point x="141.5" y="508.0" />
+      <point x="874.1666666666665" y="508.0" />
+      <point x="-221.83333333333337" y="214.0" />
     </edge>
     <edge source="com.memorynotfound.spring.security.repository.GroupDbRepository" target="com.memorynotfound.spring.security.repository.IGroupDbRepository">
-      <point x="-136.0" y="-213.0" />
-      <point x="2262.721854575164" y="1470.0" />
-      <point x="2059.7718545751636" y="1470.0" />
-      <point x="127.5" y="179.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.controller.GroupController" target="com.memorynotfound.spring.security.repository.IGroupDbRepository">
-      <point x="-58.39999999999998" y="-125.0" />
-      <point x="2004.3218545751636" y="1500.0" />
-      <point x="1974.7718545751636" y="1500.0" />
-      <point x="42.5" y="179.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.repository.PersonDbRepository" target="com.memorynotfound.spring.security.repository.IPersonDbRepository">
-      <point x="0.0" y="-191.5" />
-      <point x="1395.5843545751636" y="1470.0" />
-      <point x="1458.0218545751636" y="1470.0" />
-      <point x="0.0" y="113.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.controller.IdeaController" target="com.memorynotfound.spring.security.repository.IPersonDbRepository">
-      <point x="116.80000000000001" y="-136.0" />
-      <point x="581.8" y="1450.0" />
-      <point x="1338.4218545751635" y="1450.0" />
-      <point x="-119.60000000000002" y="113.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.repository.IPersonDbRepository">
-      <point x="164.66666666666674" y="-169.5" />
-      <point x="1081.3496323529412" y="1460.0" />
-      <point x="1398.2218545751634" y="1460.0" />
-      <point x="-59.799999999999955" y="113.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.controller.FrontpageController" target="com.memorynotfound.spring.security.repository.IGroupDbRepository">
-      <point x="109.5" y="-202.0" />
-      <point x="1860.2218545751634" y="1500.0" />
-      <point x="1889.7718545751636" y="1500.0" />
-      <point x="-42.5" y="179.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.controller.FrontpageController" target="com.memorynotfound.spring.security.model.Person">
-      <point x="-36.5" y="-202.0" />
-      <point x="1714.2218545751634" y="1490.0" />
-      <point x="1712.7218545751634" y="1490.0" />
-      <point x="1712.7218545751634" y="991.0" />
-      <point x="1684.0218545751636" y="991.0" />
-      <point x="60.500000000000114" y="455.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.model.Idea">
-      <point x="-164.66666666666674" y="-169.5" />
-      <point x="752.0162990196078" y="1440.0" />
-      <point x="761.7077906162465" y="1440.0" />
-      <point x="761.7077906162465" y="941.0" />
-      <point x="396.55439425770317" y="941.0" />
-      <point x="76.57142857142856" y="213.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.controller.GroupController" target="com.memorynotfound.spring.security.repository.IPersonDbRepository">
-      <point x="-116.80000000000001" y="-125.0" />
-      <point x="1945.9218545751635" y="1460.0" />
-      <point x="1577.6218545751635" y="1460.0" />
-      <point x="119.59999999999991" y="113.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.repository.IIdeaDbRepository">
-      <point x="-219.55555555555566" y="-169.5" />
-      <point x="697.1274101307189" y="1430.0" />
-      <point x="513.8666666666668" y="1430.0" />
-      <point x="99.66666666666674" y="102.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.email.Email" target="com.memorynotfound.spring.security.model.Idea">
-      <point x="-84.25" y="-92.5" />
-      <point x="1035.7718545751634" y="931.0" />
-      <point x="434.8401085434175" y="931.0" />
-      <point x="114.85714285714283" y="213.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.repository.IdeaDbRepository" target="com.memorynotfound.spring.security.repository.IIdeaDbRepository">
-      <point x="99.66666666666674" y="-125.0" />
-      <point x="249.16666666666674" y="1500.0" />
-      <point x="314.5333333333333" y="1500.0" />
-      <point x="-99.66666666666674" y="102.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.email.Email">
-      <point x="54.888888888888914" y="-169.5" />
-      <point x="971.5718545751635" y="1440.0" />
-      <point x="993.6468545751634" y="1440.0" />
-      <point x="-126.375" y="92.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.model.Person">
-      <point x="-54.888888888888914" y="-169.5" />
-      <point x="861.7940767973856" y="1430.0" />
-      <point x="783.7077906162465" y="1430.0" />
-      <point x="783.7077906162465" y="971.0" />
-      <point x="1482.3551879084966" y="971.0" />
-      <point x="-141.16666666666666" y="455.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.controller.IdeaController" target="com.memorynotfound.spring.security.model.Person">
-      <point x="58.39999999999998" y="-136.0" />
-      <point x="523.4" y="1440.0" />
-      <point x="662.6118872549018" y="1440.0" />
-      <point x="662.6118872549018" y="951.0" />
-      <point x="1401.6885212418301" y="951.0" />
-      <point x="-221.83333333333334" y="455.5" />
-    </edge>
-    <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.repository.IGroupDbRepository">
-      <point x="219.55555555555566" y="-169.5" />
-      <point x="1136.2385212418303" y="1500.0" />
-      <point x="1804.7718545751636" y="1500.0" />
+      <point x="136.0" y="-213.0" />
+      <point x="306.0" y="1017.0" />
+      <point x="508.95000000000005" y="1017.0" />
       <point x="-127.5" y="179.5" />
     </edge>
+    <edge source="com.memorynotfound.spring.security.controller.GroupController" target="com.memorynotfound.spring.security.repository.IGroupDbRepository">
+      <point x="58.39999999999998" y="-125.0" />
+      <point x="564.4" y="1017.0" />
+      <point x="593.95" y="1017.0" />
+      <point x="-42.5" y="179.5" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.repository.PersonDbRepository" target="com.memorynotfound.spring.security.repository.IPersonDbRepository">
+      <point x="-119.60000000000014" y="-203.0" />
+      <point x="1050.3374999999999" y="1017.0" />
+      <point x="1016.0" y="1017.0" />
+      <point x="0.0" y="114.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.controller.IdeaController" target="com.memorynotfound.spring.security.repository.IPersonDbRepository">
+      <point x="-116.79999999999995" y="-136.0" />
+      <point x="1882.6375" y="967.0" />
+      <point x="1135.6" y="967.0" />
+      <point x="119.59999999999991" y="114.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.repository.IPersonDbRepository">
+      <point x="-164.66666666666674" y="-169.5" />
+      <point x="1421.7708333333333" y="987.0" />
+      <point x="1075.8" y="987.0" />
+      <point x="59.799999999999955" y="114.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.controller.FrontpageController" target="com.memorynotfound.spring.security.repository.IGroupDbRepository">
+      <point x="-109.5" y="-202.0" />
+      <point x="708.5" y="1007.0" />
+      <point x="678.95" y="1007.0" />
+      <point x="42.5" y="179.5" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.controller.FrontpageController" target="com.memorynotfound.spring.security.model.Person">
+      <point x="36.5" y="-202.0" />
+      <point x="854.5" y="1007.0" />
+      <point x="856.0" y="1007.0" />
+      <point x="856.0" y="548.0" />
+      <point x="1035.4999999999998" y="548.0" />
+      <point x="-60.5" y="214.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.controller.GroupController" target="com.memorynotfound.spring.security.repository.IPersonDbRepository">
+      <point x="116.79999999999995" y="-125.0" />
+      <point x="622.8" y="1017.0" />
+      <point x="896.3999999999999" y="1017.0" />
+      <point x="-119.60000000000002" y="114.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.model.Idea">
+      <point x="164.66666666666669" y="-169.5" />
+      <point x="1751.1041666666667" y="1017.0" />
+      <point x="1735.3516865079364" y="1017.0" />
+      <point x="1735.3516865079364" y="548.0" />
+      <point x="1957.5660714285718" y="548.0" />
+      <point x="-76.57142857142844" y="103.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.email.Email" target="com.memorynotfound.spring.security.model.Idea">
+      <point x="84.25" y="-92.5" />
+      <point x="1467.348611111111" y="538.0" />
+      <point x="1919.2803571428574" y="538.0" />
+      <point x="-114.85714285714289" y="103.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.repository.IIdeaDbRepository">
+      <point x="219.55555555555566" y="-169.5" />
+      <point x="1805.9930555555557" y="1017.0" />
+      <point x="2010.4523284313723" y="1017.0" />
+      <point x="-99.66666666666674" y="103.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.repository.IdeaDbRepository" target="com.memorynotfound.spring.security.repository.IIdeaDbRepository">
+      <point x="-99.66666666666652" y="-125.5" />
+      <point x="2215.2708333333335" y="1007.0" />
+      <point x="2209.7856617647058" y="1007.0" />
+      <point x="99.66666666666674" y="103.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.email.Email">
+      <point x="-109.77777777777783" y="-169.5" />
+      <point x="1476.6597222222222" y="977.0" />
+      <point x="1425.223611111111" y="977.0" />
+      <point x="42.125" y="92.5" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.model.Person">
+      <point x="54.888888888888914" y="-169.5" />
+      <point x="1641.326388888889" y="1007.0" />
+      <point x="1713.3516865079364" y="1007.0" />
+      <point x="1713.3516865079364" y="468.0" />
+      <point x="1237.1666666666667" y="468.0" />
+      <point x="141.16666666666697" y="214.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.controller.IdeaController" target="com.memorynotfound.spring.security.model.Person">
+      <point x="-58.40000000000009" y="-136.0" />
+      <point x="1941.0375" y="957.0" />
+      <point x="1863.1375" y="957.0" />
+      <point x="1863.1375" y="448.0" />
+      <point x="1317.8333333333333" y="448.0" />
+      <point x="221.83333333333348" y="214.0" />
+    </edge>
     <edge source="com.memorynotfound.spring.security.repository.IdeaDbRepository" target="com.memorynotfound.spring.security.model.Idea">
-      <point x="-99.66666666666674" y="-125.0" />
-      <point x="49.83333333333326" y="1500.0" />
-      <point x="104.67855392156844" y="1500.0" />
-      <point x="104.67855392156844" y="991.0" />
-      <point x="205.12582282913172" y="991.0" />
-      <point x="-114.85714285714289" y="213.5" />
+      <point x="0.0" y="-125.5" />
+      <point x="2314.9375" y="1017.0" />
+      <point x="2359.2708333333335" y="1017.0" />
+      <point x="2359.2708333333335" y="538.0" />
+      <point x="2110.7089285714287" y="538.0" />
+      <point x="76.57142857142844" y="103.0" />
+    </edge>
+    <edge source="com.memorynotfound.spring.security.controller.DeveloperController" target="com.memorynotfound.spring.security.repository.IGroupDbRepository">
+      <point x="-219.55555555555566" y="-169.5" />
+      <point x="1366.8819444444443" y="997.0" />
+      <point x="763.95" y="997.0" />
+      <point x="127.5" y="179.5" />
     </edge>
     <edge source="com.memorynotfound.spring.security.repository.IGroupDbRepository" target="com.memorynotfound.spring.security.model.Group">
-      <point x="85.0" y="-179.5" />
-      <point x="2017.2718545751636" y="1021.0" />
-      <point x="2132.2075688608775" y="1021.0" />
-      <point x="-28.71428571428578" y="191.5" />
+      <point x="-85.0" y="-179.5" />
+      <point x="551.45" y="498.0" />
+      <point x="436.5142857142856" y="498.0" />
+      <point x="28.714285714285666" y="125.5" />
     </edge>
     <edge source="com.memorynotfound.spring.security.repository.PersonDbRepository" target="com.memorynotfound.spring.security.model.Person">
-      <point x="59.799999999999955" y="-191.5" />
-      <point x="1455.3843545751633" y="1480.0" />
-      <point x="1654.92862394958" y="1480.0" />
-      <point x="1654.92862394958" y="991.0" />
-      <point x="1603.3551879084966" y="991.0" />
-      <point x="-20.16666666666663" y="455.5" />
+      <point x="0.0" y="-203.0" />
+      <point x="1169.9375" y="1017.0" />
+      <point x="1187.0" y="1017.0" />
+      <point x="1187.0" y="548.0" />
+      <point x="1156.4999999999998" y="548.0" />
+      <point x="60.5" y="214.0" />
     </edge>
     <edge source="com.memorynotfound.spring.security.controller.GroupController" target="com.memorynotfound.spring.security.model.Group">
-      <point x="116.79999999999995" y="-125.0" />
-      <point x="2179.5218545751636" y="1500.0" />
-      <point x="2238.396626984127" y="1500.0" />
-      <point x="2238.396626984127" y="1011.0" />
-      <point x="2189.636140289449" y="1011.0" />
-      <point x="28.714285714285666" y="191.5" />
+      <point x="-58.39999999999998" y="-125.0" />
+      <point x="447.6" y="997.0" />
+      <point x="355.5516164799253" y="997.0" />
+      <point x="355.5516164799253" y="498.0" />
+      <point x="407.79999999999995" y="498.0" />
+      <point x="0.0" y="125.5" />
     </edge>
     <edge source="com.memorynotfound.spring.security.config" target="com.memorynotfound.spring.security.web">
       <point x="0.0" y="-14.5" />
       <point x="0.0" y="14.5" />
     </edge>
     <edge source="com.memorynotfound.spring.security.email.Email" target="com.memorynotfound.spring.security.model.Person">
-      <point x="84.25" y="-92.5" />
-      <point x="1204.2718545751634" y="981.0" />
-      <point x="1522.6885212418301" y="981.0" />
-      <point x="-100.83333333333331" y="455.5" />
+      <point x="-84.25" y="-92.5" />
+      <point x="1298.848611111111" y="558.0" />
+      <point x="1196.8333333333333" y="558.0" />
+      <point x="100.83333333333348" y="214.0" />
     </edge>
     <edge source="com.memorynotfound.spring.security.repository.PersonDbRepository" target="com.memorynotfound.spring.security.email.Email">
-      <point x="-119.60000000000002" y="-191.5" />
-      <point x="1275.9843545751635" y="1440.0" />
-      <point x="1162.1468545751634" y="1440.0" />
-      <point x="42.125" y="92.5" />
+      <point x="59.799999999999955" y="-203.0" />
+      <point x="1229.7375" y="1017.0" />
+      <point x="1256.723611111111" y="1017.0" />
+      <point x="-126.375" y="92.5" />
     </edge>
     <edge source="com.memorynotfound.spring.security.controller.IdeaController" target="com.memorynotfound.spring.security.repository.IIdeaDbRepository">
-      <point x="0.0" y="-136.0" />
-      <point x="465.0" y="1500.0" />
-      <point x="414.20000000000005" y="1500.0" />
-      <point x="0.0" y="102.5" />
+      <point x="58.40000000000009" y="-136.0" />
+      <point x="2057.8375" y="1017.0" />
+      <point x="2110.1189950980392" y="1017.0" />
+      <point x="0.0" y="103.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.2732420953279849" x="1291.0" y="1049.5" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="0.2732420953279849" x="1285.0" y="550.0" />
+  <SelectedNodes>
+    <node>com.memorynotfound.spring.security.model.Person</node>
+  </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
-    <Category>Constructors</Category>
-    <Category>Methods</Category>
     <Category>Inner Classes</Category>
+    <Category>Constructors</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>

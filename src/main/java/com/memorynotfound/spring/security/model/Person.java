@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 /**
  * @author Mikkel
+ * @author Ludvig
  */
 public class Person {
     private int personId;

@@ -36,6 +36,10 @@ public class PersonDbRepository implements IPersonDbRepository {
     public PersonDbRepository() throws MessagingException {
     }
 
+    /**
+     * Vi gør brug af denne metode i sammenhæng med createPerson, da city og zipCode ligger
+     * i en separat tabel.
+     */
     private void insertIntoCity(int zipCode, String city){
         String sql = "INSERT IGNORE INTO city(zip_code, city)"+
                 "VALUES(?,?)";
@@ -46,6 +50,10 @@ public class PersonDbRepository implements IPersonDbRepository {
         });
     }
 
+    /**
+     * Her insender vi et statement til vores database for at få oprettet en bruger i vores system.
+     * Vi gør brug af preparedstatements for at gøre vores database mere sikker.
+    */
     @Override
     public void createPerson(Person person) {
         int roleId = getRoleId(person.getRole());
@@ -185,11 +193,19 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     }
 
+    /**
+     *Her gør  vi brug af person_id fra databasen, til at finde og slette brugeren vha. et statement
+     */
     @Override
     public void deletePerson(int id) {
         jdbc.update("DELETE FROM Person WHERE person_id = ?", id);
     }
 
+    /**
+     *Her henter vi alle de brugere i vores system, der har role_id = 1, altså alle developers.
+     * De bliver alle sammen tilføjet til en arraylist så vi kan putte det i en tabel på vores side.
+     * Vi gør brug af et inner join for også at kunne vise zip_code på siden.
+     */
     @Override
     public List<Person> getAllPersons() {
 
@@ -209,6 +225,11 @@ public class PersonDbRepository implements IPersonDbRepository {
         return person;
     }
 
+    /**
+     *Vi gør brug af denne metode for at modtage data om en enkelt person, i dette tilfælde first_name, last_name, email og
+     * city.
+     * Den bliver især brugt nå vi skal vise dataen for brugeren på hjemmesiden.
+     */
     @Override
     public Person getPerson(int id) {
         String sql = "SELECT * FROM idebanken.Person INNER JOIN city ON city.zip_code = Person.zip_code WHERE Person.person_id=?";
