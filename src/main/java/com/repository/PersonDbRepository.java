@@ -242,6 +242,9 @@ public class PersonDbRepository implements IPersonDbRepository {
         return null;
     }
 
+    /**
+     * Returnerer et {@link Person} objekt ud fra en e-mail adresse.
+     */
     @Override
     public Person getPerson(String email) {
         String sql = "SELECT * FROM idebanken.Person INNER JOIN city ON city.zip_code = Person.zip_code WHERE Person.email=?";
@@ -313,6 +316,9 @@ public class PersonDbRepository implements IPersonDbRepository {
         return 0;
     }
 
+    /**
+     * Returnerer true, hvis e-mailen er ledig, og returnerer false, hvis en bruger med e-mailen allerede eksisterer.
+     */
     @Override
     public boolean checkEmail(String email) {
         String sql = "SELECT email FROM idebanken.Person";
@@ -329,6 +335,9 @@ public class PersonDbRepository implements IPersonDbRepository {
         }
     }
 
+    /**
+     * Returnerer et id p&aring; en role i databasen, ud fra en String.
+     */
     private int getRoleId(String role){
         int roleId = 0;
 

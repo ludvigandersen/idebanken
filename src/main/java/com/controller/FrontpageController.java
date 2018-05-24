@@ -26,26 +26,42 @@ public class FrontpageController {
     @Autowired
     IGroupDbRepository iGroupDbRepository;
 
+    /**
+     * Her henvises til forsiden for hele vores site.
+     */
     @GetMapping("/")
     public String root() {
         return "index";
     }
 
+    /**
+     * Denne metode viser login siden.
+     */
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
+    /**
+     * Denne metode bruger vi til at vise acess-denied siden, n&aring;r man vil se noget man ikke har rettigheder til p&aring; siden.
+     */
     @GetMapping("/access-denied")
     public String accessDenied() {
         return "/error/access-denied";
     }
 
+    /**
+     * Henviser til siden create-user, n&aring;r en person p&aring; siden vil oprette en ny bruger.
+     */
     @GetMapping("/create-user")
     public String createUser(){
         return "user/create-user";
     }
 
+    /**
+     * Metoden bliver brugt n&aring;r man vil oprette en ny bruger og har trykket opret,
+     * men at en anden bruger allerede har brugt den e-mail adresse man har indtastet.
+     */
     @GetMapping("/create-user-email")
     public String createUser(Model model){
         model.addAttribute("email", "email");
@@ -70,24 +86,33 @@ public class FrontpageController {
         }
     }
 
+    /**
+     * Bruges til at bekr&aelig;fte at man har oprettet en ny bruger.
+     */
     @GetMapping("user/confirm-created-user")
     public String confirmCreatedUser(){
         return "user/confirm-created-user";
     }
 
+    /**
+     * Vi bruger denne metode til at vise kontakt siden, alts&aring; hvordan folk kan f&aring; fat p&aring; os der st&aring;r bag siden.
+     */
     @GetMapping("/contact")
     public String contact(){
         return "contact";
     }
 
+    /**
+     * Viser siden about, som beskriver, hvem vi er, os der st&aring;r bag siden.
+     */
     @GetMapping("/about")
     public String about(){
         return "about";
     }
 
     /**
-     * I denne metode tager vi data fra alle vores developers så vi kan vise dem for vores brugere
-     * på /all-developers på vores hjemmside.
+     * I denne metode tager vi data fra alle vores developers s&aring; vi kan vise dem for vores brugere
+     * p&aring; /all-developers p&aring; vores hjemmside.
      * */
     @GetMapping("/all-developers")
     public String readAllDevelopers(Model model){
@@ -95,6 +120,9 @@ public class FrontpageController {
             return "all-developers";
     }
 
+    /**
+     * Metoden bliver brugt n&aring;r man vil slette sin bruger.
+     */
     @GetMapping("/delete-user")
     public String deleteUser(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -104,8 +132,8 @@ public class FrontpageController {
     }
 
     /**
-     * Denne metode ligger til rådighed for brugeren, når de &oslash;nsker at slette deres profil.
-     * Den kan tilgås for dem på "min side"
+     * Denne metode ligger til r&aring;dighed for brugeren, n&aring;r de &oslash;nsker at slette deres profil.
+     * Den kan tilg&aring;s for dem p&aring; "min side"
      */
     @PostMapping("/delete-user-post")
     public String deleteUser(@ModelAttribute Person person){
@@ -113,23 +141,12 @@ public class FrontpageController {
         return "redirect:/confirm-delete-user";
     }
 
+    /**
+     * Bekr&aelig;ftelse af at man har slettet sin bruger.
+     */
     @GetMapping("/confirm-delete-user")
     public String confirmDeleteUser(){
 
         return "user/confirm-delete-user";
-    }
-
-    @GetMapping("/edit-user")
-    public String editUser(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Person person = iPersonDbRepository.getPerson(auth.getName());
-        model.addAttribute(person);
-        return "user/edit-user";
-    }
-
-    @PostMapping("/edit-user-post")
-    public String editUser(){
-
-        return "user/edit-user";
     }
 }

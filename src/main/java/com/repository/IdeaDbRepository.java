@@ -130,6 +130,10 @@ public class IdeaDbRepository implements IIdeaDbRepository{
         return null;
     }
 
+    /**
+     * Returnerer en liste med id&eacute;er som en liste med gruppe id´er er tilknyttet til.
+     * Bruges til at finde id&eacute;er, hvor grupper er godkendte til id&eacute;erne.
+     */
     @Override
     public List<Idea> getAssignedIdeas(List<Integer> groups) {
         List<Idea> ideas = new ArrayList<>();
@@ -162,6 +166,9 @@ public class IdeaDbRepository implements IIdeaDbRepository{
         return ideas;
     }
 
+    /**
+     * Returnerer en liste med id&eacute;er, som grupperne, i listen med gruppe id´er, har ans&oslash;gt.
+     */
     @Override
     public List<Idea> getAppliedIdeas(List<Integer> groups) {
         List<Idea> ideas = new ArrayList<>();

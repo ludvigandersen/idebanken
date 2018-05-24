@@ -129,13 +129,8 @@ public class IdeaController {
     }
 
     /**
-<<<<<<< HEAD:src/main/java/com/memorynotfound/spring/security/controller/IdeaController.java
-     * Denne metode bruger vi til at slette en idé, det gør vi ved at hente ideaId fra html'en og
-     * bruger den i deleteIdea metoden.
-=======
      * Denne metode bruger vi til at slette en id&eacute;, det g&oslash;r vi ved at hente ideaId fra html'en og
-     * bruger den i deleteIdea metoden .
->>>>>>> 4498c3ec96fd3cb802759f646a7d58029a208bd6:src/main/java/com/controller/IdeaController.java
+     * bruger den i deleteIdea metoden.
      */
     @PostMapping("/delete-idea-post")
     public String deleteIdea(

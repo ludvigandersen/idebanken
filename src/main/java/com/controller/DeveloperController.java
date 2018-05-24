@@ -42,6 +42,9 @@ public class DeveloperController {
     public DeveloperController() throws MessagingException {
     }
 
+    /**
+     * Metoden bruger vi til at vise forsiden n&aring;r en bruger er logget ind, samt at vise de id&eacute;er som udvikleren har ans&oslash;gt.
+     */
     @GetMapping("/user")
     public String userIndex(Model model) {
 
@@ -109,11 +112,11 @@ public class DeveloperController {
     }
 
     /**
-     * Denne metode bruger vi når en Person ønsker at læse mere om en idé.
+     * Denne metode bruger vi n&aring;r en Person &oslash;nsker at l&aelig;se mere om en id&eacute;.
      * Vi sender t Person objekt og en rating med, som bliver brugt i dashboardet.
      *
-     * Vi sender også en liste med idéid´er, grupper og den idé personen ønsker at se, med over i HTML filen.
-     * Listen med id´er bliver brugt til at finde ud af om brugeren allerede har ansøgt idéen.
+     * Vi sender ogs&aring; en liste med id&eacute;id´er, grupper og den id&eacute; personen &oslash;nsker at se, med over i HTML filen.
+     * Listen med id´er bliver brugt til at finde ud af om brugeren allerede har ans&oslash;gt id&eacute;en.
      */
     @GetMapping("/user/idea")
     public String userIdea(@RequestParam("id") int id, Model model){
@@ -137,7 +140,12 @@ public class DeveloperController {
         return "user/idea-user";
     }
 
-    
+    /**
+     * Metoden her bliver kaldt n&aring;r en udvikler vil ans&oslash;ge en id&eacute;.
+     * Udvikleren har mulighed for at skrive en besked og v&aelig;lge hvilken gruppe han vil ans&oslash;ge id&eacute;en med.
+     * Her bliver metoden {@link com.repository.GroupDbRepository#assignGroupToIdea(int, int)} kaldt.
+     * {@link Email#emailApplyToIdea(Person, String, String, Idea)} metoden bliver ogs&aring; kaldt og udvikleren har nu ans&oslash;gt id&eacute;en.
+     */
     @PostMapping("/aply-for-idea-post")
     public String aplyForIdea(@RequestParam("ideaId") int ideaId,
                               @RequestParam("personEmail") String developerEmail,
@@ -149,11 +157,19 @@ public class DeveloperController {
         return "redirect:/user/confirm-apply";
     }
 
+    /**
+     * Metoden bliver brugt til at vise siden confirm-apply.html til at bekr&aelig;fte at udvikleren har ans&oslash;gt en id&eacute;
+     */
     @GetMapping("user/confirm-apply")
     public String confirmApply(){
         return "user/confirm-apply";
     }
 
+    /**
+     * Denne metode sender et Person objekt, som er den person som er logget ind, samt en rating v&aelig;rdi ind i HTML filen via. thymeleaf.
+     * Vi sender ogs&aring; en liste med id&eacute;er afsted, som skal bruges til at vise alle id&eacute;er, som er oprettet p&aring; siden.
+     * Til sidst returnerer vi strengen "user/find-ideas" som g&oslash;r at HTML filen find.ideas.html bliver vist.
+     */
     @GetMapping("user/find-ideas")
     public String findIdea(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -167,6 +183,9 @@ public class DeveloperController {
         return "user/find-ideas";
     }
 
+    /**
+     * Denne metode bliver brugt n&aring;r en udvikler &oslash;nsker at se hvilke grupper, han er med i.
+     */
     @GetMapping("user/group")
     public String groups(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -183,6 +202,9 @@ public class DeveloperController {
         return "user/group";
     }
 
+    /**
+     * Her bliver metoden brugt n&aring;r en udvikler &oslash;nsker at se sin profil og evt. &aelig;ndre fx telefon nummer.
+     */
     @GetMapping("user/my-profile")
     public String myProfile(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

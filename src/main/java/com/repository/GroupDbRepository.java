@@ -76,6 +76,9 @@ public class GroupDbRepository implements IGroupDbRepository {
         });
     }
 
+    /**
+     * Metoden bliver brugt til at inds&aelig;tte en gruppe i databasen, som kun m&aring; have 1 Person tilknyttet.
+     */
     @Override
     public void createGroup(Group group, boolean locked) {
         String sql = "INSERT INTO idebanken.Group (group_id, group_name, locked)"+
@@ -141,6 +144,9 @@ public class GroupDbRepository implements IGroupDbRepository {
         return null;
     }
 
+    /**
+     * Bruges til at lave en liste med flere gruppe id´er som en person er tilknyttet.
+     */
     @Override
     public List<Integer> getGroupIdsWithPerson(int personId) {
         List<Integer> groupIds = new ArrayList<>();
@@ -153,6 +159,9 @@ public class GroupDbRepository implements IGroupDbRepository {
         return groupIds;
     }
 
+    /**
+     * Bruges til at hente en liste med id&eacute; id´er, hvor grupper i listen med gruppe id´er er tilknyttet.
+     */
     @Override
     public List<Integer> getIdeaIdsWithGroup(List<Integer> groupId) {
         List<Integer> groupIds = new ArrayList<>();
@@ -195,7 +204,9 @@ public class GroupDbRepository implements IGroupDbRepository {
         return groups;
     }
 
-
+    /**
+     * Returnerer en liste med gruppe id´er som en person er tilknyttet.
+     */
     @Override
     public List<Group> getGroupsWithPersonIn(int personId) {
         List<Group> groups = new ArrayList<>();
@@ -213,6 +224,9 @@ public class GroupDbRepository implements IGroupDbRepository {
         return groups;
     }
 
+    /**
+     * Bruges til at tilknytte en gruppe til en id&eacute;.
+     */
     @Override
     public void assignGroupToIdea(int ideaId, int groupId) {
         if (!checkIfAlreadyAssigned(ideaId, groupId)) {
@@ -229,6 +243,9 @@ public class GroupDbRepository implements IGroupDbRepository {
         }
     }
 
+    /**
+     * Tilf&oslash;jer en person til en gruppe.
+     */
     @Override
     public void assignPersonToGroup(int personId, int groupId) {
         String sql = "INSERT INTO DeveloperGroup (developer_group_id, person_id, group_id)"+
@@ -240,6 +257,9 @@ public class GroupDbRepository implements IGroupDbRepository {
         });
     }
 
+    /**
+     * Hent gruppe id ud fra en String.
+     */
     @Override
     public int getGroupIdWithName(String email) {
         int groupId = 0;
@@ -252,6 +272,9 @@ public class GroupDbRepository implements IGroupDbRepository {
         return groupId;
     }
 
+    /**
+     * Bruges til at checke om en gruppe allerede er tilknyttet en id&eacute;.
+     */
     private boolean checkIfAlreadyAssigned(int ideaId, int groupId){
         List<Integer> assigned = new ArrayList<>();
         String sql = "SELECT group_idea_id FROM GroupIdea WHERE idea_id = ? AND group_id = ?";
