@@ -29,6 +29,9 @@ public class GroupController {
     @Autowired
     IPersonDbRepository iPersonDbRepository;
 
+    /**
+     * Her mapper vi til opret gruppe samtidigt med at vi henter brugeres id.
+     */
     @GetMapping ("/create-group")
     public String createGroup (Model model){
 
@@ -37,6 +40,10 @@ public class GroupController {
         return "user/create-group";
     }
 
+    /**
+     * Her oprettes gruppen. Vi bruger den tidligere hentet id og gruppens navn
+     * til at indsætte brugeren i gruppen.
+     */
     @PostMapping("/create-group-post")
     public String createGroup (@ModelAttribute("name") String groupName,
                                @ModelAttribute("personName") String personName){
@@ -84,6 +91,9 @@ public class GroupController {
         return "redirect:/user/confirm-apply";
     }
 
+    /**
+     * Her mapper vi til tilføj gruppe siden og henter gruppe id.
+     */
     @GetMapping("/add-group-member")
     public String addGroupMember(@RequestParam("id") int id, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -98,6 +108,9 @@ public class GroupController {
         return "user/add-group-member";
     }
 
+    /**
+     * Her tilføjer vi udvikler til gruppe ved at bruge den tidligere hentede gruppe id og henter person id med e-mail.
+     */
     @PostMapping("/add-group-member-post")
     public String addGroupMember(@ModelAttribute("groupId") int groupId,
                                  @ModelAttribute("person_email") String personEmail){
@@ -110,6 +123,9 @@ public class GroupController {
         return "redirect:/edit-group?id="+groupId;
     }
 
+    /**
+     * Her mapper vi til gruppe detaljer hvor vi viser gruppens indhold ved brug af group id.
+     */
     @GetMapping("/group-details")
     public String details (@RequestParam("id") int id, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
