@@ -1,5 +1,6 @@
 package com.memorynotfound.spring.security.web;
 
+import com.memorynotfound.spring.security.controller.FrontpageController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
@@ -13,11 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Denne klasse bliver brugt til at vise HTML siden access-denied.html når man ikke er logget ind
+ * og requester en side som man skal vaelig;re logget ind med en bestemt user role for at se.
+ * @author Mikkel
+ */
+
 @Component
 public class LoggingAccessDeniedHandler implements AccessDeniedHandler {
 
     private static Logger log = LoggerFactory.getLogger(LoggingAccessDeniedHandler.class);
 
+    /**
+     * Denne metode tager sig af at redirecte brugeren til metoden {@link FrontpageController#accessDenied()}
+     * hvis brugeren ikke er autoriseret til at se den efterspurgte side.
+     */
     @Override
     public void handle(HttpServletRequest request,
                        HttpServletResponse response,

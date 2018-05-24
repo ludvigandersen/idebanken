@@ -2,6 +2,9 @@ package com.memorynotfound.spring.security.model;
 
 import java.time.LocalDate;
 
+/**
+ * @author Christoffer
+ */
 public class Idea {
     private int ideaId;
     private String ideaName;

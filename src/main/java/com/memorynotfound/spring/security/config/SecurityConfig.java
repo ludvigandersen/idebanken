@@ -15,12 +15,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.sql.DataSource;
 
+/**
+ * @author Mikkel
+ */
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private LoggingAccessDeniedHandler accessDeniedHandler;
 
+    /**
+     * Denne metode ignorerer de routes, som er defineret.
+     * Det er vi nødt til at gøre for at kunne bruge HTTP POST requests.
+     */
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/create-user-post");
@@ -37,6 +44,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/delete-group-post");
     }
 
+    /**
+     * Her bliver der defineret hvilke routes man kan tilgå uden at være logget ind, når man er logget ind og med
+     * hvilken user role man kan se hvad.
+     *
+     * Log ind og log ud routes bliver også defineret og der bliver sat en access denied handler, til at håndtere,
+     * hvis man ikke har rettigheder til at se den side man ønsker.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -79,9 +93,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("datasource")
     private DataSource dataSource;
 
+    /**
+     * Her sætter vi de brugere der skal have lov til at logge ind, samt hvilken user role de får når de logger ind.
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // password = $2a$10$GkHRhh4AHWS.WHUzRucUIeBoEmowH7qZ2HLVas544VbXFscstpEE6
         auth.jdbcAuthentication().dataSource(dataSource)
                 .authoritiesByUsernameQuery("SELECT email, role FROM Person INNER JOIN PersonRole ON " +
                         "Person.role_id = PersonRole.role_id WHERE email=?")
@@ -90,6 +106,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+    /**
+     * Her sætter vi password encoderen vi har brugt til at hashe de passwords som allerede er i tabellen.
+     * Denne metode bliver brugt til at sammenligne 2 hashede passwords.
+     */
     @Bean
     public PasswordEncoder passEncoder() {
         return new BCryptPasswordEncoder();

@@ -5,6 +5,11 @@ import com.memorynotfound.spring.security.model.Idea;
 import com.memorynotfound.spring.security.model.Person;
 
 import java.util.List;
+/**
+ * Dette er vores interface for GroupDbRepository
+ * @author Nicolai
+ * @author Christoffer
+ */
 
 public interface IGroupDbRepository {
     void createGroup(Group group);

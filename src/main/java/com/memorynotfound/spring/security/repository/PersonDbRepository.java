@@ -1,5 +1,7 @@
 package com.memorynotfound.spring.security.repository;
 
+import com.memorynotfound.spring.security.controller.DeveloperController;
+import com.memorynotfound.spring.security.controller.FrontpageController;
 import com.memorynotfound.spring.security.email.Email;
 import com.memorynotfound.spring.security.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Mikkel
+ * @author Christoffer
+ * @author Ludvig
+ */
 
 @Repository
 public class PersonDbRepository implements IPersonDbRepository {
@@ -30,29 +36,46 @@ public class PersonDbRepository implements IPersonDbRepository {
     public PersonDbRepository() throws MessagingException {
     }
 
+    private void insertIntoCity(int zipCode, String city){
+        String sql = "INSERT IGNORE INTO city(zip_code, city)"+
+                "VALUES(?,?)";
+
+        jdbc.update(sql, preparedStatement -> {
+            preparedStatement.setInt(1, zipCode);
+            preparedStatement.setString(2, city);
+        });
+    }
+
     @Override
     public void createPerson(Person person) {
         int roleId = getRoleId(person.getRole());
         boolean emailNot = false;
 
 
-            String sql = "INSERT INTO Person(person_id, first_name, last_name, email, zip_code, city, password, role_id, email_notifications, date)"+
-                    "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+            String sql = "INSERT INTO Person(person_id, first_name, last_name, email, zip_code, password, role_id, email_notifications, date)"+
+                    "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             jdbc.update(sql, preparedStatement -> {
                 preparedStatement.setString(1, person.getFirstName());
                 preparedStatement.setString(2, person.getLastName());
                 preparedStatement.setString(3, person.getEmail());
                 preparedStatement.setInt(4, person.getZipCode());
-                preparedStatement.setString(5, person.getCity());
-                preparedStatement.setString(6, person.getPassword());
-                preparedStatement.setInt(7, roleId);
-                preparedStatement.setBoolean(8, emailNot);
-                preparedStatement.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
+                preparedStatement.setString(5, person.getPassword());
+                preparedStatement.setInt(6, roleId);
+                preparedStatement.setBoolean(7, emailNot);
+                preparedStatement.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now()));
             });
+
+            insertIntoCity(person.getZipCode(), person.getCity());
         email.emailCreatePerson(person);
     }
 
+    /**
+     * Her modtager vi al den data brugeren har indtastet i form af en Person person og et gammelt password.
+     * Vi tjekker om det gamle password matcher passwordet
+     * indtastet i gammel password baren via. {@link #checkPassword(String, int)}
+     * Vi bruger herefter en UPDATE sql statement til at opdatere idéens data i databasen
+    */
     @Override
     public void updatePersonPassword(Person person, String oldPassword){
 
@@ -66,8 +89,11 @@ public class PersonDbRepository implements IPersonDbRepository {
         }
     }
 
+    /**
+     * Her tjekker vi om det gamle password matcher passwordet ndtastet i gammel password baren
+     */
     private boolean checkPassword(String oldPassword, int personId){
-        String sql = "SELECT * FROM idebanken.Person WHERE person_id = ?";
+        String sql = "SELECT Person.password FROM idebanken.Person WHERE person_id = ?";
         sqlRowSet = jdbc.queryForRowSet(sql,personId);
 
         String password = "";
@@ -87,19 +113,29 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     }
 
+    /**
+     * Her modtager vi al den data brugeren har indtastet i form af en Person person, olfTlf1 og oldTlf2
+     * Som vi bruger i et UPDATE statement og opdatere brugeren i databasen
+     * Før vi kan indsætte tlf nr. er vi nødt til at tjekke om brugeren allerede har et tlf nr.
+     * For at se om det er et UPDATE statement eller et INSERT statement der skal bruges.
+     *
+     * Derefter tjekker om tlf nummerne er ens, da det skaber problemmer hvis de er,
+     * som f.eks. hvis der bliver indtastet noget i tlf1 men ikke tlf2, men de to gamle nr er ens, vil
+     * den stadig ændre dem begge
+     */
     @Override
     public void updatePerson(Person person, String oldTlf1, String oldTlf2) {
         String sql = "UPDATE Person SET  first_name = ?, last_name = ?," +
-                " zip_code = ?, city = ? WHERE person_id = ?";
+                " zip_code = ? WHERE person_id = ?";
 
         jdbc.update(sql, preparedStatement -> {
             preparedStatement.setString(1, person.getFirstName());
             preparedStatement.setString(2, person.getLastName());
             preparedStatement.setInt(3, person.getZipCode());
-            preparedStatement.setString(4, person.getCity());
-            preparedStatement.setInt(5, person.getPersonId());
+            preparedStatement.setInt(4, person.getPersonId());
 
         });
+        insertIntoCity(person.getZipCode(), person.getCity());
 
         if(!person.getTlf1().equalsIgnoreCase("")){
             if(!person.getTlf1().equalsIgnoreCase(oldTlf2)) {
@@ -158,7 +194,7 @@ public class PersonDbRepository implements IPersonDbRepository {
     public List<Person> getAllPersons() {
 
         List<Person> person = new ArrayList<>();
-        String sql = "SELECT first_name, last_name, email, city FROM idebanken.Person WHERE role_id = 1";
+        String sql = "SELECT * FROM idebanken.Person INNER JOIN city ON city.zip_code = Person.zip_code WHERE Person.role_id = 1";
         sqlRowSet = jdbc.queryForRowSet(sql);
 
         while (sqlRowSet.next()){
@@ -175,7 +211,7 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     @Override
     public Person getPerson(int id) {
-        String sql = "SELECT * FROM idebanken.Person WHERE person_id=?";
+        String sql = "SELECT * FROM idebanken.Person INNER JOIN city ON city.zip_code = Person.zip_code WHERE Person.person_id=?";
         sqlRowSet = jdbc.queryForRowSet(sql, id);
 
         while (sqlRowSet.next()){
@@ -191,7 +227,7 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     @Override
     public Person getPerson(String email) {
-        String sql = "SELECT * FROM idebanken.Person WHERE email=?";
+        String sql = "SELECT * FROM idebanken.Person INNER JOIN city ON city.zip_code = Person.zip_code WHERE Person.email=?";
         sqlRowSet = jdbc.queryForRowSet(sql, email);
         Person person = new Person();
 
@@ -231,6 +267,9 @@ public class PersonDbRepository implements IPersonDbRepository {
         return person;
     }
 
+    /**
+     * Her finder vi brugerens tlf nummere ud fra personens personId, og indsætter dem i en liste
+     */
     private List<String> findPhoneNumbers(int id){
         List<String> tlf = new ArrayList<>();
         String sql = "SELECT tlf FROM idebanken.PhoneNumbers WHERE person_id=?";
@@ -243,6 +282,9 @@ public class PersonDbRepository implements IPersonDbRepository {
 
     }
 
+    /**
+     * Her finder vi brugerens personId ud fra E-mailen
+     */
     @Override
     public int getPersonId(String email) {
         String sql = "SELECT person_id FROM idebanken.Person WHERE email=?";

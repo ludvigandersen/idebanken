@@ -21,6 +21,11 @@ import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Mikkel
+ * @author Nicolai
+ * @author Christoffer
+ */
 @Controller
 public class DeveloperController {
 
@@ -40,6 +45,7 @@ public class DeveloperController {
 
     @GetMapping("/user")
     public String userIndex(Model model) {
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Person person = iPersonDbRepository.getPerson(auth.getName());
         model.addAttribute(person);
@@ -54,6 +60,12 @@ public class DeveloperController {
         return "user/index";
     }
 
+    /**
+     * Her er metoden vi bruger til at ændre udvikler og idéperson brugernes data.
+     * For at updatere vores bruger ska vi hente fornavn, efternavn, E-mail, tlf1, tlf2,
+     * oldtlf1, oldtlf2, postnr og by.
+     * via. updatePerson()
+     */
     @PostMapping("/user-update-person")
     public String updatePerson(
         @ModelAttribute("firstName") String firstName,
@@ -75,6 +87,11 @@ public class DeveloperController {
                 return "redirect:/user/confirm-apply";
     }
 
+    /**
+     * Her er metoden vi bruger til at ændre udvikler og idéperson brugernes password.
+     * For at kunne ændre password skal vi hente E-mail, det nye password og det gamle password
+     * fra my-profile.html
+     */
     @PostMapping("/user-update-password")
     public String updatePersonPassword(
             @ModelAttribute("email") String email,

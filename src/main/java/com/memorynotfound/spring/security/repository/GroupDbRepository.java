@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Mikkel
+ * @author Christoffer
+ * @author Nicolai
+ */
 
 @Repository
 public class GroupDbRepository implements IGroupDbRepository{
@@ -19,7 +24,9 @@ public class GroupDbRepository implements IGroupDbRepository{
     JdbcTemplate jdbc;
     SqlRowSet sqlRowSet;
 
-
+    /**
+     * Her opretter vi en gruppe med det indtastet gruppenavn.
+     */
     @Override
     public void createGroup(Group group){
 
@@ -31,11 +38,17 @@ public class GroupDbRepository implements IGroupDbRepository{
         });
     }
 
+    /**
+     * Her modtager vi gruppens groupId, som vi bruger i et DELETE statement for at slette den rigtige.
+     */
     @Override
     public void deleteGroup(int id) {
         jdbc.update("DELETE FROM idebanken.Group WHERE group_id = ?", id);
     }
 
+    /**
+     * Her gør vi brug af groupId og personId for at tilføje udvikler til en gruppe.
+     */
     @Override
     public void addMember(int groupId, int personId){
         String sql = "INSERT INTO idebanken.DeveloperGroup "+
@@ -50,6 +63,10 @@ public class GroupDbRepository implements IGroupDbRepository{
 
     }
 
+    /**
+     * Her kan vi modtager vi et navn og gruppens groupId, som vi bruger i et UPDATE statement for
+     * at opdatere gruppens data.
+     */
     @Override
     public void updateGroup(String name, int id) {
         String sql = "UPDATE idebanken.Group SET group_name = ? WHERE group_id = ?";
@@ -70,6 +87,9 @@ public class GroupDbRepository implements IGroupDbRepository{
         });
     }
 
+    /**
+     * Her henter vi gruppens detaljer og indsætter i en liste ved brug af groupId
+     */
     @Override
     public List<Person> read(int id) {
         List<Person> personList = new ArrayList<>();
@@ -92,6 +112,9 @@ public class GroupDbRepository implements IGroupDbRepository{
         return personList;
     }
 
+    /**
+     * Her modtager vi gruppens navn, som vi derefter kan bruge for at finde gruppens groupId
+     */
     @Override
     public int findGroup(String name){
         String sql = "SELECT Group.group_id" +
@@ -104,6 +127,9 @@ public class GroupDbRepository implements IGroupDbRepository{
         return 0;
     }
 
+    /**
+     * Her modtager vi gruppens groupId, som vi derefter kan bruge for at finde gruppens navn
+     */
     @Override
     public String findGroupName(int id){
         String sql = "SELECT Group.group_name" +
@@ -150,6 +176,9 @@ public class GroupDbRepository implements IGroupDbRepository{
         return groupIds;
     }
 
+    /**
+     * Her henter vi gruppeliste med personId
+     */
     @Override
     public List<Group> getDeveloperGroupsWithPersonId(int personId) {
         List<Group> groups = new ArrayList<>();
@@ -166,6 +195,7 @@ public class GroupDbRepository implements IGroupDbRepository{
 
         return groups;
     }
+
 
     @Override
     public List<Group> getGroupsWithPersonIn(int personId) {
