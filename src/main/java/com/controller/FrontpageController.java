@@ -104,7 +104,7 @@ public class FrontpageController {
     }
 
     /**
-     * Denne metode ligger til rådighed for brugeren, når de ønsker at slette deres profil.
+     * Denne metode ligger til rådighed for brugeren, når de &oslash;nsker at slette deres profil.
      * Den kan tilgås for dem på "min side"
      */
     @PostMapping("/delete-user-post")

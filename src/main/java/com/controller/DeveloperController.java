@@ -108,6 +108,13 @@ public class DeveloperController {
         return "redirect:/user/confirm-apply";
     }
 
+    /**
+     * Denne metode bruger vi når en Person ønsker at læse mere om en idé.
+     * Vi sender t Person objekt og en rating med, som bliver brugt i dashboardet.
+     *
+     * Vi sender også en liste med idéid´er, grupper og den idé personen ønsker at se, med over i HTML filen.
+     * Listen med id´er bliver brugt til at finde ud af om brugeren allerede har ansøgt idéen.
+     */
     @GetMapping("/user/idea")
     public String userIdea(@RequestParam("id") int id, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -130,6 +137,7 @@ public class DeveloperController {
         return "user/idea-user";
     }
 
+    
     @PostMapping("/aply-for-idea-post")
     public String aplyForIdea(@RequestParam("ideaId") int ideaId,
                               @RequestParam("personEmail") String developerEmail,
