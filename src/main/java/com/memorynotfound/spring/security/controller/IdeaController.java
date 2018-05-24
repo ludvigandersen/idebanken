@@ -131,7 +131,7 @@ public class IdeaController {
 
     /**
      * Denne metode bruger vi til at slette en idé, det gør vi ved at hente ideaId fra html'en og
-     * bruger den i deleteIdea metoden .
+     * bruger den i deleteIdea metoden.
      */
     @PostMapping("/delete-idea-post")
     public String deleteIdea(
