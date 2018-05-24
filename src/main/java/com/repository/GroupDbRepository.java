@@ -96,9 +96,10 @@ public class GroupDbRepository implements IGroupDbRepository {
     public List<Person> read(int id) {
         List<Person> personList = new ArrayList<>();
         String sql = "SELECT Group.group_id, Group.group_name, Group.locked, DeveloperGroup.person_id, " +
-                "Person.first_name, Person.last_name, Person.email, Person.city FROM idebanken.Group " +
+                "Person.first_name, Person.last_name, Person.email, city.city FROM idebanken.Group " +
                 "INNER JOIN idebanken.DeveloperGroup ON Group.group_id = DeveloperGroup.group_id " +
-                "INNER JOIN idebanken.Person on DeveloperGroup.person_id = Person.person_id " +
+                "INNER JOIN idebanken.Person ON DeveloperGroup.person_id = Person.person_id " +
+                "INNER JOIN idebanken.city ON Person.zip_code = city.zip_code " +
                 "WHERE Group.group_id = ?" ;
         sqlRowSet = jdbc.queryForRowSet(sql, id);
         while (sqlRowSet.next()){

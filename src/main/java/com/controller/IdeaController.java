@@ -34,7 +34,9 @@ public class IdeaController {
     @GetMapping("/create-idea")
     public String createIdea(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("ideaPersonName",auth.getName());
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute(person);
+        model.addAttribute("ideaPersonName", auth.getName());
         return "idea/create-idea";
     }
 

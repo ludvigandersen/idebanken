@@ -34,8 +34,12 @@ public class GroupController {
      */
     @GetMapping ("/create-group")
     public String createGroup (Model model){
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = iPersonDbRepository.getPerson(auth.getName());
+        model.addAttribute(person);
+        double rate = 3;
+        model.addAttribute("rate", rate);
+
         model.addAttribute("personName",auth.getName());
         return "user/create-group";
     }

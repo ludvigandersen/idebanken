@@ -12,9 +12,9 @@
 <div class="container">
     <div th:replace="fragments/header :: header"></div>
     <div class="scroll_content">
-        <div th:replace="fragments/dashboard :: dashboard"></div>
-        <div class="user-content">
             <h1>Ændre idé</h1>
+            <div th:replace="fragments/dashboard :: dashboard"></div>
+            <div class="user-content">
 
             <form action="/edit-idea-post" method="post">
                 <td><p>Idé navn:</p></td>
