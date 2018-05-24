@@ -1,4 +1,4 @@
-package com.memorynotfound.spring.security.model;
+package com.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

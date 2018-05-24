@@ -1,6 +1,6 @@
-package com.memorynotfound.spring.security.web;
+package com.web;
 
-import com.memorynotfound.spring.security.controller.FrontpageController;
+import com.controller.FrontpageController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;

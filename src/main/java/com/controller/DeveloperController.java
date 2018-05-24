@@ -1,12 +1,12 @@
-package com.memorynotfound.spring.security.controller;
+package com.controller;
 
-import com.memorynotfound.spring.security.email.Email;
-import com.memorynotfound.spring.security.model.Group;
-import com.memorynotfound.spring.security.model.Idea;
-import com.memorynotfound.spring.security.model.Person;
-import com.memorynotfound.spring.security.repository.IGroupDbRepository;
-import com.memorynotfound.spring.security.repository.IIdeaDbRepository;
-import com.memorynotfound.spring.security.repository.IPersonDbRepository;
+import com.email.Email;
+import com.model.Group;
+import com.model.Idea;
+import com.model.Person;
+import com.repository.IGroupDbRepository;
+import com.repository.IIdeaDbRepository;
+import com.repository.IPersonDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

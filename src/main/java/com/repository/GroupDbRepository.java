@@ -1,8 +1,8 @@
-package com.memorynotfound.spring.security.repository;
+package com.repository;
 
-import com.memorynotfound.spring.security.model.Group;
-import com.memorynotfound.spring.security.model.Idea;
-import com.memorynotfound.spring.security.model.Person;
+import com.model.Group;
+import com.model.Person;
+import com.repository.IGroupDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 @Repository
-public class GroupDbRepository implements IGroupDbRepository{
+public class GroupDbRepository implements IGroupDbRepository {
 
     @Autowired
     JdbcTemplate jdbc;

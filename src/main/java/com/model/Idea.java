@@ -1,4 +1,4 @@
-package com.memorynotfound.spring.security.model;
+package com.model;
 
 import java.time.LocalDate;
 

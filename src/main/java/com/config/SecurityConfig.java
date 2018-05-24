@@ -1,6 +1,6 @@
-package com.memorynotfound.spring.security.config;
+package com.config;
 
-import com.memorynotfound.spring.security.web.LoggingAccessDeniedHandler;
+import com.web.LoggingAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Denne metode ignorerer de routes, som er defineret.
-     * Det er vi nødt til at gøre for at kunne bruge HTTP POST requests.
+     * Det er vi n&oslash;dt til at gøre for at kunne bruge HTTP POST requests.
      */
     @Override
     public void configure(WebSecurity web) {

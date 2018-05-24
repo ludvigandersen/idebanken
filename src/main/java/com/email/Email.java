@@ -1,7 +1,6 @@
-package com.memorynotfound.spring.security.email;
-
-import com.memorynotfound.spring.security.model.Idea;
-import com.memorynotfound.spring.security.model.Person;
+package com.email;
+import com.model.Idea;
+import com.model.Person;
 
 import java.util.*;
 import javax.mail.*;

@@ -1,9 +1,7 @@
-package com.memorynotfound.spring.security.repository;
+package com.repository;
 
 
-import com.memorynotfound.spring.security.model.Group;
-import com.memorynotfound.spring.security.model.Idea;
-import com.memorynotfound.spring.security.model.Person;
+import com.model.Idea;
 
 import java.util.List;
 /**

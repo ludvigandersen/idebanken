@@ -1,12 +1,9 @@
-package com.memorynotfound.spring.security.repository;
+package com.repository;
 
-import com.memorynotfound.spring.security.controller.DeveloperController;
-import com.memorynotfound.spring.security.controller.FrontpageController;
-import com.memorynotfound.spring.security.email.Email;
-import com.memorynotfound.spring.security.model.Person;
+import com.email.Email;
+import com.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.mail.MessagingException;
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
