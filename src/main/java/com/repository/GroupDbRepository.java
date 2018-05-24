@@ -2,7 +2,6 @@ package com.repository;
 
 import com.model.Group;
 import com.model.Person;
-import com.repository.IGroupDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -12,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Mikkel
  * @author Christoffer
+ * @author Mikkel
  * @author Nicolai
  */
 
@@ -47,7 +46,7 @@ public class GroupDbRepository implements IGroupDbRepository {
     }
 
     /**
-     * Her gør vi brug af groupId og personId for at tilføje udvikler til en gruppe.
+     * Her g&oslash;r vi brug af groupId og personId for at tilf&oslash;je udvikler til en gruppe.
      */
     @Override
     public void addMember(int groupId, int personId){
@@ -88,7 +87,7 @@ public class GroupDbRepository implements IGroupDbRepository {
     }
 
     /**
-     * Her henter vi gruppens detaljer og indsætter i en liste ved brug af groupId
+     * Her henter vi gruppens detaljer og inds&aelig;tter i en liste ved brug af groupId
      */
     @Override
     public List<Person> read(int id) {

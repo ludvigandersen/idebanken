@@ -11,10 +11,10 @@ import javax.mail.internet.*;
  */
 public class Email {
 
-    // Her skal du ændre email adressen
+    // Her skal du &aelig;ndre email adressen
     final String username = "tryllemikkel@gmail.com";
 
-    // Her skal du ændre passwordet, som passer til ovenstående e-mail adresse
+    // Her skal du &aelig;ndre passwordet, som passer til ovenst&aring;ende e-mail adresse
     final String password = "dcc59vez";
 
     Properties props = new Properties();
@@ -27,7 +27,7 @@ public class Email {
             });
 
     /**
-     * Her i constructoren sætter vi flere smtp parametre, bla. at vores mail host er googles gmail server
+     * Her i constructoren s&aelig;tter vi flere smtp parametre, bla. at vores mail host er googles gmail server
      * som bruger port 587.
      */
     public Email(){
@@ -39,7 +39,7 @@ public class Email {
     }
 
     /**
-     * Denne metode bliver kaldt når der bliver oprettet en ny person på vores side
+     * Denne metode bliver kaldt n&aring;r der bliver oprettet en ny person p&aring; vores side
      * E-mailen bliver sendt til personen der har oprettet en profil.
      */
     public void emailCreatePerson(Person person){
@@ -48,8 +48,8 @@ public class Email {
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(person.getEmail()));
             message.setSubject("Din bruger er oprettet");
-            message.setText("Hej, du har oprettet en bruger på Idébanken. " +
-                    "Du kan logge ind på siden med din email: " + person.getEmail() +
+            message.setText("Hej, du har oprettet en bruger p&aring; Id&eacute;banken. " +
+                    "Du kan logge ind p&aring; siden med din email: " + person.getEmail() +
                     " samt det kodeord du har valgt.");
             Transport.send(message);
 
@@ -60,8 +60,8 @@ public class Email {
     }
 
     /**
-     * Denne metode bliver brugt når en udvikler på siden ansøger en idé.
-     * E-mailen bliver sendt til den person som har oprettet idéen.
+     * Denne metode bliver brugt n&aring;r en udvikler p&aring; siden ans&oslash;ger en id&eacute;.
+     * E-mailen bliver sendt til den person som har oprettet id&eacute;en.
      */
     public void emailApplyToIdea(Person developer, String applyMessage, String ideaEmail, Idea idea){
         try {
@@ -70,9 +70,9 @@ public class Email {
             message.setFrom(new InternetAddress(username));
 
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(ideaEmail));
-            message.setSubject("En udvikler har ansøgt din idé");
-            message.setText("Hej, en udvikler på sitet har ansøgt din idé: " + idea.getIdeaName() +
-                            " login på idebanken for at godkende udvikleren. \n " +
+            message.setSubject("En udvikler har ans&oslash;gt din id&eacute;");
+            message.setText("Hej, en udvikler p&aring; sitet har ans&oslash;gt din id&eacute;: " + idea.getIdeaName() +
+                            " login p&aring; idebanken for at godkende udvikleren. \n " +
                             "Udvikler oplysninger: \n " +
                             "Navn: " + developer.getFirstName() + " " + developer.getLastName() + "\n" +
                             "Email: " + developer.getEmail() + "\n" +

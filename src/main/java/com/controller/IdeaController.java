@@ -29,7 +29,7 @@ public class IdeaController {
     IPersonDbRepository iPersonDbRepository;
 
     /**
-     * Her mapper vi til opret idé siden.
+     * Her mapper vi til opret id&eacute; siden.
      */
     @GetMapping("/create-idea")
     public String createIdea(Model model){
@@ -39,8 +39,8 @@ public class IdeaController {
     }
 
     /**
-     * Her henter vi det data som brugeren har indtastet på opret idé siden, og gennem iIdeaDbRepository,
-     * kalder vi createIdea metoden og tilføjer den nye idé i databasen.
+     * Her henter vi det data som brugeren har indtastet p&aring; opret id&eacute; siden, og gennem iIdeaDbRepository,
+     * kalder vi createIdea metoden og tilf&oslash;jer den nye id&eacute; i databasen.
      * Derefter redirecter den til en kvittering
      */
     @PostMapping("/create-idea-post")
@@ -58,7 +58,7 @@ public class IdeaController {
     }
 
     /**
-     * Her mapper vi til kvitteringen, som brugen får efter en idé er oprettet
+     * Her mapper vi til kvitteringen, som brugen f&aring;r efter en id&eacute; er oprettet
      */
     @GetMapping("idea/confirm-created-idea")
     public String confirmCreatedIdea(){
@@ -74,7 +74,7 @@ public class IdeaController {
     }
 
     /**
-     * Her viser vi idébrugeren en liste over alle de idéer han har oprettet, vi henter hans navn via. auth
+     * Her viser vi id&eacute;brugeren en liste over alle de id&eacute;er han har oprettet, vi henter hans navn via. auth
      * og bruger det til at finde hans PersonId.
      */
     @GetMapping("/idea/my-ideas")
@@ -91,7 +91,7 @@ public class IdeaController {
     }
 
     /**
-     * Her henter vi en liste af alle idéer der er lagt op websiden
+     * Her henter vi en liste af alle id&eacute;er der er lagt op websiden
      */
     @GetMapping("/all-ideas")
     public String readAllIdeas(Model model){
@@ -100,7 +100,7 @@ public class IdeaController {
     }
 
     /**
-     * Her mapper vi til edit idea siden, hvor idépersonen har mulighed for at ændre sin idé.
+     * Her mapper vi til edit idea siden, hvor id&eacute;personen har mulighed for at &aelig;ndre sin id&eacute;.
      */
     @GetMapping("/edit-idea")
     public String userIdeaPerson(@RequestParam("id") int id, Model model){
@@ -113,7 +113,7 @@ public class IdeaController {
         return "idea/edit-idea";
     }
     /**
-     * Her henter vi al den indtastede data på ændre idé siden, og bruger den til at ændre idépersonens idé via.
+     * Her henter vi al den indtastede data p&aring; &aelig;ndre id&eacute; siden, og bruger den til at &aelig;ndre id&eacute;personens id&eacute; via.
      * metoden updateIdea()
      */
     @PostMapping("/edit-idea-post")
@@ -129,7 +129,7 @@ public class IdeaController {
     }
 
     /**
-     * Denne metode bruger vi til at slette en idé, det gør vi ved at hente ideaId fra html'en og
+     * Denne metode bruger vi til at slette en id&eacute;, det g&oslash;r vi ved at hente ideaId fra html'en og
      * bruger den i deleteIdea metoden .
      */
     @PostMapping("/delete-idea-post")

@@ -23,8 +23,8 @@ public class IdeaDbRepository implements IIdeaDbRepository{
     SqlRowSet sqlRowSet;
 
     /**
-     * Her modtager vi al den data idépersonen har indtastet i form af en Idea idea.
-     * Vi bruger herefter en INSERT sql statement til at indsætte idéen i databasen
+     * Her modtager vi al den data id&eacute;personen har indtastet i form af en Idea idea.
+     * Vi bruger herefter en INSERT sql statement til at inds&aelig;tte id&eacute;en i databasen
      */
     @Override
     public void createIdea(Idea idea) {
@@ -39,8 +39,8 @@ public class IdeaDbRepository implements IIdeaDbRepository{
         });
     }
     /**
-     * Her modtager vi al den data idépersonen har indtastet i form af en Idea idea.
-     * Vi bruger herefter en UPDATE sql statement til at opdatere idéens data i databasen
+     * Her modtager vi al den data id&eacute;personen har indtastet i form af en Idea idea.
+     * Vi bruger herefter en UPDATE sql statement til at opdatere id&eacute;ens data i databasen
      */
     @Override
     public void updateIdea(Idea idea) {
@@ -53,7 +53,7 @@ public class IdeaDbRepository implements IIdeaDbRepository{
         });
     }
     /**
-     * Her modtager vi idéens ideaId og brugen den til at finde den rigtige idé der skal slettes
+     * Her modtager vi id&eacute;ens ideaId og brugen den til at finde den rigtige id&eacute; der skal slettes
      */
     @Override
     public void deleteIdea(int id) {
@@ -65,7 +65,7 @@ public class IdeaDbRepository implements IIdeaDbRepository{
     }
 
     /**
-     * Her henter vi alle idéerne i databasen og indsætter dem i en liste, som vi derefter sender tilbage
+     * Her henter vi alle id&eacute;erne i databasen og inds&aelig;tter dem i en liste, som vi derefter sender tilbage
      * for at kunne vise listen.
      */
     @Override
@@ -88,9 +88,9 @@ public class IdeaDbRepository implements IIdeaDbRepository{
     }
 
     /**
-     * Her har vi lavet en metode der kan finde alle idéer der er lavet af en specifik idéperson.
-     * Det gør via. det personId som vi modtager fra controlleren. Herefter laver vi et SELECT statement
-     * til at finde dem, herefter indsætter vi dem i en liste.
+     * Her har vi lavet en metode der kan finde alle id&eacute;er der er lavet af en specifik id&eacute;person.
+     * Det g&oslash;r via. det personId som vi modtager fra controlleren. Herefter laver vi et SELECT statement
+     * til at finde dem, herefter inds&aelig;tter vi dem i en liste.
      */
     @Override
     public List<Idea> getIdeaList(int id) {
@@ -111,7 +111,7 @@ public class IdeaDbRepository implements IIdeaDbRepository{
         return ideas;
     }
     /**
-     * Her har vi en metoden der kan finde en idé ud fra ideaId'en
+     * Her har vi en metoden der kan finde en id&eacute; ud fra ideaId'en
      */
     public Idea getIdea(int id) {
         String sql = "SELECT * FROM idebanken.Idea WHERE idea_id=?";

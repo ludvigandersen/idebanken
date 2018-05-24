@@ -6,8 +6,8 @@ import com.model.Person;
 import java.util.List;
 /**
  * Dette er vores interface for GroupDbRepository
- * @author Nicolai
  * @author Christoffer
+ * @author Nicolai
  */
 
 public interface IGroupDbRepository {

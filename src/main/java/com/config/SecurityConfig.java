@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Denne metode ignorerer de routes, som er defineret.
-     * Det er vi n&oslash;dt til at gøre for at kunne bruge HTTP POST requests.
+     * Det er vi n&oslash;dt til at g&oslash;re for at kunne bruge HTTP POST requests.
      */
     @Override
     public void configure(WebSecurity web) {
@@ -45,11 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Her bliver der defineret hvilke routes man kan tilgå uden at være logget ind, når man er logget ind og med
+     * Her bliver der defineret hvilke routes man kan tilg&aring; uden at v&aelig;re logget ind, n&aring;r man er logget ind og med
      * hvilken user role man kan se hvad.
      *
-     * Log ind og log ud routes bliver også defineret og der bliver sat en access denied handler, til at håndtere,
-     * hvis man ikke har rettigheder til at se den side man ønsker.
+     * Log ind og log ud routes bliver ogs&aring; defineret og der bliver sat en access denied handler, til at h&aring;ndtere,
+     * hvis man ikke har rettigheder til at se den side man &oslash;nsker.
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -94,7 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
 
     /**
-     * Her sætter vi de brugere der skal have lov til at logge ind, samt hvilken user role de får når de logger ind.
+     * Her s&aelig;tter vi de brugere der skal have lov til at logge ind, samt hvilken user role de f&aring;r n&aring;r de logger ind.
      */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -107,7 +107,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Her sætter vi password encoderen vi har brugt til at hashe de passwords som allerede er i tabellen.
+     * Her s&aelig;tter vi password encoderen vi har brugt til at hashe de passwords som allerede er i tabellen.
      * Denne metode bliver brugt til at sammenligne 2 hashede passwords.
      */
     @Bean

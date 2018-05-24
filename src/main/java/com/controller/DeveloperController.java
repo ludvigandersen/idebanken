@@ -18,13 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.mail.MessagingException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Christoffer
  * @author Mikkel
  * @author Nicolai
- * @author Christoffer
  */
 @Controller
 public class DeveloperController {
@@ -61,7 +60,7 @@ public class DeveloperController {
     }
 
     /**
-     * Her er metoden vi bruger til at ændre udvikler og idéperson brugernes data.
+     * Her er metoden vi bruger til at &aelig;ndre udvikler og id&eacute;person brugernes data.
      * For at updatere vores bruger ska vi hente fornavn, efternavn, E-mail, tlf1, tlf2,
      * oldtlf1, oldtlf2, postnr og by.
      * via. updatePerson()
@@ -88,8 +87,8 @@ public class DeveloperController {
     }
 
     /**
-     * Her er metoden vi bruger til at ændre udvikler og idéperson brugernes password.
-     * For at kunne ændre password skal vi hente E-mail, det nye password og det gamle password
+     * Her er metoden vi bruger til at &aelig;ndre udvikler og id&eacute;person brugernes password.
+     * For at kunne &aelig;ndre password skal vi hente E-mail, det nye password og det gamle password
      * fra my-profile.html
      */
     @PostMapping("/user-update-password")

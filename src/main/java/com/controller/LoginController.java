@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
 
     /**
-     * Metoden her bliver kaldt når man logger ind og fra {@link com.config.SecurityConfig}
+     * Metoden her bliver kaldt n&aring;r man logger ind og fra {@link com.config.SecurityConfig}
      * klassen bliver sendt videre.
-     * Her finder vi så ud af hvilken user role man er logget ind med og afhængig af det
+     * Her finder vi s&aring; ud af hvilken user role man er logget ind med og afh&aelig;ngig af det
      * bliver man redirected til den rigtige side.
      */
     @GetMapping("/redirect")

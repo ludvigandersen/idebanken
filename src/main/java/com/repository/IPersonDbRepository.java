@@ -6,8 +6,8 @@ import java.util.List;
 
 /**
  * Dette er vores interface for PersonDbRepository
- * @author Mikkel
  * @author Christoffer
+ * @author Mikkel
  * @author Ludvig
  */
 

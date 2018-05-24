@@ -15,9 +15,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * @author Mikkel
  * @author Christoffer
  * @author Ludvig
+ * @author Mikkel
  */
 
 @Repository
@@ -70,7 +70,7 @@ public class PersonDbRepository implements IPersonDbRepository {
      * Her modtager vi al den data brugeren har indtastet i form af en Person person og et gammelt password.
      * Vi tjekker om det gamle password matcher passwordet
      * indtastet i gammel password baren via. {@link #checkPassword(String, int)}
-     * Vi bruger herefter en UPDATE sql statement til at opdatere idéens data i databasen
+     * Vi bruger herefter en UPDATE sql statement til at opdatere id&eacute;ens data i databasen
     */
     @Override
     public void updatePersonPassword(Person person, String oldPassword){
@@ -112,12 +112,12 @@ public class PersonDbRepository implements IPersonDbRepository {
     /**
      * Her modtager vi al den data brugeren har indtastet i form af en Person person, olfTlf1 og oldTlf2
      * Som vi bruger i et UPDATE statement og opdatere brugeren i databasen
-     * Før vi kan indsætte tlf nr. er vi nødt til at tjekke om brugeren allerede har et tlf nr.
+     * F&oslash;r vi kan inds&aelig;tte tlf nr. er vi n&oslash;dt til at tjekke om brugeren allerede har et tlf nr.
      * For at se om det er et UPDATE statement eller et INSERT statement der skal bruges.
      *
      * Derefter tjekker om tlf nummerne er ens, da det skaber problemmer hvis de er,
      * som f.eks. hvis der bliver indtastet noget i tlf1 men ikke tlf2, men de to gamle nr er ens, vil
-     * den stadig ændre dem begge
+     * den stadig &aelig;ndre dem begge
      */
     @Override
     public void updatePerson(Person person, String oldTlf1, String oldTlf2) {
@@ -264,7 +264,7 @@ public class PersonDbRepository implements IPersonDbRepository {
     }
 
     /**
-     * Her finder vi brugerens tlf nummere ud fra personens personId, og indsætter dem i en liste
+     * Her finder vi brugerens tlf nummere ud fra personens personId, og inds&aelig;tter dem i en liste
      */
     private List<String> findPhoneNumbers(int id){
         List<String> tlf = new ArrayList<>();

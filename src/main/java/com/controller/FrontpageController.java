@@ -52,8 +52,8 @@ public class FrontpageController {
     }
 
     /**
-     * Denne metode bruger vi når en person ønsker at oprette en bruger på vores side.
-     * Om det er som en Idéperson eller som udvikler betyder ikke noget for metoden,
+     * Denne metode bruger vi n&aring;r en person &oslash;nsker at oprette en bruger p&aring; vores side.
+     * Om det er som en Id&eacute;person eller som udvikler betyder ikke noget for metoden,
      * den bruges nemlig til at oprette begge typer Person.
      */
     @PostMapping("/create-user-post")

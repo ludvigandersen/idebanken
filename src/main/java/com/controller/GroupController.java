@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 /**
- * @author Nicolai
  * @author Christoffer
+ * @author Nicolai
  */
 
 @Controller
@@ -42,7 +42,7 @@ public class GroupController {
 
     /**
      * Her oprettes gruppen. Vi bruger den tidligere hentet id og gruppens navn
-     * til at indsætte brugeren i gruppen.
+     * til at inds&aelig;tte brugeren i gruppen.
      */
     @PostMapping("/create-group-post")
     public String createGroup (@ModelAttribute("name") String groupName,
@@ -58,8 +58,8 @@ public class GroupController {
     }
 
     /**
-     * Her mapper vi til ændre gruppe siden, hvor brugeren får mulighed for at indtaste de
-     * ændre han vil tilføje
+     * Her mapper vi til &aelig;ndre gruppe siden, hvor brugeren f&aring;r mulighed for at indtaste de
+     * &aelig;ndre han vil tilf&oslash;je
      */
     @GetMapping("/edit-group")
     public String editGroup (@RequestParam("id") int id, Model model){
@@ -77,7 +77,7 @@ public class GroupController {
         return "user/edit-group";
     }
     /**
-     * Her henter vi al den indtastede data på ændre gruppe siden, og bruger den til at ændre
+     * Her henter vi al den indtastede data p&aring; &aelig;ndre gruppe siden, og bruger den til at &aelig;ndre
      * gruppens data via. metoden updateGroup(), derefter redirecter den til en kvittering for
      * at den er opdateret
      */
@@ -92,7 +92,7 @@ public class GroupController {
     }
 
     /**
-     * Her mapper vi til tilføj gruppe siden og henter gruppe id.
+     * Her mapper vi til tilf&oslash;j gruppe siden og henter gruppe id.
      */
     @GetMapping("/add-group-member")
     public String addGroupMember(@RequestParam("id") int id, Model model){
@@ -109,7 +109,7 @@ public class GroupController {
     }
 
     /**
-     * Her tilføjer vi udvikler til gruppe ved at bruge den tidligere hentede gruppe id og henter person id med e-mail.
+     * Her tilf&oslash;jer vi udvikler til gruppe ved at bruge den tidligere hentede gruppe id og henter person id med e-mail.
      */
     @PostMapping("/add-group-member-post")
     public String addGroupMember(@ModelAttribute("groupId") int groupId,
@@ -143,7 +143,7 @@ public class GroupController {
     }
 
     /**
-     * Denne metode bruger vi til at slette en gruppe, det gør vi ved at hente groupId fra html'en som vi
+     * Denne metode bruger vi til at slette en gruppe, det g&oslash;r vi ved at hente groupId fra html'en som vi
      * derefter bruger den i deleteGroup metoden.
      */
     @PostMapping("/delete-group-post")
