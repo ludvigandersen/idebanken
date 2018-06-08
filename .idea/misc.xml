@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavadocGenerationManager">
+<<<<<<< HEAD
     <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/../Idébanken doc" />
+=======
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Desktop/Projekt idebanken/javadoc" />
+>>>>>>> 7d3b6dbbf83e5137f65b2d796dd30909ace93d20
     <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="true" />
   </component>
   <component name="MavenProjectsManager">

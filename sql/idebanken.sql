@@ -33,7 +33,7 @@ CREATE TABLE `DeveloperGroup` (
   KEY `group_id_fk` (`group_id`),
   CONSTRAINT `group_id_fk` FOREIGN KEY (`group_id`) REFERENCES `Group` (`group_id`) ON DELETE CASCADE,
   CONSTRAINT `person_id_fk` FOREIGN KEY (`person_id`) REFERENCES `Person` (`person_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `DeveloperGroup` (
 
 LOCK TABLES `DeveloperGroup` WRITE;
 /*!40000 ALTER TABLE `DeveloperGroup` DISABLE KEYS */;
-INSERT INTO `DeveloperGroup` VALUES (28,70,55),(46,2,59),(47,2,2);
+INSERT INTO `DeveloperGroup` VALUES (28,70,55),(47,2,2),(48,72,60),(50,2,62),(51,2,64);
 /*!40000 ALTER TABLE `DeveloperGroup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +59,7 @@ CREATE TABLE `Group` (
   `locked` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`group_id`),
   UNIQUE KEY `Group_group_name_uindex` (`group_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `Group` (
 
 LOCK TABLES `Group` WRITE;
 /*!40000 ALTER TABLE `Group` DISABLE KEYS */;
-INSERT INTO `Group` VALUES (1,'Team Awesome',0),(2,'test@test.dk',1),(41,'Yah',0),(42,'Memes',0),(43,'memse',0),(44,'asd',0),(46,'dfdf',0),(47,'asdf',0),(48,'test',0),(49,'testttttt',0),(50,'testtttttttttttta',0),(51,'qwe',0),(52,'tyu',0),(53,'teasdf',0),(55,'Nicolailinckandersen@gmail.com',1),(59,'Fuckmylife',0);
+INSERT INTO `Group` VALUES (1,'Team Awesome',0),(2,'test@test.dk',1),(41,'Yah',0),(42,'Memes',0),(43,'memse',0),(44,'asd',0),(46,'dfdf',0),(47,'asdf',0),(48,'test',0),(49,'testttttt',0),(50,'testtttttttttttta',0),(51,'qwe',0),(52,'tyu',0),(53,'teasdf',0),(55,'Nicolailinckandersen@gmail.com',1),(60,'mikkel@dalbynielsen.dk',1),(61,'magicmikkel@gmail.com',1),(62,'Min gruppe',0),(64,'my group',0);
 /*!40000 ALTER TABLE `Group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +87,7 @@ CREATE TABLE `GroupIdea` (
   PRIMARY KEY (`group_idea_id`),
   KEY `idea_fk` (`idea_id`),
   KEY `group_fk` (`group_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `GroupIdea` (
 
 LOCK TABLES `GroupIdea` WRITE;
 /*!40000 ALTER TABLE `GroupIdea` DISABLE KEYS */;
-INSERT INTO `GroupIdea` VALUES (1,2,1,0),(2,2,6,1),(10,2,2,0),(11,2,9,0),(12,12,1,0),(13,2,10,0),(14,59,1,0);
+INSERT INTO `GroupIdea` VALUES (1,2,1,0),(2,2,6,1),(10,2,2,0),(11,2,9,0),(12,12,1,0),(13,2,10,0),(14,59,1,0),(15,59,2,0);
 /*!40000 ALTER TABLE `GroupIdea` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,8 +139,7 @@ CREATE TABLE `Person` (
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `zip_code` int(11) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
+  `zip_code` int(11) NOT NULL,
   `password` varchar(60) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   `email_notifications` tinyint(1) DEFAULT NULL,
@@ -149,7 +148,7 @@ CREATE TABLE `Person` (
   UNIQUE KEY `Person_email_uindex` (`email`),
   KEY `Person_PersonRole_role_id_fk` (`role_id`),
   CONSTRAINT `Person_PersonRole_role_id_fk` FOREIGN KEY (`role_id`) REFERENCES `PersonRole` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +157,7 @@ CREATE TABLE `Person` (
 
 LOCK TABLES `Person` WRITE;
 /*!40000 ALTER TABLE `Person` DISABLE KEYS */;
-INSERT INTO `Person` VALUES (2,'TestFornavn','TestEfternavn','test@test.dk',2230,'Nørrebro','$2a$10$ZSlHR.NTWl2HneCUB0O/NeVSJds.je0QOYjaPANvhx4dbpahm0jEG',1,0,NULL),(9,'idea','test','idea@test.dk',1234,'Nørrebro','$2a$10$mHNdRqpbv/K8MrNDYWd1QOb4SOHLB7PSat4j4nXHQyaRHowzOPZoK',2,0,'2018-05-18'),(47,'mikkel','nielsen','tryllemikkel@gmail.com',123,'213','$2a$10$vWHjkha.11ukvtjsAKL4zelTOpK2fiHiHJFSqQ9gfIKXPiLVzo5Le',1,0,'2018-05-14'),(56,'Mikkel','Nielsen','mikkel@dalbynielsen.dk',2720,'Vanløse','$2a$10$t6gKifA0eL8PiHRWD9bQ0OxsN89tKdoJPWBosiSxCiFe0m52Nu35e',1,0,'2018-05-15'),(57,'Nicolai','Andersen','Nicolai@osalle4.dk',2990,'Nivå','$2a$10$72YzobzSfAxS8V/cqaq8AOO2QhqOND5CpGv2alrhJbF8lu1cSBxMq',2,0,'2018-05-16'),(70,'Nico','Lundsgaard','Nicolailinckandersen@gmail.com',2990,'Nivå','$2a$10$ku59y2qz6RupFgP9DmcqvOBKeuzqKGLss/djSPwEQBchikBqgNlLK',1,0,'2018-05-17'),(71,'Ludvig','Albert Rossil Andersen','ludvig.andersen@yahoo.dk',3400,'Hillerød','$2a$10$zqeyMqUJsrLGqcpVTRLPFOdGuwsAXPZe70CUWRDKJe0qWsVY5mI8m',1,0,'2018-05-18');
+INSERT INTO `Person` VALUES (2,'TestFornavn','TestEfternavn','test@test.dk',2610,'$2a$10$ZSlHR.NTWl2HneCUB0O/NeVSJds.je0QOYjaPANvhx4dbpahm0jEG',1,0,NULL),(9,'idea','test','idea@test.dk',2720,'$2a$10$mHNdRqpbv/K8MrNDYWd1QOb4SOHLB7PSat4j4nXHQyaRHowzOPZoK',2,0,'2018-05-18'),(47,'mikkel','nielsen','tryllemikkel@gmail.com',2720,'$2a$10$vWHjkha.11ukvtjsAKL4zelTOpK2fiHiHJFSqQ9gfIKXPiLVzo5Le',1,0,'2018-05-14'),(57,'Nicolai','Andersen','Nicolai@osalle4.dk',2720,'$2a$10$72YzobzSfAxS8V/cqaq8AOO2QhqOND5CpGv2alrhJbF8lu1cSBxMq',2,0,'2018-05-16'),(70,'Nico','Lundsgaard','Nicolailinckandersen@gmail.com',2720,'$2a$10$ku59y2qz6RupFgP9DmcqvOBKeuzqKGLss/djSPwEQBchikBqgNlLK',1,0,'2018-05-17'),(71,'Ludvig','Albert Rossil Andersen','ludvig.andersen@yahoo.dk',2720,'$2a$10$zqeyMqUJsrLGqcpVTRLPFOdGuwsAXPZe70CUWRDKJe0qWsVY5mI8m',1,0,'2018-05-18'),(72,'Mikkel','Nielsen','mikkel@dalbynielsen.dk',2720,'$2a$10$RgkaoYEEhP0BE/GDc6swhOwMTRLrsulG3Z4MjMaBPlTF35iMlQUwy',1,0,'2018-05-22');
 /*!40000 ALTER TABLE `Person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -209,8 +208,33 @@ CREATE TABLE `PhoneNumbers` (
 
 LOCK TABLES `PhoneNumbers` WRITE;
 /*!40000 ALTER TABLE `PhoneNumbers` DISABLE KEYS */;
-INSERT INTO `PhoneNumbers` VALUES (6,2,'22116036'),(7,2,'25381160');
+INSERT INTO `PhoneNumbers` VALUES (6,2,'12345678'),(7,2,'25381160');
 /*!40000 ALTER TABLE `PhoneNumbers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `city`
+--
+
+DROP TABLE IF EXISTS `city`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `city` (
+  `zip_code` int(11) NOT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`zip_code`),
+  UNIQUE KEY `city_zip_code_uindex` (`zip_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `city`
+--
+
+LOCK TABLES `city` WRITE;
+/*!40000 ALTER TABLE `city` DISABLE KEYS */;
+INSERT INTO `city` VALUES (2610,'Rødovre'),(2720,'Vanløse');
+/*!40000 ALTER TABLE `city` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -248,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-21 12:44:45
+-- Dump completed on 2018-05-24 16:03:19
